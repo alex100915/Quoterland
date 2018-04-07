@@ -1,0 +1,72 @@
+﻿@model dynamic
+@{
+    ViewBag.Title = "New";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<h2>New Quote</h2>
+<p style="padding-top:5px"></p>
+<form id="newQuote">
+    <div class="form-group">
+        <label>Quote</label>
+        <div class="tt-container">
+            <textarea name="quote" value="" class="form-control"> </textarea>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label>Phrase to Learn</label>
+        <div class="tt-container">
+            <input name="phraseToLearn" type="text" value="" class="form-control" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label>Movie</label>
+        <div class="tt-container">
+            <input name="movieName" type="text" value="" class="form-control" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label>Youtube Link</label>
+        <div class="tt-container">
+            <input name="YoutubeLink" type="text" value="" class="form-control" />
+        </div>
+    </div>
+
+    <button class="btn btn-primary">Submit</button>
+</form>
+
+@section scripts
+{
+ <script>
+
+     $(document).ready(function () {
+         
+         var newquote=$("#newQuote").submit(function () {
+             var zamiana = newQuote.quote.value.replace(/\r\n|\r|\n/g, '<br/>');
+             var data = $('#newQuote').serializeArray();
+             data.push({ name: 'content', value: zamiana });
+             $.ajax({              
+                 url: "/api/quotes",
+                 method: "POST",
+                 data: data
+             })
+             .done(function () {
+                 toastr.success("Rentals successfully recorded.");
+                 $('#newQuote')[0].reset();
+             })
+                    .fail(function () {
+                        toastr.error("Something unexpected happened.");
+                    });
+
+             return false;
+             
+         });        
+     });
+
+ </script>   
+}
+

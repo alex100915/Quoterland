@@ -1,0 +1,29 @@
+﻿@model dynamic
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Śmieszny filmik</h2>
+
+
+
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            $.ajax({
+                url: "/api/quotes/@Model",
+                method: "GET",
+                success: function (data) {
+                    var page = data["youtubeLink"];
+                    page = page.replace("watch?v=", "embed/");
+                    form.src=page;
+                }
+            });
+     });
+    </script>
+} 
+    <iframe id="form" width="560" height="315" src="" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
+

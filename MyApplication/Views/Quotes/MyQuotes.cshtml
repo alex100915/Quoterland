@@ -1,0 +1,81 @@
+﻿@model dynamic
+@{
+    ViewBag.Title = "MyQuotes";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>My Quotes</h2>
+<p style="padding-top:5px"></p>
+@Html.ActionLink("New Quote", "New", "Quotes", null, new { @class = "btn btn-primary" })
+<p style="padding-top:10px"></p>
+<table id="quotes" class="table table-bordered" table-hover>
+    <thead>
+        <tr>
+            <th>Quotes</th>
+            <th>Phrase To Learn</th>
+            <th>Movie</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+    <tbody></tbody>
+</table>
+
+
+
+@section scripts
+{
+
+<script>
+        if ("@Model" == null) {
+            url = "/api/quotes";
+        }
+        else {
+            url = "/api/quotes?userId=@Model";
+        }
+        $(document).ready(function () {
+            var table=$("#quotes").DataTable({
+                ajax: {
+                    url: url,
+                    dataSrc: ""
+                },
+                columns: [
+                    {
+                        data: "content",
+                        render: function (data, type, quote) {
+                            return "<a href='/quotes/detail/" + quote.id + "'>" + quote.content + "</a>";
+                        }
+                    },
+
+                    {
+                        data: "phraseToLearn"
+                    },
+                    {
+                        data: "movieName",
+
+                    },
+                    {
+                        data: "id",
+                        render: function (data) {
+                            return "<button class='btn-link js-delete' data-quote-id=" + data + ">Delete</button>";
+                        }
+                    }
+                ]
+            });
+            $("#quotes").on("click", ".js-delete", function () {
+                var button = $(this);
+
+                bootbox.confirm("Are you sure you want to delete this quote?", function (result) {
+                    if (result) {
+                        $.ajax({
+                            url: "/api/quotes/" + button.attr("data-quote-id"),
+                            method: "DELETE",
+                            success: function () {
+                                table.row(button.parents("tr")).remove().draw();
+                            }
+                        });
+                    }
+                });
+            });
+        });
+</script>
+}

@@ -1,0 +1,48 @@
+﻿@model dynamic
+@{
+    ViewBag.Title = "Get";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>All Quotes</h2>
+<table id="quotes" class="table table-bordered" table-hover>
+    <thead>
+        <tr>
+            <th>Quotes</th>
+            <th>Phrase To Learn</th>
+            <th>Movie</th>
+        </tr>
+    </thead>
+    <tbody></tbody>
+</table>
+
+
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            $("#quotes").DataTable({
+                ajax: {
+                    url: "/api/quotes",               
+                    dataSrc: ""
+                },
+                columns: [
+                    {
+                        data: "content",
+                        render: function (data, type, quote) {
+                            return "<a href='/quotes/detail/" + quote.id + "'>" + quote.content + "</a>";
+                        }
+                    },
+
+                    {
+                        data: "phraseToLearn"
+                    },
+                    {
+                        data: "movieName",
+
+                    }
+                ]
+            });
+        });
+</script>
+}
