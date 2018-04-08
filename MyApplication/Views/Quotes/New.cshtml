@@ -9,14 +9,14 @@
 <p style="padding-top:5px"></p>
 <form id="newQuote">
     <div class="form-group">
-        <label>Quote</label>
+        <label>Quote (max 300 characters)</label>
         <div class="tt-container">
             <textarea name="quote" value="" class="form-control"> </textarea>
         </div>
     </div>
 
     <div class="form-group">
-        <label>Phrase to Learn</label>
+        <label>Phrase to Learn (max 60 characters)</label>
         <div class="tt-container">
             <input name="phraseToLearn" type="text" value="" class="form-control" />
         </div>
@@ -49,20 +49,20 @@
      $(document).ready(function () {
          
          var newquote=$("#newQuote").submit(function () {
-             var zamiana = newQuote.quote.value.replace(/\r\n|\r|\n/g, '<br/>');
+             var replacing = newQuote.quote.value.replace(/\r\n|\r|\n/g, '<br/>'); //adding breakline to database
              var data = $('#newQuote').serializeArray();
-             data.push({ name: 'content', value: zamiana });
+             data.push({ name: 'content', value: replacing });
              $.ajax({              
                  url: "/api/quotes",
                  method: "POST",
                  data: data
              })
              .done(function () {
-                 toastr.success("Rentals successfully recorded.");
+                 toastr.success("Quote successfully added.");
                  $('#newQuote')[0].reset();
              })
                     .fail(function () {
-                        toastr.error("Something unexpected happened.");
+                        toastr.error("Fields incorrectly filled.");
                     });
 
              return false;
