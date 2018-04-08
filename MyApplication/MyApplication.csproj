@@ -211,6 +211,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\QuotesController.cs" />
     <Compile Include="Dtos\ApplicationUserDto.cs" />
+    <Compile Include="Dtos\MovieDto.cs" />
     <Compile Include="Dtos\QuoteDto.cs" />
     <Compile Include="GlimpseSecurityPolicy.cs" />
     <Compile Include="Global.asax.cs">
@@ -224,10 +225,27 @@
     <Compile Include="Migrations\201803111927361_YoutubeLinkToQuote.Designer.cs">
       <DependentUpon>201803111927361_YoutubeLinkToQuote.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201804071850349_AddMoviesTable.cs" />
+    <Compile Include="Migrations\201804071850349_AddMoviesTable.Designer.cs">
+      <DependentUpon>201804071850349_AddMoviesTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804071854079_AddMovieColumnToQuotesTable.cs" />
+    <Compile Include="Migrations\201804071854079_AddMovieColumnToQuotesTable.Designer.cs">
+      <DependentUpon>201804071854079_AddMovieColumnToQuotesTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804071906066_PopulateMovies.cs" />
+    <Compile Include="Migrations\201804071906066_PopulateMovies.Designer.cs">
+      <DependentUpon>201804071906066_PopulateMovies.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804081159266_AddDataAnnotations.cs" />
+    <Compile Include="Migrations\201804081159266_AddDataAnnotations.Designer.cs">
+      <DependentUpon>201804081159266_AddDataAnnotations.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Movie.cs" />
     <Compile Include="Models\Quote.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -492,6 +510,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201803111927361_YoutubeLinkToQuote.resx">
       <DependentUpon>201803111927361_YoutubeLinkToQuote.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804071850349_AddMoviesTable.resx">
+      <DependentUpon>201804071850349_AddMoviesTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804071854079_AddMovieColumnToQuotesTable.resx">
+      <DependentUpon>201804071854079_AddMovieColumnToQuotesTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804071906066_PopulateMovies.resx">
+      <DependentUpon>201804071906066_PopulateMovies.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804081159266_AddDataAnnotations.resx">
+      <DependentUpon>201804081159266_AddDataAnnotations.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNet.Identity;
+using MyApplication.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,10 +10,18 @@ namespace MyApplication.Controllers
 {
     public class QuotesController : Controller
     {
+        private ApplicationDbContext context;
+
+        public QuotesController()
+        {
+            context = new ApplicationDbContext();
+        }
+
         // GET: Quotes
         public ActionResult New()
         {
-            return View();
+            var movies = context.Movies.ToList();
+            return View(model:movies);
         }
 
         [Authorize]

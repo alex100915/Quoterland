@@ -16,6 +16,8 @@ namespace MyApplication.App_Start
             Mapper.CreateMap<Quote, QuoteDto>();
             Mapper.CreateMap<ApplicationUserDto, ApplicationUser>();
             Mapper.CreateMap<ApplicationUser, ApplicationUserDto>();
+            Mapper.CreateMap<Movie, MovieDto>();
+            Mapper.CreateMap<MovieDto, Movie>();
         }
     }
 }

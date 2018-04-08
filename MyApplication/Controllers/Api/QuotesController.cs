@@ -9,6 +9,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Data.Entity;
 
 namespace MyApplication.Controllers.Api
 {
@@ -38,7 +39,7 @@ namespace MyApplication.Controllers.Api
         [HttpGet]
         public IHttpActionResult GetAllQuotes()
         {            
-            var allQuotes = _context.Quotes;
+            var allQuotes = _context.Quotes.Include(q => q.Movie);
 
             var allQuotesDto = allQuotes
                 .ToList()
@@ -50,7 +51,7 @@ namespace MyApplication.Controllers.Api
         [HttpGet]
         public IHttpActionResult GetMyQuotes(string userId)
         {
-            var myQuotes = _context.Quotes.Where(q => q.UserId == userId).ToList();
+            var myQuotes = _context.Quotes.Include(q=>q.Movie).Where(q => q.UserId == userId).ToList();
             return Ok(myQuotes);
         }
 
@@ -61,7 +62,7 @@ namespace MyApplication.Controllers.Api
             List<Quote> quotesByMoviesNames = new List<Quote>();
             foreach (var movie in moviesName)
             {
-                var quotes = _context.Quotes.Where(q => q.MovieName == movie);
+                var quotes = _context.Quotes.Include(q => q.Movie).Where(q => q.Movie.Title == movie);
                 foreach (var quote in quotes)
                 {
                     quotesByMoviesNames.Add(quote);

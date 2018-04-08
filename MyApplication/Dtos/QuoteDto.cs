@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MyApplication.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -15,7 +16,9 @@ namespace MyApplication.Dtos
 
         public string PhraseToLearn { get; set; }
 
-        public string MovieName { get; set; }
+        public MovieDto Movie { get; set; }
+
+        public int MovieId { get; set; }
 
         public string YoutubeLink { get; set; }
     }

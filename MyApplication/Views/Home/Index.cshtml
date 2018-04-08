@@ -5,58 +5,58 @@
 
 <div align="center">
     <p style="padding-top:20px"></p>
-    <h1>Welcome to Quoter'sLand!</h1>
+    <h1>Welcome to Quoter's Land!</h1>
     <p style="padding-top:10px"></p>
     <text>Learn English watching your favourite TV Shows</text>
     <h2>Check your favourites:</h2>
     <form id="myForm">
 
-        <input type="checkbox" id="myCheckbox1" value="Friends" img src="http://wypazona.pl/wp-content/uploads/2015/09/friends-1170x878.jpg" />
+        <input type="checkbox" id="myCheckbox1" value="Friends" />
         <label for="myCheckbox1">
-            <img src="http://wypazona.pl/wp-content/uploads/2015/09/friends-1170x878.jpg">
+            <img src="../../images/friends-1170x878.jpg">
         </label>
 
         <input type="checkbox" id="myCheckbox2" value="The Office" />
         <label for="myCheckbox2">
-            <img src="https://i.ytimg.com/vi/QOtuX0jL85Y/maxresdefault.jpg">
+            <img src="../../images/maxresdefault.jpg">
         </label>
 
         <input type="checkbox" id="myCheckbox3" value="The Big Bang Theory" />
         <label for="myCheckbox3">
-            <img src="https://static.posters.cz/image/750/naklejki/big-bang-theory-logo-i14026.jpg">
+            <img src="../../images/2000px-TBBT_logo.svg.png">
         </label>
 
-        <input type="checkbox" id="myCheckbox4" value="That '70s Show'" />
+        <input type="checkbox" id="myCheckbox4" value="That 70s Show" />
         <label for="myCheckbox4">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e2/That_%2770s_Show_logo.png/240px-That_%2770s_Show_logo.png">
+            <img src="../../images/That_'70s_Show_logo.png">
         </label>
 
         <input type="checkbox" id="myCheckbox5" value="Two and a half Men" />
         <label for="myCheckbox5">
-            <img src="http://i0.kym-cdn.com/entries/icons/original/000/009/764/TwoHalfMen.jpg">
+            <img src="../../images/TwoHalfMen.jpg">
         </label>
 
         <input type="checkbox" id="myCheckbox6" value="Californication" />
         <label for="myCheckbox6">
-            <img src="https://i.pinimg.com/originals/96/1f/7d/961f7d860a18643b6456d4045603c5b8.jpg">
+            <img src="../../images/961f7d860a18643b6456d4045603c5b8.jpg">
         </label>
 
         <input type="checkbox" id="myCheckbox7" value="Trailer Park Boys" />
         <label for="myCheckbox7">
-            <img src="https://hostmat.eu/images/91200883465731836869.jpg">
+            <img src="../../images/91200883465731836869.jpg">
         </label>
 
         <input type="checkbox" id="myCheckbox8" value="how i met your mother" />
         <label for="myCheckbox8">
-            <img src="http://www.netsidebar.com/wp/wp-content/uploads/himym.jpeg">
+            <img src="../../images/himym.jpeg">
         </label>
 
         <input type="checkbox" id="myCheckbox9" value="2 Broke Girls" />
         <label for="myCheckbox9">
-            <img src="http://is1.mzstatic.com/image/thumb/Music6/v4/98/7b/f9/987bf970-a991-0aae-92c8-7eb6d47e6020/source/1200x630bb.jpg">
+            <img src="../../images/1200x630bb.jpg">
         </label>
     </form>
-    <a id="Find" class="btn btn-primary" href="@Url.Action("FindQuotes", "Quotes")">Find Quotes</a>
+    <a id="Find" class="btn btn-primary" href="@Url.Action("AllQuotes", "Quotes")">Find Quotes</a>
 </div>
 
 @Styles.Render("~/content/fancychecbox.css")
