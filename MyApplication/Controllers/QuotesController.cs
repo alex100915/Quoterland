@@ -17,6 +17,11 @@ namespace MyApplication.Controllers
             context = new ApplicationDbContext();
         }
 
+        protected override void Dispose(bool disposing)
+        {
+            context.Dispose();
+        }
+
         // GET: Quotes
         public ActionResult New()
         {
@@ -43,8 +48,7 @@ namespace MyApplication.Controllers
 
         public ActionResult Detail(int id)
         {
-            int Id = id;
-            return View(Id);
+            return View(id);
         }
     }
 }
