@@ -22,6 +22,11 @@ namespace MyApplication.Controllers.Api
             _context = new ApplicationDbContext();
         }
 
+        protected override void Dispose(bool disposing)
+        {
+            _context.Dispose();    
+        }
+
         [HttpPost]
         public IHttpActionResult CreateNewQuote(QuoteDto quoteDto)
         {
@@ -71,6 +76,7 @@ namespace MyApplication.Controllers.Api
             return Ok(quotesByMoviesNames);
         }
 
+        [HttpGet]
         public IHttpActionResult GetQuote(int id)
         {          
             var quote = _context.Quotes.SingleOrDefault(q=>q.Id==id);
@@ -82,6 +88,7 @@ namespace MyApplication.Controllers.Api
             return Ok(quoteDto);
         }
 
+        [HttpDelete]
         public IHttpActionResult DeleteQuote(int id)
         {
             var quoteInDb = _context.Quotes.SingleOrDefault(c => c.Id == id);
