@@ -262,3 +262,5 @@ C:\Users\KOWAL\Documents\MyApplication\MyApplication\obj\Release\MyApplication.c
 C:\Users\KOWAL\Documents\MyApplication\MyApplication\obj\Release\MyApplication.dll
 C:\Users\KOWAL\Documents\MyApplication\MyApplication\obj\Release\MyApplication.pdb
 C:\Users\KOWAL\Documents\MyApplication\MyApplication\obj\Release\MyApplication.Migrations.AddNewMovies.resources
+C:\Users\KOWAL\Desktop\MyApplication\MyApplication\obj\Release\MyApplication.Migrations.AddNewMovies.resources
+C:\Users\KOWAL\Desktop\MyApplication\MyApplication\obj\Release\MyApplication.Migrations.ChangeLengthAttributesInQuotesTable.resources

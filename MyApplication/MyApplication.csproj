@@ -245,6 +245,10 @@
     <Compile Include="Migrations\201804081922007_AddNewMovies.Designer.cs">
       <DependentUpon>201804081922007_AddNewMovies.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201806071420430_ChangeLengthAttributesInQuotesTable.cs" />
+    <Compile Include="Migrations\201806071420430_ChangeLengthAttributesInQuotesTable.Designer.cs">
+      <DependentUpon>201806071420430_ChangeLengthAttributesInQuotesTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -529,6 +533,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201804081922007_AddNewMovies.resx">
       <DependentUpon>201804081922007_AddNewMovies.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806071420430_ChangeLengthAttributesInQuotesTable.resx">
+      <DependentUpon>201806071420430_ChangeLengthAttributesInQuotesTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

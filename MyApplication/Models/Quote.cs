@@ -13,7 +13,8 @@ namespace MyApplication.Models
         public byte Id { get; set; }
 
         [Required]
-        [MaxLength(300)]
+        [MinLength(15)]
+        [MaxLength(200)]
         public string Content { get; set; }
 
         public ApplicationUser User { get; set; }
@@ -22,7 +23,8 @@ namespace MyApplication.Models
         public string UserId { get; set; }
 
         [Required]
-        [MaxLength(60)]
+        [MinLength(3)]
+        [MaxLength(40)]
         public string PhraseToLearn { get; set; }
 
         public Movie Movie { get; set; }
