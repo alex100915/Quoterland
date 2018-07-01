@@ -206,6 +206,8 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\Api\LearnedsController.cs" />
+    <Compile Include="Controllers\Api\LearningsController.cs" />
     <Compile Include="Controllers\Api\QuotesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -249,9 +251,15 @@
     <Compile Include="Migrations\201806071420430_ChangeLengthAttributesInQuotesTable.Designer.cs">
       <DependentUpon>201806071420430_ChangeLengthAttributesInQuotesTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201806301842564_StoringLearnedAndLearningQuotes.cs" />
+    <Compile Include="Migrations\201806301842564_StoringLearnedAndLearningQuotes.Designer.cs">
+      <DependentUpon>201806301842564_StoringLearnedAndLearningQuotes.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\Learned.cs" />
+    <Compile Include="Models\Learning.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Movie.cs" />
     <Compile Include="Models\Quote.cs" />
@@ -498,8 +506,9 @@
     <Content Include="Views\Quotes\New.cshtml" />
     <Content Include="Views\Quotes\MyQuotes.cshtml" />
     <Content Include="Views\Quotes\Detail.cshtml" />
-    <Content Include="Views\Quotes\AllQuotes.cshtml" />
+    <Content Include="Views\Quotes\AllQuotesForAnonymous.cshtml" />
     <Content Include="Views\Quotes\FindQuotes.cshtml" />
+    <Content Include="Views\Quotes\AllQuotes.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -536,6 +545,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201806071420430_ChangeLengthAttributesInQuotesTable.resx">
       <DependentUpon>201806071420430_ChangeLengthAttributesInQuotesTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806301842564_StoringLearnedAndLearningQuotes.resx">
+      <DependentUpon>201806301842564_StoringLearnedAndLearningQuotes.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

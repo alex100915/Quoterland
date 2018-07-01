@@ -38,7 +38,11 @@ namespace MyApplication.Controllers
 
         public ActionResult AllQuotes()
         {
-            return View();
+            if (User.Identity.IsAuthenticated)
+            {
+                return View();
+            }
+            return View("AllQuotesForAnonymous");
         }
 
         public ActionResult FindQuotes(string moviesName)

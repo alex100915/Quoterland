@@ -41,6 +41,26 @@ namespace MyApplication.Controllers.Api
             return Created(new Uri(Request.RequestUri+"/"+quote.Id),quoteDto);
         }
 
+        //[HttpPost]
+        //[Route("api/learning")]
+        //public IHttpActionResult AddToLearningQuotes(QuoteDto quoteDto)
+        //{
+        //    if (!ModelState.IsValid)
+        //        return BadRequest();
+
+        //    var userId = User.Identity.GetUserId();
+
+        //    var quote = Mapper.Map<QuoteDto, Quote>(quoteDto);
+
+        //    _context.Users.Single(u => u.Id == userId).Learning.Add(quote);           
+            
+        //    _context.SaveChanges();
+
+        //    return Ok();
+        //}
+
+        
+
         [HttpGet]
         public IHttpActionResult GetAllQuotes()
         {            

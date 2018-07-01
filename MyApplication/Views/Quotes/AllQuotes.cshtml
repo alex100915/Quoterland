@@ -11,9 +11,10 @@
             <th>Quotes</th>
             <th>Phrase To Learn</th>
             <th>Title</th>
+            <th>Learned</th>
+            <th>Lerning</th>
         </tr>
     </thead>
-    <tbody></tbody>
 </table>
 
 
@@ -21,9 +22,21 @@
 {
     <script>
         $(document).ready(function () {
+            var result = $.ajax({
+                url: "/api/learneds",
+                method: "GET",
+                async: false
+            }).responseJSON;
+
+            var result2 = $.ajax({
+                url: "/api/learnings",
+                method: "GET",
+                async: false
+            }).responseJSON;
+            
             $("#quotes").DataTable({
                 ajax: {
-                    url: "/api/quotes",               
+                    url: "/api/quotes",
                     dataSrc: ""
                 },
                 columns: [
@@ -40,9 +53,36 @@
                     {
                         data: "movie.title",
 
+                    },
+                    {
+                        render: function (data, type, quote) {
+
+                            var checkbox = '<input type="checkbox">'
+
+                            result.filter(function (item) {
+                                if(item.id==quote.id)
+                                checkbox = '<input type="checkbox" checked>'
+                            });
+
+                            return checkbox;
+                        }
+                    },
+                    {
+                        render: function (data, type, quote) {
+
+                            var checkbox = '<input type="checkbox">'
+
+                            result2.filter(function (item) {
+                                if (item.id == quote.id)
+                                    checkbox = '<input type="checkbox" checked>'
+                            });
+
+                            return checkbox;
+                        }
                     }
                 ]
             });
+           
         });
-</script>
+    </script>
 }

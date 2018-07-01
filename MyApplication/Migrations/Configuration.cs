@@ -1,5 +1,6 @@
 namespace MyApplication.Migrations
 {
+    using Models;
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
@@ -7,9 +8,11 @@ namespace MyApplication.Migrations
 
     internal sealed class Configuration : DbMigrationsConfiguration<MyApplication.Models.ApplicationDbContext>
     {
+        ApplicationDbContext context;
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
+            context = new ApplicationDbContext();
         }
 
         protected override void Seed(MyApplication.Models.ApplicationDbContext context)

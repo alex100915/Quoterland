@@ -4,13 +4,14 @@ using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Data.Entity.ModelConfiguration.Conventions;
 
 namespace MyApplication.Models
 {
     // You can add profile data for the user by adding more properties to your ApplicationUser class, please visit http://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
     public class ApplicationUser : IdentityUser
     {
-        public List<Quote> Quotes { get; set; }
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
@@ -24,6 +25,8 @@ namespace MyApplication.Models
     {
         public DbSet<Quote> Quotes { get; set; }
         public DbSet<Movie> Movies { get; set; }
+        public DbSet<Learned> Learneds { get; set; }
+        public DbSet<Learning> Learnings { get; set; }
 
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
@@ -33,6 +36,13 @@ namespace MyApplication.Models
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();
+        }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Learned>().HasRequired(l => l.ApplicationUser).WithMany().WillCascadeOnDelete(false);
+            modelBuilder.Entity<Learning>().HasRequired(l => l.ApplicationUser).WithMany().WillCascadeOnDelete(false);
+            base.OnModelCreating(modelBuilder);
         }
     }
 }
