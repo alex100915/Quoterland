@@ -507,7 +507,6 @@
     <Content Include="Views\Quotes\MyQuotes.cshtml" />
     <Content Include="Views\Quotes\Detail.cshtml" />
     <Content Include="Views\Quotes\AllQuotesForAnonymous.cshtml" />
-    <Content Include="Views\Quotes\FindQuotes.cshtml" />
     <Content Include="Views\Quotes\AllQuotes.cshtml" />
   </ItemGroup>
   <ItemGroup>

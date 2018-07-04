@@ -19,10 +19,17 @@
 @section scripts
 {
     <script>
+        if ("@Model" == "") {
+            url = "/api/quotes";
+        }
+        else {
+            url = "/api/quotes?moviesNames=@Model";
+        }
+
         $(document).ready(function () {
             $("#quotes").DataTable({
                 ajax: {
-                    url: "/api/quotes",
+                    url: url,
                     dataSrc: ""
                 },
                 columns: [
