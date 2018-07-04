@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNet.Identity;
+using MyApplication.Dtos;
 using MyApplication.Models;
 using System;
 using System.Collections.Generic;
@@ -23,6 +24,30 @@ namespace MyApplication.Controllers.Api
             _context.Dispose();    
         }
 
+        [HttpPost]
+        public IHttpActionResult AddToLearningQuotes(byte id)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest();
+
+            var userId = User.Identity.GetUserId();
+
+            var quote = new Learning
+            {
+                ApplicationUserId = userId,
+                QuoteId = id
+            };
+
+            if (_context.Learneds.Any(q => q.ApplicationUserId == userId && q.QuoteId == id))
+                return BadRequest();
+
+            _context.Learnings.Add(quote);
+
+            _context.SaveChanges();
+
+            return Ok();
+        }
+
         [HttpGet]
         public IHttpActionResult GetLearningQuotes()
         {
@@ -39,6 +64,23 @@ namespace MyApplication.Controllers.Api
             }
 
             return Ok(returnedlist);
+        }
+
+        [HttpDelete]
+        public IHttpActionResult DeleteFromLearningQuotes(byte id)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest();
+
+            var userId = User.Identity.GetUserId();
+
+            var quote=_context.Learnings.Single(q => q.QuoteId == id && q.ApplicationUserId==userId);
+
+            _context.Learnings.Remove(quote);
+
+            _context.SaveChanges();
+
+            return Ok(id);
         }
     }
 }

@@ -17,10 +17,70 @@
     </thead>
 </table>
 
-
 @section scripts
 {
     <script>
+
+        function learned(quote) {
+   
+            var result=$.ajax({
+                url: "/api/learneds/" + quote,
+                method: "POST",
+                async:false,
+            }).done(function () {
+                toastr.success("Quote successfully added to learned.");
+            }).fail(function () {
+                toastr.error("Quote is already on learning list");
+            });
+            if (result.statusText == "OK") {
+                event.currentTarget.setAttribute("onchange", "deletelearned(" + quote + ")");
+            }
+            else
+            {
+                event.currentTarget.checked = false;
+            }
+            
+        }
+        function learning(quote) {
+
+            var result = $.ajax({
+                url: "/api/learnings/" + quote,
+                method: "POST",
+                async: false,
+            }).done(function () {
+                toastr.success("Quote successfully added to learning.");
+            }).fail(function () {
+                toastr.error("Quote is already on learned list");
+            })
+            if (result.statusText == "OK") {
+                event.currentTarget.setAttribute("onchange", "deletelearning(" + quote + ")");
+            }
+            else {
+                event.currentTarget.checked = false;
+            }
+        }
+        
+
+        function deletelearned(quote) {    
+            $.ajax({
+                url: "/api/learneds/" + quote,
+                method: "DELETE"
+            }).done(function () {
+                toastr.warning("Quote successfully deleted form learned.");
+            })
+            event.currentTarget.setAttribute("onchange", "learned(" + quote + ")");
+        }
+        
+        function deletelearning(quote) {
+            $.ajax({
+                url: "/api/learnings/"+quote,
+                method: "DELETE"
+            }).done(function () {
+                toastr.warning("Quote successfully deleted from learning.");
+            })
+            event.currentTarget.setAttribute("onchange", "learning(" + quote + ")");
+        }
+
         $(document).ready(function () {
             var result = $.ajax({
                 url: "/api/learneds",
@@ -33,7 +93,7 @@
                 method: "GET",
                 async: false
             }).responseJSON;
-            
+                      
             $("#quotes").DataTable({
                 ajax: {
                     url: "/api/quotes",
@@ -56,27 +116,23 @@
                     },
                     {
                         render: function (data, type, quote) {
-
-                            var checkbox = '<input type="checkbox">'
-
-                            result.filter(function (item) {
-                                if(item.id==quote.id)
-                                checkbox = '<input type="checkbox" checked>'
+                            var checkbox = '<input type="checkbox" onchange="learned(' + quote.id + ')">';
+                            result.filter(function (item) {                              
+                                if (item.id == quote.id)
+                                    checkbox = '<input type="checkbox" checked onchange="deletelearned(' + quote.id + ')">';
                             });
-
                             return checkbox;
                         }
                     },
                     {
                         render: function (data, type, quote) {
-
-                            var checkbox = '<input type="checkbox">'
+                           
+                            var checkbox = '<input type="checkbox" onchange="learning(' + quote.id +')">';
 
                             result2.filter(function (item) {
                                 if (item.id == quote.id)
-                                    checkbox = '<input type="checkbox" checked>'
+                                    checkbox = '<input type="checkbox" checked onchange="deletelearning(' + quote.id + ')">';
                             });
-
                             return checkbox;
                         }
                     }

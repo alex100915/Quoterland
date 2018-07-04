@@ -27,14 +27,23 @@ namespace MyApplication.Controllers.Api
         }
 
         [HttpPost]
-        public IHttpActionResult AddToLearnedQuotes(QuoteDto quoteDto)
+        public IHttpActionResult AddToLearnedQuotes(byte id)
         {
             if (!ModelState.IsValid)
                 return BadRequest();
 
             var userId = User.Identity.GetUserId();
 
-            _context.Learneds.Where(l => l.ApplicationUserId == userId).ToList();
+            var quote = new Learned
+            {
+                ApplicationUserId=userId,
+                QuoteId=id
+            };
+
+            if (_context.Learnings.Any(q => q.ApplicationUserId == userId && q.QuoteId == id))
+                return BadRequest();
+
+            _context.Learneds.Add(quote);
 
             _context.SaveChanges();
 
@@ -57,6 +66,23 @@ namespace MyApplication.Controllers.Api
             }
 
             return Ok(returnedlist);
+        }
+
+        [HttpDelete]
+        public IHttpActionResult DeleteFromLearnedQuotes(byte id)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest();
+
+            var userId = User.Identity.GetUserId();
+
+            var quote = _context.Learneds.Single(q => q.QuoteId == id && q.ApplicationUserId == userId);
+
+            _context.Learneds.Remove(quote);
+
+            _context.SaveChanges();
+
+            return Ok(id);
         }
     }
 }
