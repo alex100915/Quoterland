@@ -10,7 +10,6 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using MyApplication.Core.ViewModels;
 using MyApplication.Core.Models;
-using MyApplication.ViewModels;
 
 namespace MyApplication.Controllers
 {
