@@ -1,30 +1,23 @@
 ﻿using AutoMapper;
 using Microsoft.AspNet.Identity;
-using MyApplication.Dtos;
-using MyApplication.Models;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 using System.Data.Entity;
+using MyApplication.Core.Dtos;
+using MyApplication.Core.Models;
+using MyApplication.Persistence;
 
 namespace MyApplication.Controllers.Api
 {
     public class QuotesController : ApiController
     {
-        private ApplicationDbContext _context;
+        private readonly UnitOfWork _unitOfWork;
 
-        public QuotesController()
+        public QuotesController(UnitOfWork unitOfWork)
         {
-            _context = new ApplicationDbContext();
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            _context.Dispose();    
+            _unitOfWork = unitOfWork;
         }
 
         [HttpPost]
@@ -34,40 +27,21 @@ namespace MyApplication.Controllers.Api
                 return BadRequest();
 
             var quote = Mapper.Map<QuoteDto, Quote>(quoteDto);
-            quote.UserId = User.Identity.GetUserId();
-            _context.Quotes.Add(quote);
-            _context.SaveChanges();
 
+            quote.UserId = User.Identity.GetUserId();
+
+            _unitOfWork.Quotes.Add(quote);
+
+            _unitOfWork.Complete();
             return Created(new Uri(Request.RequestUri+"/"+quote.Id),quoteDto);
         }
-
-        //[HttpPost]
-        //[Route("api/learning")]
-        //public IHttpActionResult AddToLearningQuotes(QuoteDto quoteDto)
-        //{
-        //    if (!ModelState.IsValid)
-        //        return BadRequest();
-
-        //    var userId = User.Identity.GetUserId();
-
-        //    var quote = Mapper.Map<QuoteDto, Quote>(quoteDto);
-
-        //    _context.Users.Single(u => u.Id == userId).Learning.Add(quote);           
-            
-        //    _context.SaveChanges();
-
-        //    return Ok();
-        //}
-
         
-
         [HttpGet]
         public IHttpActionResult GetAllQuotes()
-        {            
-            var allQuotes = _context.Quotes.Include(q => q.Movie);
+        {
+            var allQuotes = _unitOfWork.Quotes.GetAllQuotesInDatabase();
 
             var allQuotesDto = allQuotes
-                .ToList()
                 .Select(Mapper.Map<Quote, QuoteDto>);
 
             return Ok(allQuotesDto);
@@ -76,30 +50,29 @@ namespace MyApplication.Controllers.Api
         [HttpGet]
         public IHttpActionResult GetMyQuotes(string userId)
         {
-            var myQuotes = _context.Quotes.Include(q=>q.Movie).Where(q => q.UserId == userId).ToList();
+            var myQuotes = _unitOfWork.Quotes.GetAllUserQuotes(userId);
             return Ok(myQuotes);
         }
 
         public IHttpActionResult GetQuotesByMoviesNames(string moviesNames)
         {
-
             string[] moviesName = moviesNames.Split(',').ToArray();
-            List<Quote> quotesByMoviesNames = new List<Quote>();
+
+            var quotesByMoviesNames = new List<Quote>();
+
             foreach (var movie in moviesName)
             {
-                var quotes = _context.Quotes.Include(q => q.Movie).Where(q => q.Movie.Title == movie);
-                foreach (var quote in quotes)
-                {
-                    quotesByMoviesNames.Add(quote);
-                }
+                var quotes = _unitOfWork.Quotes.GetQuotesByMovieTitle(movie);
+                quotesByMoviesNames.AddRange(quotes);
             }
+
             return Ok(quotesByMoviesNames);
         }
 
         [HttpGet]
         public IHttpActionResult GetQuote(int id)
         {          
-            var quote = _context.Quotes.SingleOrDefault(q=>q.Id==id);
+            var quote = _unitOfWork.Quotes.GetQuoteById(id);
 
             if (quote == null)
                 return NotFound();
@@ -111,13 +84,13 @@ namespace MyApplication.Controllers.Api
         [HttpDelete]
         public IHttpActionResult DeleteQuote(int id)
         {
-            var quoteInDb = _context.Quotes.SingleOrDefault(c => c.Id == id);
+            var quoteInDb = _unitOfWork.Quotes.GetQuoteById(id);
 
             if (quoteInDb == null)
                 return NotFound();
 
-            _context.Quotes.Remove(quoteInDb);
-            _context.SaveChanges();
+            _unitOfWork.Quotes.Remove(quoteInDb);
+            _unitOfWork.Complete();
 
             return Ok();
         }

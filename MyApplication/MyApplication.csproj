@@ -73,6 +73,26 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Ninject, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ninject.3.2.0.0\lib\net45-full\Ninject.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Ninject.Extensions.Conventions, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ninject.Extensions.Conventions.3.2.0.0\lib\net45-full\Ninject.Extensions.Conventions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Ninject.Web.Common, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ninject.Web.Common.3.2.0.0\lib\net45-full\Ninject.Web.Common.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Ninject.Web.Mvc, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ninject.MVC5.3.2.1.0\lib\net45-full\Ninject.Web.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Ninject.Web.WebApi, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ninject.Web.WebApi.3.2.1.0\lib\net45-full\Ninject.Web.WebApi.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -138,6 +158,10 @@
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
+    <Reference Include="WebActivatorEx, Version=2.0.0.0, Culture=neutral, PublicKeyToken=7b26dc2a43f6a0d4, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebActivatorEx.2.0\lib\net40\WebActivatorEx.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="WebGrease">
       <Private>True</Private>
       <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
@@ -202,6 +226,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\MappingProfile.cs" />
+    <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
@@ -212,57 +237,68 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\QuotesController.cs" />
-    <Compile Include="Dtos\ApplicationUserDto.cs" />
-    <Compile Include="Dtos\MovieDto.cs" />
-    <Compile Include="Dtos\QuoteDto.cs" />
+    <Compile Include="Core\IUnitOfWork.cs" />
+    <Compile Include="Core\Models\ApplicationUser.cs" />
+    <Compile Include="Core\Models\Learned.cs" />
+    <Compile Include="Core\Models\Learning.cs" />
+    <Compile Include="Core\Models\Movie.cs" />
+    <Compile Include="Core\Models\Quote.cs" />
+    <Compile Include="Core\Repositories\ILearnedRepository.cs" />
+    <Compile Include="Core\Repositories\ILearningRepository.cs" />
+    <Compile Include="Core\Repositories\IQuoteRepository.cs" />
+    <Compile Include="Core\Dtos\ApplicationUserDto.cs" />
+    <Compile Include="Core\Dtos\MovieDto.cs" />
+    <Compile Include="Core\Dtos\QuoteDto.cs" />
     <Compile Include="GlimpseSecurityPolicy.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201803101746175_InitialModel.cs" />
-    <Compile Include="Migrations\201803101746175_InitialModel.Designer.cs">
+    <Compile Include="Persistence\ApplicationDbContext.cs" />
+    <Compile Include="Persistence\Migrations\201803101746175_InitialModel.cs" />
+    <Compile Include="Persistence\Migrations\201803101746175_InitialModel.Designer.cs">
       <DependentUpon>201803101746175_InitialModel.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201803111927361_YoutubeLinkToQuote.cs" />
-    <Compile Include="Migrations\201803111927361_YoutubeLinkToQuote.Designer.cs">
+    <Compile Include="Persistence\Migrations\201803111927361_YoutubeLinkToQuote.cs" />
+    <Compile Include="Persistence\Migrations\201803111927361_YoutubeLinkToQuote.Designer.cs">
       <DependentUpon>201803111927361_YoutubeLinkToQuote.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201804071850349_AddMoviesTable.cs" />
-    <Compile Include="Migrations\201804071850349_AddMoviesTable.Designer.cs">
+    <Compile Include="Persistence\Migrations\201804071850349_AddMoviesTable.cs" />
+    <Compile Include="Persistence\Migrations\201804071850349_AddMoviesTable.Designer.cs">
       <DependentUpon>201804071850349_AddMoviesTable.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201804071854079_AddMovieColumnToQuotesTable.cs" />
-    <Compile Include="Migrations\201804071854079_AddMovieColumnToQuotesTable.Designer.cs">
+    <Compile Include="Persistence\Migrations\201804071854079_AddMovieColumnToQuotesTable.cs" />
+    <Compile Include="Persistence\Migrations\201804071854079_AddMovieColumnToQuotesTable.Designer.cs">
       <DependentUpon>201804071854079_AddMovieColumnToQuotesTable.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201804071906066_PopulateMovies.cs" />
-    <Compile Include="Migrations\201804071906066_PopulateMovies.Designer.cs">
+    <Compile Include="Persistence\Migrations\201804071906066_PopulateMovies.cs" />
+    <Compile Include="Persistence\Migrations\201804071906066_PopulateMovies.Designer.cs">
       <DependentUpon>201804071906066_PopulateMovies.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201804081159266_AddDataAnnotations.cs" />
-    <Compile Include="Migrations\201804081159266_AddDataAnnotations.Designer.cs">
+    <Compile Include="Persistence\Migrations\201804081159266_AddDataAnnotations.cs" />
+    <Compile Include="Persistence\Migrations\201804081159266_AddDataAnnotations.Designer.cs">
       <DependentUpon>201804081159266_AddDataAnnotations.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201804081922007_AddNewMovies.cs" />
-    <Compile Include="Migrations\201804081922007_AddNewMovies.Designer.cs">
+    <Compile Include="Persistence\Migrations\201804081922007_AddNewMovies.cs" />
+    <Compile Include="Persistence\Migrations\201804081922007_AddNewMovies.Designer.cs">
       <DependentUpon>201804081922007_AddNewMovies.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201806071420430_ChangeLengthAttributesInQuotesTable.cs" />
-    <Compile Include="Migrations\201806071420430_ChangeLengthAttributesInQuotesTable.Designer.cs">
+    <Compile Include="Persistence\Migrations\201806071420430_ChangeLengthAttributesInQuotesTable.cs" />
+    <Compile Include="Persistence\Migrations\201806071420430_ChangeLengthAttributesInQuotesTable.Designer.cs">
       <DependentUpon>201806071420430_ChangeLengthAttributesInQuotesTable.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201806301842564_StoringLearnedAndLearningQuotes.cs" />
-    <Compile Include="Migrations\201806301842564_StoringLearnedAndLearningQuotes.Designer.cs">
+    <Compile Include="Persistence\Migrations\201806301842564_StoringLearnedAndLearningQuotes.cs" />
+    <Compile Include="Persistence\Migrations\201806301842564_StoringLearnedAndLearningQuotes.Designer.cs">
       <DependentUpon>201806301842564_StoringLearnedAndLearningQuotes.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\IdentityModels.cs" />
-    <Compile Include="Models\Learned.cs" />
-    <Compile Include="Models\Learning.cs" />
-    <Compile Include="Models\ManageViewModels.cs" />
-    <Compile Include="Models\Movie.cs" />
-    <Compile Include="Models\Quote.cs" />
+    <Compile Include="Core\ViewModels\AccountViewModels.cs" />
+    <Compile Include="Core\ViewModels\ManageViewModels.cs" />
+    <Compile Include="Persistence\Migrations\Configuration.cs" />
+    <Compile Include="Core\Repositories\IMovieRepository.cs" />
+    <Compile Include="Persistence\Repositories\LearnedRepository.cs" />
+    <Compile Include="Persistence\Repositories\LearningRepository.cs" />
+    <Compile Include="Persistence\Repositories\MovieRepository.cs" />
+    <Compile Include="Persistence\Repositories\QuoteRepository.cs" />
+    <Compile Include="Persistence\UnitOfWork.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -521,31 +557,31 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201803101746175_InitialModel.resx">
+    <EmbeddedResource Include="Persistence\Migrations\201803101746175_InitialModel.resx">
       <DependentUpon>201803101746175_InitialModel.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201803111927361_YoutubeLinkToQuote.resx">
+    <EmbeddedResource Include="Persistence\Migrations\201803111927361_YoutubeLinkToQuote.resx">
       <DependentUpon>201803111927361_YoutubeLinkToQuote.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804071850349_AddMoviesTable.resx">
+    <EmbeddedResource Include="Persistence\Migrations\201804071850349_AddMoviesTable.resx">
       <DependentUpon>201804071850349_AddMoviesTable.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804071854079_AddMovieColumnToQuotesTable.resx">
+    <EmbeddedResource Include="Persistence\Migrations\201804071854079_AddMovieColumnToQuotesTable.resx">
       <DependentUpon>201804071854079_AddMovieColumnToQuotesTable.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804071906066_PopulateMovies.resx">
+    <EmbeddedResource Include="Persistence\Migrations\201804071906066_PopulateMovies.resx">
       <DependentUpon>201804071906066_PopulateMovies.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804081159266_AddDataAnnotations.resx">
+    <EmbeddedResource Include="Persistence\Migrations\201804081159266_AddDataAnnotations.resx">
       <DependentUpon>201804081159266_AddDataAnnotations.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804081922007_AddNewMovies.resx">
+    <EmbeddedResource Include="Persistence\Migrations\201804081922007_AddNewMovies.resx">
       <DependentUpon>201804081922007_AddNewMovies.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201806071420430_ChangeLengthAttributesInQuotesTable.resx">
+    <EmbeddedResource Include="Persistence\Migrations\201806071420430_ChangeLengthAttributesInQuotesTable.resx">
       <DependentUpon>201806071420430_ChangeLengthAttributesInQuotesTable.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201806301842564_StoringLearnedAndLearningQuotes.resx">
+    <EmbeddedResource Include="Persistence\Migrations\201806301842564_StoringLearnedAndLearningQuotes.resx">
       <DependentUpon>201806301842564_StoringLearnedAndLearningQuotes.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>

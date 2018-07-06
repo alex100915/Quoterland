@@ -1,31 +1,27 @@
 ﻿using Microsoft.AspNet.Identity;
-using MyApplication.Models;
+using MyApplication.Core.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using MyApplication.Persistence;
 
 namespace MyApplication.Controllers
 {
     public class QuotesController : Controller
     {
-        private ApplicationDbContext context;
+        private readonly UnitOfWork _unitOfWork;
 
-        public QuotesController()
+        public QuotesController(UnitOfWork unitOfWork)
         {
-            context = new ApplicationDbContext();
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            context.Dispose();
+            _unitOfWork = unitOfWork;
         }
 
         // GET: Quotes
         public ActionResult New()
         {
-            var movies = context.Movies.ToList();
+            var movies = _unitOfWork.Movies.GetAllMovies();
             return View(model:movies);
         }
 

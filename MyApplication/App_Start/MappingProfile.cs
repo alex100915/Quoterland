@@ -1,10 +1,6 @@
 ﻿using AutoMapper;
-using MyApplication.Dtos;
-using MyApplication.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+using MyApplication.Core.Dtos;
+using MyApplication.Core.Models;
 
 namespace MyApplication.App_Start
 {

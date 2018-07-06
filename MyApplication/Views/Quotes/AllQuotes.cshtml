@@ -53,7 +53,7 @@
             var result = $.ajax({
                 url: "/api/learnings/" + quote,
                 method: "POST",
-                async: false,
+                async: false
             }).done(function () {
                 toastr.success("Quote successfully added to learning.");
             }).fail(function () {
@@ -125,7 +125,7 @@
                         render: function (data, type, quote) {
                             var checkbox = '<input type="checkbox" onchange="learned(' + quote.id + ')">';
                             result.filter(function (item) {
-                                if (item.id == quote.id)
+                                if (item.quoteId == quote.id)
                                     checkbox = '<input type="checkbox" checked onchange="deletelearned(' + quote.id + ')">';
                             });
                             return checkbox;
@@ -137,7 +137,7 @@
                             var checkbox = '<input type="checkbox" onchange="learning(' + quote.id +')">';
 
                             result2.filter(function (item) {
-                                if (item.id == quote.id)
+                                if (item.quoteId == quote.id)
                                     checkbox = '<input type="checkbox" checked onchange="deletelearning(' + quote.id + ')">';
                             });
                             return checkbox;

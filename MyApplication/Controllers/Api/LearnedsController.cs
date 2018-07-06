@@ -1,29 +1,19 @@
-﻿using AutoMapper;
-using Microsoft.AspNet.Identity;
-using MyApplication.Dtos;
-using MyApplication.Models;
-using System;
+﻿using Microsoft.AspNet.Identity;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
-using System.Data.Entity;
+using MyApplication.Core.Models;
+using MyApplication.Persistence;
 
 namespace MyApplication.Controllers.Api
 {
     public class LearnedsController : ApiController
     {
-        private ApplicationDbContext _context;
+        private readonly UnitOfWork _unitOfWork;
 
-        public LearnedsController()
+        public LearnedsController(UnitOfWork unitOfWork)
         {
-            _context = new ApplicationDbContext();
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            _context.Dispose();
+            _unitOfWork = unitOfWork;
         }
 
         [HttpPost]
@@ -34,18 +24,16 @@ namespace MyApplication.Controllers.Api
 
             var userId = User.Identity.GetUserId();
 
-            var quote = new Learned
-            {
-                ApplicationUserId=userId,
-                QuoteId=id
-            };
-
-            if (_context.Learnings.Any(q => q.ApplicationUserId == userId && q.QuoteId == id))
+            if (_unitOfWork.Learnings.CheckQuoteExistsInLearnings(id, userId))
                 return BadRequest();
 
-            _context.Learneds.Add(quote);
+            _unitOfWork.Learneds.Add(new Learned
+            {
+                ApplicationUserId = userId,
+                QuoteId = id
+            });
 
-            _context.SaveChanges();
+            _unitOfWork.Complete();
 
             return Ok();
         }
@@ -56,16 +44,9 @@ namespace MyApplication.Controllers.Api
             if (!ModelState.IsValid)
                 return BadRequest();
 
-            var userId = User.Identity.GetUserId();
+            var quotes = _unitOfWork.Learneds.GetUserLearnedQuotes(User.Identity.GetUserId());
 
-            var quotes=_context.Learneds.Where(l => l.ApplicationUserId == userId).ToList();
-            List<Quote> returnedlist = new List<Quote>();
-            foreach (var quote in quotes)
-            {
-                returnedlist.Add(_context.Quotes.Single(q => q.Id == quote.QuoteId));
-            }
-
-            return Ok(returnedlist);
+            return Ok(quotes);
         }
 
         [HttpDelete]
@@ -76,11 +57,11 @@ namespace MyApplication.Controllers.Api
 
             var userId = User.Identity.GetUserId();
 
-            var quote = _context.Learneds.Single(q => q.QuoteId == id && q.ApplicationUserId == userId);
+            var quote = _unitOfWork.Learneds.GetUserLearnedQuoteById(id, userId);
 
-            _context.Learneds.Remove(quote);
+            _unitOfWork.Learneds.Remove(quote);
 
-            _context.SaveChanges();
+            _unitOfWork.Complete();
 
             return Ok(id);
         }

@@ -356,3 +356,14 @@ C:\Users\KOWAL\Desktop\QuotersLand\MyApplication\obj\Release\MyApplication.cspro
 C:\Users\KOWAL\Desktop\QuotersLand\MyApplication\obj\Release\MyApplication.dll
 C:\Users\KOWAL\Desktop\QuotersLand\MyApplication\obj\Release\MyApplication.pdb
 C:\Users\KOWAL\Desktop\QuotersLand\MyApplication\obj\Release\MyApplication.Migrations.StoringLearnedAndLearningQuotes.resources
+C:\Users\KOWAL\Desktop\QuotersLand\MyApplication\bin\Ninject.dll
+C:\Users\KOWAL\Desktop\QuotersLand\MyApplication\bin\Ninject.Extensions.Conventions.dll
+C:\Users\KOWAL\Desktop\QuotersLand\MyApplication\bin\Ninject.Web.Common.dll
+C:\Users\KOWAL\Desktop\QuotersLand\MyApplication\bin\Ninject.Web.Mvc.dll
+C:\Users\KOWAL\Desktop\QuotersLand\MyApplication\bin\Ninject.Web.WebApi.dll
+C:\Users\KOWAL\Desktop\QuotersLand\MyApplication\bin\WebActivatorEx.dll
+C:\Users\KOWAL\Desktop\QuotersLand\MyApplication\bin\Ninject.xml
+C:\Users\KOWAL\Desktop\QuotersLand\MyApplication\bin\Ninject.Extensions.Conventions.xml
+C:\Users\KOWAL\Desktop\QuotersLand\MyApplication\bin\Ninject.Web.Common.xml
+C:\Users\KOWAL\Desktop\QuotersLand\MyApplication\bin\Ninject.Web.Mvc.xml
+C:\Users\KOWAL\Desktop\QuotersLand\MyApplication\bin\Ninject.Web.WebApi.xml

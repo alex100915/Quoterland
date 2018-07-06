@@ -1,29 +1,19 @@
 ﻿using Microsoft.AspNet.Identity;
-using MyApplication.Dtos;
-using MyApplication.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
+using MyApplication.Core.Models;
+using MyApplication.Persistence;
 
 namespace MyApplication.Controllers.Api
 {
     public class LearningsController : ApiController
     {
-        ApplicationDbContext _context;
+        private readonly UnitOfWork _unitOfWork;
 
-        public LearningsController()
+        public LearningsController(UnitOfWork unitOfWork)
         {
-            _context = new ApplicationDbContext();
+            _unitOfWork = unitOfWork;
         }
-
-        protected override void Dispose(bool disposing)
-        {
-            _context.Dispose();    
-        }
-
+        
         [HttpPost]
         public IHttpActionResult AddToLearningQuotes(byte id)
         {
@@ -38,12 +28,12 @@ namespace MyApplication.Controllers.Api
                 QuoteId = id
             };
 
-            if (_context.Learneds.Any(q => q.ApplicationUserId == userId && q.QuoteId == id))
+            if (_unitOfWork.Learneds.CheckQuoteExistsInLearnedList(id,userId))
                 return BadRequest();
 
-            _context.Learnings.Add(quote);
+            _unitOfWork.Learnings.Add(quote);
 
-            _context.SaveChanges();
+            _unitOfWork.Complete();
 
             return Ok();
         }
@@ -56,14 +46,9 @@ namespace MyApplication.Controllers.Api
 
             var userId = User.Identity.GetUserId();
 
-            var quotes = _context.Learnings.Where(l => l.ApplicationUserId == userId).ToList();
-            List<Quote> returnedlist = new List<Quote>();
-            foreach (var quote in quotes)
-            {
-                returnedlist.Add(_context.Quotes.Single(q => q.Id == quote.QuoteId));
-            }
+            var quotes = _unitOfWork.Learnings.GetUserLearningQuotes(userId);
 
-            return Ok(returnedlist);
+            return Ok(quotes);
         }
 
         [HttpDelete]
@@ -72,13 +57,11 @@ namespace MyApplication.Controllers.Api
             if (!ModelState.IsValid)
                 return BadRequest();
 
-            var userId = User.Identity.GetUserId();
+            var quote = _unitOfWork.Learnings.GetUserLearningQuoteById(id, User.Identity.GetUserId());
 
-            var quote=_context.Learnings.Single(q => q.QuoteId == id && q.ApplicationUserId==userId);
+            _unitOfWork.Learnings.Remove(quote);
 
-            _context.Learnings.Remove(quote);
-
-            _context.SaveChanges();
+            _unitOfWork.Complete();
 
             return Ok(id);
         }

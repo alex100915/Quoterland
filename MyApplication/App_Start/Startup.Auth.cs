@@ -3,9 +3,9 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
-using Microsoft.Owin.Security.Google;
+using MyApplication.Core.Models;
 using Owin;
-using MyApplication.Models;
+using MyApplication.Persistence;
 
 namespace MyApplication
 {
