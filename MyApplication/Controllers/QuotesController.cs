@@ -1,19 +1,14 @@
 ﻿using Microsoft.AspNet.Identity;
-using MyApplication.Core.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using MyApplication.Persistence;
+using MyApplication.Core;
 
 namespace MyApplication.Controllers
 {
     public class QuotesController : Controller
     {
-        private readonly UnitOfWork _unitOfWork;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public QuotesController(UnitOfWork unitOfWork)
+        public QuotesController(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }

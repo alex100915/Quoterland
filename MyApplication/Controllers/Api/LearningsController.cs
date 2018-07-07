@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNet.Identity;
 using System.Web.Http;
+using MyApplication.Core;
 using MyApplication.Core.Models;
 using MyApplication.Persistence;
 
@@ -7,9 +8,9 @@ namespace MyApplication.Controllers.Api
 {
     public class LearningsController : ApiController
     {
-        private readonly UnitOfWork _unitOfWork;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public LearningsController(UnitOfWork unitOfWork)
+        public LearningsController(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }

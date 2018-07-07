@@ -75,6 +75,7 @@
                 })
                 var vals = arr.join(",");
                 var str = vals;
+                console.log(str);
                 $("#Find").attr("href", "@Url.Action("FindQuotes", "Quotes")?moviesName=" + str);
             })
         });

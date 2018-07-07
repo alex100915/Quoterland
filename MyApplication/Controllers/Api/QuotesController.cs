@@ -5,17 +5,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
 using System.Data.Entity;
+using MyApplication.Core;
 using MyApplication.Core.Dtos;
 using MyApplication.Core.Models;
 using MyApplication.Persistence;
+using Ninject.Infrastructure.Language;
 
 namespace MyApplication.Controllers.Api
 {
     public class QuotesController : ApiController
     {
-        private readonly UnitOfWork _unitOfWork;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public QuotesController(UnitOfWork unitOfWork)
+        public QuotesController(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
@@ -62,11 +64,12 @@ namespace MyApplication.Controllers.Api
 
             foreach (var movie in moviesName)
             {
-                var quotes = _unitOfWork.Quotes.GetQuotesByMovieTitle(movie);
-                quotesByMoviesNames.AddRange(quotes);
+                var quotesForCurrentMovie = _unitOfWork.Quotes.GetQuotesByMovieTitle(movie);
+                quotesByMoviesNames.AddRange(quotesForCurrentMovie);
             }
+            var result=quotesByMoviesNames.Select(Mapper.Map<Quote, QuoteDto>);
 
-            return Ok(quotesByMoviesNames);
+            return Ok(result);
         }
 
         [HttpGet]

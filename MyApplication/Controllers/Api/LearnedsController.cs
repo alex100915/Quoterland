@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
+using MyApplication.Core;
 using MyApplication.Core.Models;
 using MyApplication.Persistence;
 
@@ -9,9 +10,9 @@ namespace MyApplication.Controllers.Api
 {
     public class LearnedsController : ApiController
     {
-        private readonly UnitOfWork _unitOfWork;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public LearnedsController(UnitOfWork unitOfWork)
+        public LearnedsController(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
