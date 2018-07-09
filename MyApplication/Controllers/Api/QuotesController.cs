@@ -52,8 +52,10 @@ namespace MyApplication.Controllers.Api
         }
 
         [HttpGet]
-        public IHttpActionResult GetMyQuotes(string userId)
+        [Route("api/quotes/mine")]
+        public IHttpActionResult GetMyQuotes()
         {
+            var userId = User.Identity.GetUserId();
             var myQuotes = _unitOfWork.Quotes.GetAllUserQuotes(userId);
             return Ok(myQuotes);
         }

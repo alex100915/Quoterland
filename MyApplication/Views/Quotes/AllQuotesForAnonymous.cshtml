@@ -28,6 +28,9 @@
 
         $(document).ready(function () {
             $("#quotes").DataTable({
+                "language": {
+                    "emptyTable": "Sorry, we don't have any quotes for that movie yet"
+                },
                 ajax: {
                     url: url,
                     dataSrc: ""

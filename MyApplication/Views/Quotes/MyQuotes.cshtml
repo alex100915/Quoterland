@@ -26,16 +26,13 @@
 {
 
 <script>
-        if ("@Model" == null) {
-            url = "/api/quotes";
-        }
-        else {
-            url = "/api/quotes?userId=@Model";
-        }
         $(document).ready(function () {
-            var table=$("#quotes").DataTable({
+            var table = $("#quotes").DataTable({
+                "language": {
+                    "emptyTable": "Your list is empty"
+                },
                 ajax: {
-                    url: url,
+                    url: "/api/quotes/mine",
                     dataSrc: ""
                 },
                 columns: [

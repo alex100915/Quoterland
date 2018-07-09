@@ -21,10 +21,9 @@ namespace MyApplication.Controllers
         }
 
         [Authorize]
-        public ActionResult MyQuotes(string id)
+        public ActionResult MyQuotes()
         {
-            id = User.Identity.GetUserId();
-            return View(model:id);
+            return View();
         }
 
         public ActionResult AllQuotes()
