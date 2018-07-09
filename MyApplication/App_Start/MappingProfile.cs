@@ -8,12 +8,12 @@ namespace MyApplication.App_Start
     {
         public MappingProfile()
         {
-            Mapper.CreateMap<QuoteDto, Quote>();
-            Mapper.CreateMap<Quote, QuoteDto>();
-            Mapper.CreateMap<ApplicationUserDto, ApplicationUser>();
-            Mapper.CreateMap<ApplicationUser, ApplicationUserDto>();
-            Mapper.CreateMap<Movie, MovieDto>();
-            Mapper.CreateMap<MovieDto, Movie>();
+            CreateMap<QuoteDto, Quote>();
+            CreateMap<Quote, QuoteDto>();
+            CreateMap<ApplicationUserDto, ApplicationUser>();
+            CreateMap<ApplicationUser, ApplicationUserDto>();
+            CreateMap<Movie, MovieDto>();
+            CreateMap<MovieDto, Movie>();
         }
     }
 }

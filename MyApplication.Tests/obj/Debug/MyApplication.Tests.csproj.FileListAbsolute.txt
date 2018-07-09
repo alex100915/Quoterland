@@ -73,3 +73,5 @@ C:\Users\KOWAL\Desktop\QuotersLand\MyApplication.Tests\bin\Debug\System.Web.WebP
 C:\Users\KOWAL\Desktop\QuotersLand\MyApplication.Tests\obj\Debug\MyApplication.Tests.csprojResolveAssemblyReference.cache
 C:\Users\KOWAL\Desktop\QuotersLand\MyApplication.Tests\obj\Debug\MyApplication.Tests.dll
 C:\Users\KOWAL\Desktop\QuotersLand\MyApplication.Tests\obj\Debug\MyApplication.Tests.pdb
+C:\Users\KOWAL\Desktop\QuotersLand\MyApplication.Tests\bin\Debug\System.ValueTuple.dll
+C:\Users\KOWAL\Desktop\QuotersLand\MyApplication.Tests\bin\Debug\System.ValueTuple.xml

@@ -1,15 +1,11 @@
 ﻿using AutoMapper;
 using Microsoft.AspNet.Identity;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
-using System.Data.Entity;
 using MyApplication.Core;
 using MyApplication.Core.Dtos;
 using MyApplication.Core.Models;
-using MyApplication.Persistence;
-using Ninject.Infrastructure.Language;
 
 namespace MyApplication.Controllers.Api
 {
@@ -28,14 +24,20 @@ namespace MyApplication.Controllers.Api
             if (!ModelState.IsValid)
                 return BadRequest();
 
-            var quote = Mapper.Map<QuoteDto, Quote>(quoteDto);
+            var userId = User.Identity.GetUserId();
 
-            quote.UserId = User.Identity.GetUserId();
+            if (userId == null)
+                return Unauthorized();
+
+            quoteDto.UserId= User.Identity.GetUserId();
+
+            var quote = Mapper.Map<QuoteDto, Quote>(quoteDto);
 
             _unitOfWork.Quotes.Add(quote);
 
             _unitOfWork.Complete();
-            return Created(new Uri(Request.RequestUri+"/"+quote.Id),quoteDto);
+            //return Created(new Uri(Request.RequestUri + "/" + quote.Id), quoteDto);
+            return Ok();
         }
         
         [HttpGet]

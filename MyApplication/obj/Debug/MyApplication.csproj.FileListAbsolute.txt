@@ -185,3 +185,5 @@ C:\Users\KOWAL\Desktop\QuotersLand\MyApplication\obj\Debug\MyApplication.Migrati
 C:\Users\KOWAL\Desktop\QuotersLand\MyApplication\obj\Debug\MyApplication.csproj.GenerateResource.Cache
 C:\Users\KOWAL\Desktop\QuotersLand\MyApplication\obj\Debug\MyApplication.dll
 C:\Users\KOWAL\Desktop\QuotersLand\MyApplication\obj\Debug\MyApplication.pdb
+C:\Users\KOWAL\Desktop\QuotersLand\MyApplication\bin\System.ValueTuple.dll
+C:\Users\KOWAL\Desktop\QuotersLand\MyApplication\bin\System.ValueTuple.xml

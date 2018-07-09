@@ -8,6 +8,8 @@
 
         public ApplicationUserDto User { get; set; }
 
+        public string UserId { get; set; }
+
         public string PhraseToLearn { get; set; }
 
         public MovieDto Movie { get; set; }
