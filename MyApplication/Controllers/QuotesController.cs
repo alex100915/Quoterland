@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNet.Identity;
+﻿using System.Web.Http.Results;
+using Microsoft.AspNet.Identity;
 using System.Web.Mvc;
 using MyApplication.Core;
 

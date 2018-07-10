@@ -75,3 +75,5 @@ C:\Users\KOWAL\Desktop\QuotersLand\MyApplication.Tests\obj\Debug\MyApplication.T
 C:\Users\KOWAL\Desktop\QuotersLand\MyApplication.Tests\obj\Debug\MyApplication.Tests.pdb
 C:\Users\KOWAL\Desktop\QuotersLand\MyApplication.Tests\bin\Debug\System.ValueTuple.dll
 C:\Users\KOWAL\Desktop\QuotersLand\MyApplication.Tests\bin\Debug\System.ValueTuple.xml
+C:\Users\KOWAL\Desktop\QuotersLand\MyApplication.Tests\bin\Debug\System.Web.Helpers.dll
+C:\Users\KOWAL\Desktop\QuotersLand\MyApplication.Tests\bin\Debug\System.Web.Helpers.xml

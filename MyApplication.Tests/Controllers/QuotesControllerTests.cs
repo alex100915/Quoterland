@@ -1,37 +1,40 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using System.Collections.Generic;
+using System.Web.Mvc;
+using FluentAssertions;
 using Moq;
-using MyApplication.App_Start;
 using MyApplication.Controllers;
 using MyApplication.Core;
 using MyApplication.Core.Repositories;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using MyApplication.Core.Models;
 
 namespace MyApplication.Tests.Controllers
 {
+    [TestClass]
     public class QuotesControllerTests
     {
         private QuotesController _controller;
-        private Mock<IQuoteRepository> _mockRepository;
+        private Mock<IMovieRepository> _mockRepository;
 
         public QuotesControllerTests()
         {
-            _mockRepository = new Mock<IQuoteRepository>();
+            _mockRepository = new Mock<IMovieRepository>();
 
             var mockUoW = new Mock<IUnitOfWork>();
-            mockUoW.SetupGet(u => u.Quotes).Returns(_mockRepository.Object);
+            mockUoW.SetupGet(u => u.Movies).Returns(_mockRepository.Object);
 
             _controller = new QuotesController(mockUoW.Object);
         }
 
         [TestMethod]
-        public void MyQuotes_UserNotLogged_HttpNotFound()
+        public void New_ValidRequest_ShouldReturnViewResult()
         {
-            //_controller.MyQuotes(null);
+            IEnumerable<Movie> movies = new List<Movie>();
+            _mockRepository.Setup(r => r.GetAllMovies()).Returns(movies);
+
+            var result = _controller.New();
+
+            result.Should().BeOfType<ViewResult>();
         }
     }
 }

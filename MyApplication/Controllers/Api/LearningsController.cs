@@ -18,19 +18,22 @@ namespace MyApplication.Controllers.Api
         [HttpPost]
         public IHttpActionResult AddToLearningQuotes(byte id)
         {
-            if (!ModelState.IsValid)
+            var userId = User.Identity.GetUserId();
+
+            if (_unitOfWork.Quotes.GetQuoteById(id) == null)
                 return BadRequest();
 
-            var userId = User.Identity.GetUserId();
+            if (_unitOfWork.Learneds.CheckQuoteExistsInLearnedList(id,userId))
+                return BadRequest();
+
+            if (_unitOfWork.Learnings.CheckQuoteExistsInLearnings(id, userId))
+                return BadRequest();
 
             var quote = new Learning
             {
                 ApplicationUserId = userId,
                 QuoteId = id
             };
-
-            if (_unitOfWork.Learneds.CheckQuoteExistsInLearnedList(id,userId))
-                return BadRequest();
 
             _unitOfWork.Learnings.Add(quote);
 
@@ -55,10 +58,12 @@ namespace MyApplication.Controllers.Api
         [HttpDelete]
         public IHttpActionResult DeleteFromLearningQuotes(byte id)
         {
-            if (!ModelState.IsValid)
-                return BadRequest();
+            var userId = User.Identity.GetUserId();
 
-            var quote = _unitOfWork.Learnings.GetUserLearningQuoteById(id, User.Identity.GetUserId());
+            var quote = _unitOfWork.Learnings.GetUserLearningQuoteById(id,userId);
+
+            if (quote == null)
+                return BadRequest();
 
             _unitOfWork.Learnings.Remove(quote);
 
