@@ -77,3 +77,5 @@ C:\Users\KOWAL\Desktop\QuotersLand\MyApplication.Tests\bin\Debug\System.ValueTup
 C:\Users\KOWAL\Desktop\QuotersLand\MyApplication.Tests\bin\Debug\System.ValueTuple.xml
 C:\Users\KOWAL\Desktop\QuotersLand\MyApplication.Tests\bin\Debug\System.Web.Helpers.dll
 C:\Users\KOWAL\Desktop\QuotersLand\MyApplication.Tests\bin\Debug\System.Web.Helpers.xml
+C:\Users\KOWAL\Desktop\QuotersLand\MyApplication.Tests\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\KOWAL\Desktop\QuotersLand\MyApplication.Tests\bin\Debug\EntityFramework.SqlServer.xml

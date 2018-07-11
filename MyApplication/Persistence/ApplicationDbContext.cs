@@ -4,7 +4,7 @@ using MyApplication.Core.Models;
 
 namespace MyApplication.Persistence
 {
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplicationDbContext
     {
         public DbSet<Quote> Quotes { get; set; }
         public DbSet<Movie> Movies { get; set; }

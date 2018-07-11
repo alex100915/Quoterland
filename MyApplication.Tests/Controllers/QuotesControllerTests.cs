@@ -16,7 +16,8 @@ namespace MyApplication.Tests.Controllers
         private QuotesController _controller;
         private Mock<IMovieRepository> _mockRepository;
 
-        public QuotesControllerTests()
+        [TestInitialize]
+        public void TestInitialize()
         {
             _mockRepository = new Mock<IMovieRepository>();
 

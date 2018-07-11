@@ -25,7 +25,8 @@ namespace MyApplication.Tests.Controllers.Api
         private QuotesController _controller;
         private Mock<IQuoteRepository> _mockRepository;
 
-        public QuotesControllerTests()
+        [TestInitialize]
+        public void TestInitialize()
         {
             _mockRepository = new Mock<IQuoteRepository>();
 

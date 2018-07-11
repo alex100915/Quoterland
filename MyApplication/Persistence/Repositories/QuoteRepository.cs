@@ -8,9 +8,9 @@ namespace MyApplication.Persistence.Repositories
 {
     public class QuoteRepository : IQuoteRepository
     {
-        private readonly ApplicationDbContext _context;
+        private readonly IApplicationDbContext _context;
 
-        public QuoteRepository(ApplicationDbContext context)
+        public QuoteRepository(IApplicationDbContext context)
         {
             _context = context;
         }
@@ -18,8 +18,9 @@ namespace MyApplication.Persistence.Repositories
         public IEnumerable<Quote> GetQuotesByMovieTitle(string movie)
         {
             return _context.Quotes
+                .Where(q => q.Movie.Title == movie)
                 .Include(q => q.Movie)
-                .Where(q => q.Movie.Title == movie);
+                .ToList();
         }
 
         public IEnumerable<Quote> GetAllQuotesInDatabase()
@@ -33,8 +34,8 @@ namespace MyApplication.Persistence.Repositories
         public IEnumerable<Quote> GetAllUserQuotes(string userId)
         {
             return _context.Quotes
-                .Include(q => q.Movie)
                 .Where(q => q.UserId == userId)
+                .Include(q => q.Movie)
                 .ToList();
         }
 

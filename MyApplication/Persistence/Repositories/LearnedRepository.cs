@@ -7,9 +7,9 @@ namespace MyApplication.Persistence.Repositories
 {
     public class LearnedRepository : ILearnedRepository
     {
-        private readonly ApplicationDbContext _context;
+        private readonly IApplicationDbContext _context;
 
-        public LearnedRepository(ApplicationDbContext context)
+        public LearnedRepository(IApplicationDbContext context)
         {
             _context = context;
         }
@@ -21,7 +21,7 @@ namespace MyApplication.Persistence.Repositories
 
         public Learned GetUserLearnedQuoteById(byte id, string userId)
         {
-            return _context.Learneds.Single(q => q.QuoteId == id && q.ApplicationUserId == userId);
+            return _context.Learneds.SingleOrDefault(q => q.QuoteId == id && q.ApplicationUserId == userId);
         }
 
         public IEnumerable<Learned> GetUserLearnedQuotes(string userId)

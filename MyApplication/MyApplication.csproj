@@ -259,6 +259,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Persistence\ApplicationDbContext.cs" />
+    <Compile Include="Persistence\IApplicationDbContext.cs" />
     <Compile Include="Persistence\Migrations\201803101746175_InitialModel.cs" />
     <Compile Include="Persistence\Migrations\201803101746175_InitialModel.Designer.cs">
       <DependentUpon>201803101746175_InitialModel.cs</DependentUpon>

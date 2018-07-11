@@ -7,16 +7,16 @@ namespace MyApplication.Persistence.Repositories
 {
     public class LearningRepository : ILearningRepository
     {
-        private readonly ApplicationDbContext _context;
+        private readonly IApplicationDbContext _context;
 
-        public LearningRepository(ApplicationDbContext context)
+        public LearningRepository(IApplicationDbContext context)
         {
             _context = context;
         }
 
         public Learning GetUserLearningQuoteById(byte id, string userId)
         {
-            return _context.Learnings.Single(q => q.QuoteId == id && q.ApplicationUserId == userId);
+            return _context.Learnings.SingleOrDefault(q => q.QuoteId == id && q.ApplicationUserId == userId);
         }
 
         public IEnumerable<Learning> GetUserLearningQuotes(string userId)

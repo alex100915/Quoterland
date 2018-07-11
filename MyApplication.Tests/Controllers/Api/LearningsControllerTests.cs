@@ -20,8 +20,8 @@ namespace MyApplication.Tests.Controllers.Api
         private Mock<ILearnedRepository> _mockLearnedRepository;
         private Mock<ILearningRepository> _mockLearningRepository;
 
-
-        public LearningsControllerTests()
+        [TestInitialize]
+        public void TestInitialize()
         {
             _mockQuoteRepository = new Mock<IQuoteRepository>();
             _mockLearnedRepository = new Mock<ILearnedRepository>();
