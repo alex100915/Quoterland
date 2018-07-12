@@ -45,9 +45,6 @@ namespace MyApplication.Controllers.Api
         [HttpGet]
         public IHttpActionResult GetLearningQuotes()
         {
-            if (!ModelState.IsValid)
-                return BadRequest();
-
             var userId = User.Identity.GetUserId();
 
             var quotes = _unitOfWork.Learnings.GetUserLearningQuotes(userId);

@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using System;
+using AutoMapper;
 using Microsoft.AspNet.Identity;
 using System.Collections.Generic;
 using System.Linq;
@@ -56,7 +57,8 @@ namespace MyApplication.Controllers.Api
         public IHttpActionResult GetMyQuotes()
         {
             var userId = User.Identity.GetUserId();
-            var myQuotes = _unitOfWork.Quotes.GetAllUserQuotes(userId);
+            var myQuotes = _unitOfWork.Quotes.GetAllUserQuotes(userId).Select(Mapper.Map<Quote, QuoteDto>);
+
             return Ok(myQuotes);
         }
 

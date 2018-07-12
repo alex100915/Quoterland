@@ -15,19 +15,20 @@ namespace MyApplication.Controllers
         }
 
         // GET: Quotes
-        public ActionResult New()
+        [Authorize]
+        public ViewResult New()
         {
             var movies = _unitOfWork.Movies.GetAllMovies();
             return View(model:movies);
         }
 
         [Authorize]
-        public ActionResult MyQuotes()
+        public ViewResult MyQuotes()
         {
             return View();
         }
 
-        public ActionResult AllQuotes()
+        public ViewResult AllQuotes()
         {
             if (User.Identity.IsAuthenticated)
             {
@@ -36,7 +37,7 @@ namespace MyApplication.Controllers
             return View("AllQuotesForAnonymous");
         }
 
-        public ActionResult FindQuotes(string moviesName)
+        public ViewResult FindQuotes(string moviesName)
         {
             if (User.Identity.IsAuthenticated)
             {
@@ -45,7 +46,7 @@ namespace MyApplication.Controllers
             return View("AllQuotesForAnonymous", model: moviesName);
         }
 
-        public ActionResult Detail(int id)
+        public ViewResult Detail(int id)
         {
             return View(id);
         }

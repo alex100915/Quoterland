@@ -15,7 +15,6 @@ C:\Users\KOWAL\Desktop\QuotersLand\MyApplication.IntegrationTests\bin\Debug\MyAp
 C:\Users\KOWAL\Desktop\QuotersLand\MyApplication.IntegrationTests\bin\Debug\MyApplication.IntegrationTests.pdb
 C:\Users\KOWAL\Desktop\QuotersLand\MyApplication.IntegrationTests\bin\Debug\EntityFramework.dll
 C:\Users\KOWAL\Desktop\QuotersLand\MyApplication.IntegrationTests\bin\Debug\EntityFramework.SqlServer.dll
-C:\Users\KOWAL\Desktop\QuotersLand\MyApplication.IntegrationTests\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
 C:\Users\KOWAL\Desktop\QuotersLand\MyApplication.IntegrationTests\bin\Debug\MyApplication.dll
 C:\Users\KOWAL\Desktop\QuotersLand\MyApplication.IntegrationTests\bin\Debug\nunit.framework.dll
 C:\Users\KOWAL\Desktop\QuotersLand\MyApplication.IntegrationTests\bin\Debug\WebActivatorEx.dll
@@ -70,3 +69,13 @@ C:\Users\KOWAL\Desktop\QuotersLand\MyApplication.IntegrationTests\bin\Debug\Syst
 C:\Users\KOWAL\Desktop\QuotersLand\MyApplication.IntegrationTests\obj\Debug\MyApplication.IntegrationTests.csprojResolveAssemblyReference.cache
 C:\Users\KOWAL\Desktop\QuotersLand\MyApplication.IntegrationTests\obj\Debug\MyApplication.IntegrationTests.dll
 C:\Users\KOWAL\Desktop\QuotersLand\MyApplication.IntegrationTests\obj\Debug\MyApplication.IntegrationTests.pdb
+C:\Users\KOWAL\Desktop\QuotersLand\MyApplication.IntegrationTests\bin\Debug\Moq.dll
+C:\Users\KOWAL\Desktop\QuotersLand\MyApplication.IntegrationTests\bin\Debug\System.Web.Helpers.dll
+C:\Users\KOWAL\Desktop\QuotersLand\MyApplication.IntegrationTests\bin\Debug\Moq.xml
+C:\Users\KOWAL\Desktop\QuotersLand\MyApplication.IntegrationTests\bin\Debug\System.Web.Helpers.xml
+C:\Users\KOWAL\Desktop\QuotersLand\MyApplication.IntegrationTests\bin\Debug\FluentAssertions.Core.dll
+C:\Users\KOWAL\Desktop\QuotersLand\MyApplication.IntegrationTests\bin\Debug\FluentAssertions.dll
+C:\Users\KOWAL\Desktop\QuotersLand\MyApplication.IntegrationTests\bin\Debug\FluentAssertions.pdb
+C:\Users\KOWAL\Desktop\QuotersLand\MyApplication.IntegrationTests\bin\Debug\FluentAssertions.xml
+C:\Users\KOWAL\Desktop\QuotersLand\MyApplication.IntegrationTests\bin\Debug\FluentAssertions.Core.pdb
+C:\Users\KOWAL\Desktop\QuotersLand\MyApplication.IntegrationTests\bin\Debug\FluentAssertions.Core.xml

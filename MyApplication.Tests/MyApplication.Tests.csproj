@@ -136,6 +136,7 @@
     <Compile Include="Controllers\Api\QuotesControllerTests.cs" />
     <Compile Include="Controllers\QuotesControllerTests.cs" />
     <Compile Include="Extensions\ApiControllerExtensions.cs" />
+    <Compile Include="Extensions\ControllerExtensions.cs" />
     <Compile Include="Extensions\MockDbSetExtensions.cs" />
     <Compile Include="Persistence\Repositories\LearnedRepositoryTests.cs" />
     <Compile Include="Persistence\Repositories\LearningRepositoryTests.cs" />

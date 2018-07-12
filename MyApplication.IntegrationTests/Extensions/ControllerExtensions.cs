@@ -16,7 +16,7 @@ namespace MyApplication.IntegrationTests.Extensions
             identity.AddClaim(
                 new Claim("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier", userId));
 
-            var principal = new GenericPrincipal(identity, null);
+            var principal = new GenericPrincipal(identity,null);            
 
             controller.ControllerContext = Mock.Of<ControllerContext>(ctx =>
                 ctx.HttpContext == Mock.Of<HttpContextBase>(http => http.User == principal));

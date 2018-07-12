@@ -1,9 +1,5 @@
 ﻿using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Text;
-using System.Web;
-using System.Web.Http;
 using System.Web.Http.Results;
 using AutoMapper;
 using FluentAssertions;
@@ -61,15 +57,30 @@ namespace MyApplication.Tests.Controllers.Api
         [TestMethod]
         public void GetQuotesByMoviesNames_MoviesNamesAreInvalid_ShouldReturnOkWithEmptyColletion()
         {
-            var unvalidMoviesNames = "The Office";
+            var validMoviesNames = "Valid, Movie, Names";
+
+            var unvalidMoviesNames = "Unvalid, Movie, Names";
 
             IEnumerable<Quote> quotes = new List<Quote>();
 
-            _mockRepository.Setup(r => r.GetQuotesByMovieTitle(unvalidMoviesNames)).Returns(quotes);
+            _mockRepository.Setup(r => r.GetQuotesByMovieTitle(validMoviesNames)).Returns(quotes);
 
             var result = _controller.GetQuotesByMoviesNames(unvalidMoviesNames);
 
-            //result.Should().BeOfType<OkNegotiatedContentResult<IEnumerable<QuoteDto>>>().Which.Content.Count().ShouldBeEquivalentTo(1);
+            result.Should().BeOfType<OkNegotiatedContentResult<IEnumerable<QuoteDto>>>().Which.Content.Count().ShouldBeEquivalentTo(0);
+
+        }
+
+        [TestMethod]
+        public void GetQuotesByMoviesNames_ValidRequest_ShouldReturnOkWithEmptyColletion()
+        {
+            var validMoviesNames = "Valid, Movie, Names";
+
+            IEnumerable<Quote> quotes = new List<Quote> {new Quote()};
+
+            _mockRepository.Setup(r => r.GetQuotesByMovieTitle(validMoviesNames)).Returns(quotes);
+
+            var result = _controller.GetQuotesByMoviesNames(validMoviesNames);
 
             result.Should().BeOfType<OkNegotiatedContentResult<IEnumerable<QuoteDto>>>();
         }
@@ -119,6 +130,18 @@ namespace MyApplication.Tests.Controllers.Api
             var result = _controller.GetQuote(1);
 
             result.Should().BeOfType<OkNegotiatedContentResult<QuoteDto>>();
+        }
+
+        [TestMethod]
+        public void MyQuotes_ValidRequest_ShouldReturnOkNegotiatedContedResult()
+        {
+            IEnumerable<Quote> quotes = new List<Quote>();
+
+            _mockRepository.Setup(r => r.GetAllUserQuotes("1")).Returns(quotes);
+
+            var result = _controller.GetMyQuotes();
+
+            result.Should().BeOfType<OkNegotiatedContentResult<IEnumerable<QuoteDto>>>();
         }
     }
 }
