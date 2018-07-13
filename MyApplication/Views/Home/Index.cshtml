@@ -5,56 +5,18 @@
 
 <div align="center">
     <p style="padding-top:20px"></p>
-    <h1>Welcome to Quoter's Land!</h1>
+    <h1>Welcome to „Quoterland”</h1>
     <p style="padding-top:10px"></p>
     <text>Learn English watching your favourite TV Shows</text>
     <h2>Check your favourites:</h2>
     <form id="myForm">
-
-        <input type="checkbox" id="myCheckbox1" value="Friends" />
-        <label for="myCheckbox1">
-            <img src="../../images/friends-1170x878.jpg">
-        </label>
-
-        <input type="checkbox" id="myCheckbox2" value="The Office" />
-        <label for="myCheckbox2">
-            <img src="../../images/maxresdefault.jpg">
-        </label>
-
-        <input type="checkbox" id="myCheckbox3" value="The Big Bang Theory" />
-        <label for="myCheckbox3">
-            <img src="../../images/2000px-TBBT_logo.svg.png">
-        </label>
-
-        <input type="checkbox" id="myCheckbox4" value="That 70s Show" />
-        <label for="myCheckbox4">
-            <img src="../../images/That_'70s_Show_logo.png">
-        </label>
-
-        <input type="checkbox" id="myCheckbox5" value="Two and a half Men" />
-        <label for="myCheckbox5">
-            <img src="../../images/TwoHalfMen.jpg">
-        </label>
-
-        <input type="checkbox" id="myCheckbox6" value="Californication" />
-        <label for="myCheckbox6">
-            <img src="../../images/961f7d860a18643b6456d4045603c5b8.jpg">
-        </label>
-
-        <input type="checkbox" id="myCheckbox7" value="Trailer Park Boys" />
-        <label for="myCheckbox7">
-            <img src="../../images/91200883465731836869.jpg">
-        </label>
-
-        <input type="checkbox" id="myCheckbox8" value="how i met your mother" />
-        <label for="myCheckbox8">
-            <img src="../../images/himym.jpeg">
-        </label>
-
-        <input type="checkbox" id="myCheckbox9" value="2 Broke Girls" />
-        <label for="myCheckbox9">
-            <img src="../../images/1200x630bb.jpg">
-        </label>
+        @foreach (var movie in Model)
+        {
+            <input type="checkbox" id=@movie.Id value="@movie.Title" />
+            <label for=@movie.Id>
+                <img src="../../images/@(movie.Title).png">
+            </label>
+        }
     </form>
     <button id="Find" class="btn btn-primary">Find Quotes</button>
 </div>

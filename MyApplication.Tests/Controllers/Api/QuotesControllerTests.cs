@@ -49,7 +49,7 @@ namespace MyApplication.Tests.Controllers.Api
 
             _controller.Request = new HttpRequestMessage()
             {
-                RequestUri = new Uri("http://http://localhost:55966//api/quotes/" + quote.Id)
+                RequestUri = new Uri("http://localhost:55966//api/quotes/" + quote.Id)
             };
 
             var result = _controller.CreateNewQuote(quoteDto);
