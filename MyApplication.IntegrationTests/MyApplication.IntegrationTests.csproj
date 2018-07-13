@@ -136,6 +136,8 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="Controllers\Api\LearnedsControllerTests.cs" />
+    <Compile Include="Controllers\Api\LearningsControllerTests.cs" />
     <Compile Include="Controllers\Api\QuotesControllerTests.cs" />
     <Compile Include="Controllers\QuotesControllerTests.cs" />
     <Compile Include="Extensions\ApiControllerExtensions.cs" />

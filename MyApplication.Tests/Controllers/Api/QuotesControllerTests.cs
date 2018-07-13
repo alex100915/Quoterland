@@ -1,6 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Web.Http;
 using System.Web.Http.Results;
+using System.Web.UI.WebControls;
 using AutoMapper;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -12,6 +17,7 @@ using MyApplication.Core.Dtos;
 using MyApplication.Core.Models;
 using MyApplication.Core.Repositories;
 using MyApplication.Tests.Extensions;
+using RouteParameter = System.Web.Http.RouteParameter;
 
 namespace MyApplication.Tests.Controllers.Api
 {
@@ -36,14 +42,19 @@ namespace MyApplication.Tests.Controllers.Api
         }
 
         [TestMethod]
-        public void CreateNewQuote_Validrequest_ShouldReturnOkResult()
+        public void CreateNewQuote_ValidRequest_ShouldReturnOkResult()
         {
-
             var quoteDto = new QuoteDto();
+            var quote = Mapper.Map<QuoteDto, Quote>(quoteDto);
+
+            _controller.Request = new HttpRequestMessage()
+            {
+                RequestUri = new Uri("http://http://localhost:55966//api/quotes/" + quote.Id)
+            };
 
             var result = _controller.CreateNewQuote(quoteDto);
 
-            result.Should().BeOfType<OkResult>();
+            result.Should().BeOfType<CreatedNegotiatedContentResult<QuoteDto>>();
         }
 
         [TestMethod]
@@ -72,7 +83,7 @@ namespace MyApplication.Tests.Controllers.Api
         }
 
         [TestMethod]
-        public void GetQuotesByMoviesNames_ValidRequest_ShouldReturnOkWithEmptyColletion()
+        public void GetQuotesByMoviesNames_ValidRequest_ShouldReturnOkWithCollection()
         {
             var validMoviesNames = "Valid, Movie, Names";
 

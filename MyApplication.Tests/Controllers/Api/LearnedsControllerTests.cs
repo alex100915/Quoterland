@@ -112,5 +112,17 @@ namespace MyApplication.Tests.Controllers.Api
 
             result.Should().BeOfType<BadRequestResult>();
         }
+
+        [TestMethod]
+        public void DeleteFromLearnedQuotes_ValidRequest_ShouldReturnOkResult()
+        {
+            var quote = new Learned();
+
+            _mockLearnedRepository.Setup(r => r.GetUserLearnedQuoteById(1, "1")).Returns(quote);
+
+            var result = _controller.DeleteFromLearnedQuotes(1);
+
+            result.Should().BeOfType<OkNegotiatedContentResult<byte>>();
+        }
     }    
 }

@@ -25,6 +25,9 @@ namespace MyApplication.Controllers.Api
 
             var userId = User.Identity.GetUserId();
 
+            if (userId == null)
+                return Unauthorized();
+
             if (_unitOfWork.Learnings.CheckQuoteExistsInLearnings(id, userId))
                 return BadRequest();
 
@@ -45,7 +48,12 @@ namespace MyApplication.Controllers.Api
         [HttpGet]
         public IHttpActionResult GetLearnedQuotes()
         {
-            var quotes = _unitOfWork.Learneds.GetUserLearnedQuotes(User.Identity.GetUserId());
+            var userId = User.Identity.GetUserId();
+
+            if (userId == null)
+                return Unauthorized();
+
+            var quotes = _unitOfWork.Learneds.GetUserLearnedQuotes(userId);
 
             return Ok(quotes);
         }

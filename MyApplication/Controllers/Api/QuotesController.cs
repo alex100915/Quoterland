@@ -37,8 +37,8 @@ namespace MyApplication.Controllers.Api
             _unitOfWork.Quotes.Add(quote);
 
             _unitOfWork.Complete();
-            //return Created(new Uri(Request.RequestUri + "/" + quote.Id), quoteDto);
-            return Ok();
+
+            return Created(new Uri(Request.RequestUri + "/" + quote.Id), quoteDto);
         }
         
         [HttpGet]
@@ -57,6 +57,10 @@ namespace MyApplication.Controllers.Api
         public IHttpActionResult GetMyQuotes()
         {
             var userId = User.Identity.GetUserId();
+
+            if (userId == null)
+                return Unauthorized();
+
             var myQuotes = _unitOfWork.Quotes.GetAllUserQuotes(userId).Select(Mapper.Map<Quote, QuoteDto>);
 
             return Ok(myQuotes);
@@ -85,6 +89,7 @@ namespace MyApplication.Controllers.Api
 
             if (quote == null)
                 return NotFound();
+
             var quoteDto = Mapper.Map<Quote, QuoteDto>(quote);
 
             return Ok(quoteDto);
