@@ -26,3 +26,7 @@ Front-end (jQuery):
 - plugins (DataTables, Bootbox, Toastr notifications, Validation)
 
 Tools and packages: Visual Studio 2015, SQL Server Managment Studio 2017, Entity Framework, Automapper, Ninject, Moq, NUnit, Postman 
+
+Testing user: 
+email -  guest@site.com
+password - Guest1!
