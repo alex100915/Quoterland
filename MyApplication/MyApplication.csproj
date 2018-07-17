@@ -298,6 +298,18 @@
     </Compile>
     <Compile Include="Core\ViewModels\AccountViewModels.cs" />
     <Compile Include="Core\ViewModels\ManageViewModels.cs" />
+    <Compile Include="Persistence\Migrations\201807131741154_ClearMoviesTable.cs" />
+    <Compile Include="Persistence\Migrations\201807131741154_ClearMoviesTable.Designer.cs">
+      <DependentUpon>201807131741154_ClearMoviesTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201807131742349_PopulateMoviesTable.cs" />
+    <Compile Include="Persistence\Migrations\201807131742349_PopulateMoviesTable.Designer.cs">
+      <DependentUpon>201807131742349_PopulateMoviesTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201807132019004_ChangeQuoteIdToInt.cs" />
+    <Compile Include="Persistence\Migrations\201807132019004_ChangeQuoteIdToInt.Designer.cs">
+      <DependentUpon>201807132019004_ChangeQuoteIdToInt.cs</DependentUpon>
+    </Compile>
     <Compile Include="Persistence\Migrations\Configuration.cs" />
     <Compile Include="Core\Repositories\IMovieRepository.cs" />
     <Compile Include="Persistence\Repositories\LearnedRepository.cs" />
@@ -425,6 +437,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Scripts\app\app.js" />
     <Content Include="Scripts\bootbox.js" />
     <Content Include="Scripts\bootbox.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -591,6 +604,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Persistence\Migrations\201806301842564_StoringLearnedAndLearningQuotes.resx">
       <DependentUpon>201806301842564_StoringLearnedAndLearningQuotes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201807131741154_ClearMoviesTable.resx">
+      <DependentUpon>201807131741154_ClearMoviesTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201807131742349_PopulateMoviesTable.resx">
+      <DependentUpon>201807131742349_PopulateMoviesTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201807132019004_ChangeQuoteIdToInt.resx">
+      <DependentUpon>201807132019004_ChangeQuoteIdToInt.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

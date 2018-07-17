@@ -18,7 +18,7 @@ namespace MyApplication.Controllers.Api
         }
 
         [HttpPost]
-        public IHttpActionResult AddToLearnedQuotes(byte id)
+        public IHttpActionResult AddToLearnedQuotes(int id)
         {
             if (_unitOfWork.Quotes.GetQuoteById(id) == null)
                 return BadRequest();
@@ -59,7 +59,7 @@ namespace MyApplication.Controllers.Api
         }
 
         [HttpDelete]
-        public IHttpActionResult DeleteFromLearnedQuotes(byte id)
+        public IHttpActionResult DeleteFromLearnedQuotes(int id)
         {
             var userId = User.Identity.GetUserId();
 

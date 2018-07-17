@@ -122,7 +122,7 @@ namespace MyApplication.Tests.Controllers.Api
 
             var result = _controller.DeleteFromLearningQuotes(1);
 
-            result.Should().BeOfType<OkNegotiatedContentResult<byte>>();
+            result.Should().BeOfType<OkNegotiatedContentResult<int>>();
         }
     }    
 }

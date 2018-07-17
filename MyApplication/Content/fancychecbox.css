@@ -1,6 +1,6 @@
 ﻿label:before {
   content: url("../images/unchecked_checkbox.png");
-  position: absolute;
+    position: absolute;
   z-index: 100;
 }
 :checked+label:before {
@@ -11,8 +11,8 @@ input[type=checkbox] {
 }
 /*pure cosmetics:*/
 img {
-  width: 150px;
-  height: 150px;
+  width: 100px;
+  height: 140px;
 }
 label {
   margin: 10px;

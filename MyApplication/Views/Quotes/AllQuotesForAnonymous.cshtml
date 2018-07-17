@@ -8,7 +8,7 @@
 <table id="quotes" class="table table-bordered" table-hover>
     <thead>
         <tr>
-            <th>Quotes</th>
+            <th>Quote</th>
             <th>Phrase To Learn</th>
             <th>Title</th>
         </tr>
@@ -19,11 +19,14 @@
 @section scripts
 {
     <script>
+
+        //reusing AllQuotes view to FindQuotes
         if ("@Model" == "") {
             url = "/api/quotes";
-        }
-        else {
+            $("h2").text("All Quotes");
+        } else {
             url = "/api/quotes?moviesNames=@Model";
+            $("h2").text("Founded Quotes");
         }
 
         $(document).ready(function () {
@@ -39,7 +42,7 @@
                     {
                         data: "content",
                         render: function (data, type, quote) {
-                            return "<a href='/quotes/detail/" + quote.id + "'>" + quote.content + "</a>";
+                            return "<a class='quote' href='/quotes/detail/" + quote.id + "'>" + quote.content + "</a>";
                         }
                     },
 

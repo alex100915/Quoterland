@@ -6,7 +6,7 @@ namespace MyApplication.Core.Models
     public class Quote
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public byte Id { get; set; }
+        public int Id { get; set; }
 
         [Required]
         [MinLength(15)]

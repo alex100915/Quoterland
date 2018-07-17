@@ -14,12 +14,12 @@ namespace MyApplication.Persistence.Repositories
             _context = context;
         }
 
-        public bool CheckQuoteExistsInLearnedList(byte id, string userId)
+        public bool CheckQuoteExistsInLearnedList(int id, string userId)
         {
             return _context.Learneds.Any(q => q.ApplicationUserId == userId && q.QuoteId == id);
         }
 
-        public Learned GetUserLearnedQuoteById(byte id, string userId)
+        public Learned GetUserLearnedQuoteById(int id, string userId)
         {
             return _context.Learneds.SingleOrDefault(q => q.QuoteId == id && q.ApplicationUserId == userId);
         }

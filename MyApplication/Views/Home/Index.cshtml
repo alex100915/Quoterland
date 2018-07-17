@@ -5,16 +5,16 @@
 
 <div align="center">
     <p style="padding-top:20px"></p>
-    <h1>Welcome to „Quoterland”</h1>
+    <span class="h1">Welcome to „Quoterland”</span>
     <p style="padding-top:10px"></p>
-    <text>Learn English watching your favourite TV Shows</text>
+    <text>Learn English watching your favourite movies</text>
     <h2>Check your favourites:</h2>
     <form id="myForm">
         @foreach (var movie in Model)
         {
             <input type="checkbox" id=@movie.Id value="@movie.Title" />
             <label for=@movie.Id>
-                <img src="../../images/@(movie.Title).png">
+                <img src="../../images/@(movie.Title).jpg">
             </label>
         }
     </form>
@@ -27,7 +27,7 @@
 {
     <script>
         $(document).ready(function () {
-            var vals = "";
+            var moviesNames = "";
             $("input[type=checkbox]").on("change",
                 function() {
                     var arr = [];
@@ -37,16 +37,16 @@
                         }
                     });
 
-                    vals = arr.join(",").replace(",on", "");
+                    moviesNames = arr.join(",").replace(",on", "");
                     console.log(arr.length);
                 });
 
         $("#Find").on("click",
             function () {
-                console.log(vals);
-                if (vals=="" || vals=="on")
+                console.log(moviesNames);
+                if (moviesNames=="" || moviesNames=="on")
                     return toastr.error("Mark some movies");
-                window.location.href = "/quotes/findquotes?moviesName="+vals;
+                window.location.href = "/quotes/findquotes?moviesName="+moviesNames;
             });
         });
 

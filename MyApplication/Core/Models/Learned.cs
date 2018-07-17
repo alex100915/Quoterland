@@ -7,7 +7,7 @@ namespace MyApplication.Core.Models
     {
         [Key]
         [Column(Order =1)]
-        public byte QuoteId { get; set; }
+        public int QuoteId { get; set; }
         [Key]
         [Column(Order = 2)]
         public string ApplicationUserId { get; set; }

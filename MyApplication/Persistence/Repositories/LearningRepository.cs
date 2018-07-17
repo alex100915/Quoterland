@@ -14,7 +14,7 @@ namespace MyApplication.Persistence.Repositories
             _context = context;
         }
 
-        public Learning GetUserLearningQuoteById(byte id, string userId)
+        public Learning GetUserLearningQuoteById(int id, string userId)
         {
             return _context.Learnings.SingleOrDefault(q => q.QuoteId == id && q.ApplicationUserId == userId);
         }
@@ -24,7 +24,7 @@ namespace MyApplication.Persistence.Repositories
             return _context.Learnings.Where(l => l.ApplicationUserId == userId).ToList();
         }
 
-        public bool CheckQuoteExistsInLearnings(byte id, string userId)
+        public bool CheckQuoteExistsInLearnings(int id, string userId)
         {
             return _context.Learnings.Any(q => q.ApplicationUserId == userId && q.QuoteId == id);
         }

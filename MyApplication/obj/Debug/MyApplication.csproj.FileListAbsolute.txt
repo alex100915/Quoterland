@@ -172,7 +172,6 @@ C:\Users\KOWAL\Desktop\QuotersLand\MyApplication\bin\Microsoft.Owin.Security.OAu
 C:\Users\KOWAL\Desktop\QuotersLand\MyApplication\bin\Microsoft.Owin.Security.Google.xml
 C:\Users\KOWAL\Desktop\QuotersLand\MyApplication\bin\Microsoft.Owin.Security.Twitter.xml
 C:\Users\KOWAL\Desktop\QuotersLand\MyApplication\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
-C:\Users\KOWAL\Desktop\QuotersLand\MyApplication\obj\Debug\MyApplication.csprojResolveAssemblyReference.cache
 C:\Users\KOWAL\Desktop\QuotersLand\MyApplication\obj\Debug\MyApplication.Migrations.InitialModel.resources
 C:\Users\KOWAL\Desktop\QuotersLand\MyApplication\obj\Debug\MyApplication.Migrations.YoutubeLinkToQuote.resources
 C:\Users\KOWAL\Desktop\QuotersLand\MyApplication\obj\Debug\MyApplication.Migrations.AddMoviesTable.resources
@@ -187,3 +186,7 @@ C:\Users\KOWAL\Desktop\QuotersLand\MyApplication\obj\Debug\MyApplication.dll
 C:\Users\KOWAL\Desktop\QuotersLand\MyApplication\obj\Debug\MyApplication.pdb
 C:\Users\KOWAL\Desktop\QuotersLand\MyApplication\bin\System.ValueTuple.dll
 C:\Users\KOWAL\Desktop\QuotersLand\MyApplication\bin\System.ValueTuple.xml
+C:\Users\KOWAL\Desktop\QuotersLand\MyApplication\obj\Debug\MyApplication.Migrations.ClearMoviesTable.resources
+C:\Users\KOWAL\Desktop\QuotersLand\MyApplication\obj\Debug\MyApplication.Migrations.PopulateMoviesTable.resources
+C:\Users\KOWAL\Desktop\QuotersLand\MyApplication\obj\Debug\MyApplication.Migrations.ChangeQuoteIdToInt.resources
+C:\Users\KOWAL\Desktop\QuotersLand\MyApplication\obj\Debug\MyApplication.csprojResolveAssemblyReference.cache

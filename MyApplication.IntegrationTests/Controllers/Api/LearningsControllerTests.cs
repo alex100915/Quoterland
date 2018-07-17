@@ -41,7 +41,7 @@ namespace MyApplication.IntegrationTests.Controllers.Api
             var quote = new Quote
             {
                 Content = "Perfectly valid quote",
-                MovieId = 1,
+                MovieId = _context.Movies.First().Id,
                 PhraseToLearn = "Valid Phrase",
                 UserId = user.Id,
                 YoutubeLink = "https://www.youtube.com/watch?v=3nQNiWdeH2Q"
@@ -67,7 +67,7 @@ namespace MyApplication.IntegrationTests.Controllers.Api
             var quote = new Quote
             {
                 Content = "Perfectly valid quote",
-                MovieId = 1,
+                MovieId = _context.Movies.First().Id,
                 PhraseToLearn = "Valid Phrase",
                 UserId = user.Id,
                 YoutubeLink = "https://www.youtube.com/watch?v=3nQNiWdeH2Q"
@@ -96,7 +96,7 @@ namespace MyApplication.IntegrationTests.Controllers.Api
             var quote = new Quote
             {
                 Content = "Perfectly valid quote",
-                MovieId = 1,
+                MovieId = _context.Movies.First().Id,
                 PhraseToLearn = "Valid Phrase",
                 UserId = user.Id,
                 YoutubeLink = "https://www.youtube.com/watch?v=3nQNiWdeH2Q"
@@ -111,7 +111,7 @@ namespace MyApplication.IntegrationTests.Controllers.Api
 
             var result = _controller.DeleteFromLearningQuotes(quoteId);
 
-            result.Should().BeOfType<OkNegotiatedContentResult<byte>>().Which.Content.ShouldBeEquivalentTo(quoteId);
+            result.Should().BeOfType<OkNegotiatedContentResult<int>>().Which.Content.ShouldBeEquivalentTo(quoteId);
             _context.Learneds.SingleOrDefault(q => q.QuoteId == quoteId).ShouldBeEquivalentTo(null);
         }
     }

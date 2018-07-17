@@ -46,7 +46,7 @@ namespace MyApplication.IntegrationTests.Controllers.Api
             {
                 Id=1,
                 Content = "Perfectly valid quote",
-                MovieId = 1,
+                MovieId = _context.Movies.First().Id,
                 PhraseToLearn = "Valid Phrase",
                 UserId = user.Id,
                 YoutubeLink = "https://www.youtube.com/watch?v=3nQNiWdeH2Q"
@@ -71,14 +71,14 @@ namespace MyApplication.IntegrationTests.Controllers.Api
             IEnumerable<Quote> quotes=new List<Quote> {new Quote
             {
                 Content = "Perfectly valid quote",
-                MovieId = 1,
+                MovieId = _context.Movies.First().Id,
                 PhraseToLearn = "Valid Phrase",
                 UserId = user.Id,
                 YoutubeLink = "https://www.youtube.com/watch?v=3nQNiWdeH2Q"
             },new Quote
             {
                 Content = "Another perfectly valid quote",
-                MovieId = 1,
+                MovieId = _context.Movies.First().Id,
                 PhraseToLearn = "Valid Phrase",
                 UserId = user.Id,
                 YoutubeLink = "https://www.youtube.com/watch?v=3nQNiWdeH2Q"
@@ -111,14 +111,14 @@ namespace MyApplication.IntegrationTests.Controllers.Api
             IEnumerable<Quote> quotes = new List<Quote> {new Quote
             {
                 Content = "Quote for current user",
-                MovieId = 1,
+                MovieId = _context.Movies.First().Id,
                 PhraseToLearn = "Valid Phrase",
                 UserId = user.Id,
                 YoutubeLink = "https://www.youtube.com/watch?v=3nQNiWdeH2Q"
             },new Quote
             {
                 Content = "Quote for another user",
-                MovieId = 1,
+                MovieId = _context.Movies.First().Id,
                 PhraseToLearn = "Valid Phrase",
                 UserId = user2.Id,
                 YoutubeLink = "https://www.youtube.com/watch?v=3nQNiWdeH2Q"
@@ -149,28 +149,28 @@ namespace MyApplication.IntegrationTests.Controllers.Api
             IEnumerable<Quote> quotes = new List<Quote> {new Quote
             {
                 Content = "This quote is going to be returned",
-                MovieId = 1,
+                MovieId = _context.Movies.First().Id,
                 PhraseToLearn = "Valid Phrase",
                 UserId = user.Id,
                 YoutubeLink = "https://www.youtube.com/watch?v=3nQNiWdeH2Q"
             },new Quote
             {
                 Content = "This quote is going to be returned too",
-                MovieId = 2,
+                MovieId = _context.Movies.OrderBy(m=>m.Id).Skip(1).First().Id,
                 PhraseToLearn = "Valid Phrase",
                 UserId = user.Id,
                 YoutubeLink = "https://www.youtube.com/watch?v=3nQNiWdeH2Q"
             },new Quote
                 {
                     Content = "This quote too...",
-                    MovieId = 2,
+                    MovieId = _context.Movies.OrderBy(m=>m.Id).Skip(1).First().Id,
                     PhraseToLearn = "Valid Phrase",
                     UserId = user.Id,
                     YoutubeLink = "https://www.youtube.com/watch?v=3nQNiWdeH2Q"
                 },new Quote
                 {
                     Content = "...but this quote is not",
-                    MovieId = 3,
+                    MovieId = _context.Movies.OrderBy(m=>m.Id).Skip(2).First().Id,
                     PhraseToLearn = "Valid Phrase",
                     UserId = user.Id,
                     YoutubeLink = "https://www.youtube.com/watch?v=3nQNiWdeH2Q"
@@ -180,14 +180,14 @@ namespace MyApplication.IntegrationTests.Controllers.Api
             _context.SaveChanges();
 
             //Act
-            var movie1 = _context.Movies.Single(m=>m.Id==1).Title;
-            var movie2 = _context.Movies.Single(m=>m.Id==2).Title;
+            var movie1 = _context.Movies.First().Title;
+            var movie2 = _context.Movies.OrderBy(m=>m.Id).Skip(1).First().Title;
             var movie3 = "Title which not exists in database";
 
             var result = _controller.GetQuotesByMoviesNames(movie1+","+movie2+","+movie3);
 
             var quoteDtos = _context.Quotes.
-                Where(q=>q.MovieId==1 || q.MovieId==2)
+                Where(q=>q.MovieId== _context.Movies.OrderBy(m => m.Id).Skip(1).FirstOrDefault().Id || q.MovieId==_context.Movies.FirstOrDefault().Id)
                 .ToList()
                 .Select(Mapper.Map<Quote, QuoteDto>);
 
@@ -205,7 +205,7 @@ namespace MyApplication.IntegrationTests.Controllers.Api
             var quote = new Quote
             {
                 Content = "Perfectly valid quote",
-                MovieId = 1,
+                MovieId = _context.Movies.OrderBy(m => m.Id).First().Id,
                 PhraseToLearn = "Valid Phrase",
                 UserId = user.Id,
                 YoutubeLink = "https://www.youtube.com/watch?v=3nQNiWdeH2Q"
@@ -237,7 +237,7 @@ namespace MyApplication.IntegrationTests.Controllers.Api
             var quote = new Quote
             {
                 Content = "This quote is going to be deleted",
-                MovieId = 1,
+                MovieId = _context.Movies.OrderBy(m => m.Id).First().Id,
                 PhraseToLearn = "Valid Phrase",
                 UserId = user.Id,
                 YoutubeLink = "https://www.youtube.com/watch?v=3nQNiWdeH2Q"

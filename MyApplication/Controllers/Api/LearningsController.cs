@@ -16,7 +16,7 @@ namespace MyApplication.Controllers.Api
         }
         
         [HttpPost]
-        public IHttpActionResult AddToLearningQuotes(byte id)
+        public IHttpActionResult AddToLearningQuotes(int id)
         {
             var userId = User.Identity.GetUserId();
 
@@ -53,7 +53,7 @@ namespace MyApplication.Controllers.Api
         }
 
         [HttpDelete]
-        public IHttpActionResult DeleteFromLearningQuotes(byte id)
+        public IHttpActionResult DeleteFromLearningQuotes(int id)
         {
             var userId = User.Identity.GetUserId();
 

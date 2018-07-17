@@ -4,11 +4,12 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>All Quotes</h2>
+<h2></h2>
+
 <table id="quotes" class="table table-bordered" table-hover>
     <thead>
         <tr>
-            <th>Quotes</th>
+            <th>Quote</th>
             <th>Phrase To Learn</th>
             <th>Title</th>
             <th>Learned</th>
@@ -21,86 +22,16 @@
 {
     <script>
 
-        if ("@Model"=="") {
+        //reusing AllQuotes view to FindQuotes
+        if ("@Model" == "") {
             url = "/api/quotes";
-        }
-        else {
+            $("h2").text("All Quotes");
+        } else {
             url = "/api/quotes?moviesNames=@Model";
+            $("h2").text("Founded Quotes");
         }
 
-        function learned(quote) {
-
-            var result=$.ajax({
-                url: "/api/learneds/" + quote,
-                method: "POST",
-                async:false,
-            }).done(function () {
-                toastr.success("Quote successfully added to learned.");
-            }).fail(function () {
-                toastr.error("Quote is already on learning list");
-            });
-            if (result.statusText == "OK") {
-                event.currentTarget.setAttribute("onchange", "deletelearned(" + quote + ")");
-            }
-            else
-            {
-                event.currentTarget.checked = false;
-            }
-
-        }
-        function learning(quote) {
-
-            var result = $.ajax({
-                url: "/api/learnings/" + quote,
-                method: "POST",
-                async: false
-            }).done(function () {
-                toastr.success("Quote successfully added to learning.");
-            }).fail(function () {
-                toastr.error("Quote is already on learned list");
-            })
-            if (result.statusText == "OK") {
-                event.currentTarget.setAttribute("onchange", "deletelearning(" + quote + ")");
-            }
-            else {
-                event.currentTarget.checked = false;
-            }
-        }
-
-
-        function deletelearned(quote) {
-            $.ajax({
-                url: "/api/learneds/" + quote,
-                method: "DELETE"
-            }).done(function () {
-                toastr.warning("Quote successfully deleted form learned.");
-            })
-            event.currentTarget.setAttribute("onchange", "learned(" + quote + ")");
-        }
-
-        function deletelearning(quote) {
-            $.ajax({
-                url: "/api/learnings/"+quote,
-                method: "DELETE"
-            }).done(function () {
-                toastr.warning("Quote successfully deleted from learning.");
-            })
-            event.currentTarget.setAttribute("onchange", "learning(" + quote + ")");
-        }
-
-        $(document).ready(function () {
-            var result = $.ajax({
-                url: "/api/learneds",
-                method: "GET",
-                async: false
-            }).responseJSON;
-
-            var result2 = $.ajax({
-                url: "/api/learnings",
-                method: "GET",
-                async: false
-            }).responseJSON;
-
+        $(document).ready(function() {
             $("#quotes").DataTable({
                 "language": {
                     "emptyTable": "Sorry, we don't have any quotes for that movie yet"
@@ -112,11 +43,10 @@
                 columns: [
                     {
                         data: "content",
-                        render: function (data, type, quote) {
+                        render: function(data, type, quote) {
                             return "<a class='quote' href='/quotes/detail/" + quote.id + "'>" + quote.content + "</a>";
                         }
                     },
-
                     {
                         data: "phraseToLearn"
                     },
@@ -126,29 +56,38 @@
                     },
                     {
                         render: function (data, type, quote) {
-                            var checkbox = '<input type="checkbox" onchange="learned(' + quote.id + ')">';
-                            result.filter(function (item) {
+
+                            //Loading appropriate checkboxes with proper events
+                            var checkbox = '<input type="checkbox" onchange="addToLearneds(' + quote.id + ')">';
+
+                            getLearnedQuotes().filter(function(item) {
                                 if (item.quoteId == quote.id)
-                                    checkbox = '<input type="checkbox" checked onchange="deletelearned(' + quote.id + ')">';
+                                    checkbox = '<input type="checkbox" checked onchange="deleteFromLearneds(' +
+                                        quote.id +
+                                        ')">';
                             });
+
                             return checkbox;
                         }
                     },
                     {
-                        render: function (data, type, quote) {
+                        render: function(data, type, quote) {
 
-                            var checkbox = '<input type="checkbox" onchange="learning(' + quote.id +')">';
+                            //Loading appropriate checkboxes with proper events
+                            var checkbox = '<input type="checkbox" onchange="addToLearnings(' + quote.id + ')">';
 
-                            result2.filter(function (item) {
+                            getLearningQuotes().filter(function(item) {
                                 if (item.quoteId == quote.id)
-                                    checkbox = '<input type="checkbox" checked onchange="deletelearning(' + quote.id + ')">';
+                                    checkbox = '<input type="checkbox" checked onchange="deleteFromLearnings(' +
+                                        quote.id +
+                                        ')">';
                             });
+
                             return checkbox;
                         }
                     }
                 ]
             });
-
         });
     </script>
 }
