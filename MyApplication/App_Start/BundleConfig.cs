@@ -20,7 +20,9 @@ namespace MyApplication
                         "~/scripts/datatables/jquery.datatables.js",
                         "~/scripts/datatables/datatables.bootstrap.js",
                         "~/scripts/toastr.js",
-                        "~/Scripts/jquery.validate.js"
+                        "~/Scripts/jquery.validate.js",
+                        "~/Scripts/jquery-ui-1.9.0.js",
+                        "~/Scripts/jQuery.FileUpload/jquery.fileupload.js"
                         ));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(

@@ -20,5 +20,20 @@ namespace MyApplication.Persistence.Repositories
         {
             return _context.Movies.ToList();
         }
+
+        public Movie GetMovieById(int id)
+        {
+            return _context.Movies.SingleOrDefault(m => m.Id == id);
+        }
+
+        public void Remove(Movie movie)
+        {
+            _context.Movies.Remove(movie);
+        }
+
+        public void Add(Movie movie)
+        {
+            _context.Movies.Add(movie);
+        }
     }
 }

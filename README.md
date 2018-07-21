@@ -12,6 +12,9 @@ For logged-in users:
 - deleting user quotes,
 - following quotes to learn and learned quotes.
 
+For Movies Manager:
+- adding new titles with posters,
+- deleting titles
 
 Programming features:
 
@@ -30,3 +33,9 @@ Tools and packages: Visual Studio 2015, SQL Server Managment Studio 2017, Entity
 Testing user: 
 email -  guest@site.com
 password - Guest1!
+
+Movies Manager:
+email - moviesmanager@site.com
+password - Moviesmanager1!
+
+

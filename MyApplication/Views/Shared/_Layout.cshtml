@@ -25,6 +25,10 @@
             <ul class="nav navbar-nav">
                 <li>@Html.ActionLink("My Quotes", "MyQuotes", "Quotes")</li>
                 <li>@Html.ActionLink("All Quotes", "AllQuotes", "Quotes")</li>
+                @if (User.IsInRole("CanManageMovies"))
+                {
+                    <li>@Html.ActionLink("All Movies", "Index", "Movies")</li>
+                }
             </ul>
             @Html.Partial("_LoginPartial")
         </div>
