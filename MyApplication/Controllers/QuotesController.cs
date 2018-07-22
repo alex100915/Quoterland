@@ -28,22 +28,19 @@ namespace MyApplication.Controllers
             return View();
         }
 
-        public ViewResult AllQuotes()
-        {
-            if (User.Identity.IsAuthenticated)
-            {
-                return View();
-            }
-            return View("AllQuotesForAnonymous");
-        }
-
-        public ViewResult FindQuotes(string moviesName)
+        public ViewResult AllQuotes(string moviesName=null)
         {
             if (User.Identity.IsAuthenticated)
             {
                 return View("AllQuotes", model: moviesName);
             }
             return View("AllQuotesForAnonymous", model: moviesName);
+        }
+
+        public ViewResult FindQuotes()
+        {
+            var movies = _unitOfWork.Movies.GetAllMovies();
+            return View(movies);
         }
 
         public ViewResult Detail(int id)

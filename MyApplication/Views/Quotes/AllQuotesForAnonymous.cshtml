@@ -4,57 +4,59 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>All Quotes</h2>
-<table id="quotes" class="table table-bordered" table-hover>
-    <thead>
-        <tr>
-            <th>Quote</th>
-            <th>Phrase To Learn</th>
-            <th>Title</th>
-        </tr>
-    </thead>
-</table>
+<div class="container body-content" style="padding-top: 50px">
+    <h2 style="text-align: center"></h2>
 
+    <table id="quotes" class="table table-bordered" table-hover>
+        <thead>
+            <tr>
+                <th>Quote</th>
+                <th>Phrase To Learn</th>
+                <th>Title</th>
+            </tr>
+        </thead>
+    </table>
+</div>
 
-@section scripts
+    @section scripts
 {
-    <script>
+        <script>
 
-        //reusing AllQuotes view to FindQuotes
-        if ("@Model" == "") {
-            url = "/api/quotes";
-            $("h2").text("All Quotes");
-        } else {
-            url = "/api/quotes?moviesNames=@Model";
-            $("h2").text("Founded Quotes");
-        }
+            //reusing AllQuotes view to FindQuotes
+            if ("@Model" == "") {
+                url = "/api/quotes";
+                $("h2").text("All Quotes");
+            } else {
+                url = "/api/quotes?moviesNames=@Model";
+                $("h2").text("Founded Quotes");
+            }
 
-        $(document).ready(function () {
-            $("#quotes").DataTable({
-                "language": {
-                    "emptyTable": "Sorry, we don't have any quotes for that movie yet"
-                },
-                ajax: {
-                    url: url,
-                    dataSrc: ""
-                },
-                columns: [
-                    {
-                        data: "content",
-                        render: function (data, type, quote) {
-                            return "<a class='quote' href='/quotes/detail/" + quote.id + "'>" + quote.content + "</a>";
+            $(document).ready(function () {
+                $("#quotes").DataTable({
+                    "language": {
+                        "emptyTable": "Sorry, we don't have any quotes for that movie yet"
+                    },
+                    ajax: {
+                        url: url,
+                        dataSrc: ""
+                    },
+                    columns: [
+                        {
+                            data: "content",
+                            render: function (data, type, quote) {
+                                return "<a class='quote' href='/quotes/detail/" + quote.id + "'>" + quote.content + "</a>";
+                            }
+                        },
+
+                        {
+                            data: "phraseToLearn"
+                        },
+                        {
+                            data: "movie.title",
+
                         }
-                    },
-
-                    {
-                        data: "phraseToLearn"
-                    },
-                    {
-                        data: "movie.title",
-
-                    }
-                ]
+                    ]
+                });
             });
-        });
-    </script>
-}
+        </script>
+    }

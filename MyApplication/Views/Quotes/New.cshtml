@@ -5,43 +5,44 @@
 }
 
 
-<h2>New Quote</h2>
-<p style="padding-top:5px"></p>
-<form id="newQuote">
-    <div class="form-group">
-        <label>Quote</label>
-        <div class="tt-container">
-            <textarea name="quote" value="" class="form-control" required maxlength="200" minlength="15"> </textarea>
+
+<div class="container body-content" style="padding-top: 50px">
+    <h2 style="padding-bottom: 20px">New Quote</h2>
+    <form id="newQuote">
+        <div class="form-group">
+            <label>Quote</label>
+            <div class="tt-container">
+                <textarea name="quote" value="" class="form-control" required maxlength="200" minlength="15"> </textarea>
+            </div>
         </div>
-    </div>
 
-    <div class="form-group">
-        <label>Phrase to Learn</label>
-        <div class="tt-container">
-            <input name="phraseToLearn" type="text" value="" required maxlength="40" minlength="3" class="form-control" />
+        <div class="form-group">
+            <label>Phrase to Learn</label>
+            <div class="tt-container">
+                <input name="phraseToLearn" type="text" value="" required maxlength="40" minlength="3" class="form-control"/>
+            </div>
         </div>
-    </div>
 
-    <div class="form-group">
-        <label>Select show:</label>
-        <select class="form-control" name="movieId" data-rule-validMovie="true" >
-            <option value="0">Select</option>
-            @foreach (var movie in Model)
-            {
-                <option value="@movie.Id">@movie.Title</option>
-            }
-        </select>
-    </div>
-
-    <div class="form-group">
-        <label>Youtube Link</label>
-        <div class="tt-container">
-            <input name="YoutubeLink" type="text" value="" class="form-control" required data-rule-validLink="true" />
+        <div class="form-group">
+            <label>Select show:</label>
+            <select class="form-control" name="movieId" data-rule-validMovie="true">
+                <option value="0">Select</option>
+                @foreach (var movie in Model)
+                {
+                    <option value="@movie.Id">@movie.Title</option>
+                }
+            </select>
         </div>
-    </div>
-    <button class="btn btn-primary">Submit</button>
-</form>
 
+        <div class="form-group">
+            <label>Youtube Link</label>
+            <div class="tt-container">
+                <input name="YoutubeLink" type="text" value="" class="form-control" required data-rule-validLink="true"/>
+            </div>
+        </div>
+        <button class="btn btn-primary">Submit</button>
+    </form>
+</div>
 @section scripts
 {
     <script>

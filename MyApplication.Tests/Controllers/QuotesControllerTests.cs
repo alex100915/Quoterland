@@ -48,7 +48,7 @@ namespace MyApplication.Tests.Controllers
 
             var moviesName = "I am looking for quotes";
 
-            var result = _controller.FindQuotes(moviesName);
+            var result = _controller.AllQuotes(moviesName);
 
             result.ViewName.ShouldAllBeEquivalentTo("AllQuotes");
             (result.ViewData.Model as string).ShouldBeEquivalentTo(moviesName);
@@ -64,7 +64,7 @@ namespace MyApplication.Tests.Controllers
                 ctx.HttpContext == Mock.Of<HttpContextBase>(http => http.User == principal));
 
             var moviesName = "I am looking for quotes";
-            var result = _controller.FindQuotes(moviesName);
+            var result = _controller.AllQuotes(moviesName);
 
             result.ViewName.ShouldAllBeEquivalentTo("AllQuotesForAnonymous");
             (result.ViewData.Model as string).ShouldBeEquivalentTo(moviesName);

@@ -1,0 +1,52 @@
+﻿
+@{
+    ViewBag.Title = "FindQuotes";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="container body-content" align="center" style="padding-top: 50px">
+    <h2 style="padding-bottom: 20px">Find Quotes</h2>
+    <form id="myForm">
+        @foreach (var movie in Model)
+        {
+            <input type="checkbox" id=@movie.Id value="@movie.Title"/>
+            <label for=@movie.Id>
+                <img src="../../images/@(movie.Title).jpg">
+            </label>
+        }
+    </form>
+    <button id="Find" class="btn btn-primary btn-lg btn-block">Find Quotes</button>
+</div>
+
+@Styles.Render("~/content/fancychecbox.css")
+
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            var moviesNames = "";
+            $("input[type=checkbox]").on("change",
+                function() {
+                    var arr = [];
+                    $(":checkbox").each(function() {
+                        if ($(this).is(":checked")) {
+                            arr.push($(this).val());
+                        }
+                    });
+
+                    moviesNames = arr.join(",").replace(",on", "");
+                    console.log(arr.length);
+                });
+
+            $("#Find").on("click",
+                function () {
+                    console.log(moviesNames);
+                    if (moviesNames=="" || moviesNames=="on")
+                        return toastr.error("Mark some movies");
+                    window.location.href = "/quotes/allquotes?moviesName="+moviesNames;
+                });
+        });
+
+    </script>
+}

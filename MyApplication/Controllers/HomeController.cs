@@ -18,8 +18,7 @@ namespace MyApplication.Controllers
 
         public ActionResult Index()
         {
-            var movies=_unitOfWork.Movies.GetAllMovies();
-            return View(movies);
+            return View();
         }
 
         public ActionResult About()
