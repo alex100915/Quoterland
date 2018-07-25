@@ -14,6 +14,8 @@ namespace MyApplication.App_Start
             CreateMap<ApplicationUser, ApplicationUserDto>();
             CreateMap<Movie, MovieDto>();
             CreateMap<MovieDto, Movie>();
+            CreateMap<CommentDto, Comment>();
+            CreateMap<Comment, CommentDto>();
         }
     }
 }

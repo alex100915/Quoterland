@@ -10,6 +10,9 @@ namespace MyApplication.Persistence
         public DbSet<Movie> Movies { get; set; }
         public DbSet<Learned> Learneds { get; set; }
         public DbSet<Learning> Learnings { get; set; }
+        public DbSet<Comment> Comments { get; set; }
+        public DbSet<UpvotedComments> UpvotedComents { get; set; }
+
 
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)

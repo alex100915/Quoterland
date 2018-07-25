@@ -75,6 +75,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="Ninject, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
       <HintPath>..\packages\Ninject.3.2.0.0\lib\net45-full\Ninject.dll</HintPath>
       <Private>True</Private>
@@ -101,6 +102,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
@@ -242,6 +244,8 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Core\Dtos\CommentDto.cs" />
+    <Compile Include="Controllers\Api\CommentsController.cs" />
     <Compile Include="Controllers\Api\LearnedsController.cs" />
     <Compile Include="Controllers\Api\LearningsController.cs" />
     <Compile Include="Controllers\Api\MoviesController.cs" />
@@ -252,10 +256,12 @@
     <Compile Include="Controllers\QuotesController.cs" />
     <Compile Include="Core\IUnitOfWork.cs" />
     <Compile Include="Core\Models\ApplicationUser.cs" />
+    <Compile Include="Core\Models\Comment.cs" />
     <Compile Include="Core\Models\Learned.cs" />
     <Compile Include="Core\Models\Learning.cs" />
     <Compile Include="Core\Models\Movie.cs" />
     <Compile Include="Core\Models\Quote.cs" />
+    <Compile Include="Core\Models\UpvotedComments.cs" />
     <Compile Include="Core\Repositories\ILearnedRepository.cs" />
     <Compile Include="Core\Repositories\ILearningRepository.cs" />
     <Compile Include="Core\Repositories\IQuoteRepository.cs" />
@@ -321,6 +327,62 @@
     <Compile Include="Persistence\Migrations\201807201137187_AddMoviesManagerToDatabaseModel.cs" />
     <Compile Include="Persistence\Migrations\201807201137187_AddMoviesManagerToDatabaseModel.Designer.cs">
       <DependentUpon>201807201137187_AddMoviesManagerToDatabaseModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201807231144325_ChangeApplicationUserModel.cs" />
+    <Compile Include="Persistence\Migrations\201807231144325_ChangeApplicationUserModel.Designer.cs">
+      <DependentUpon>201807231144325_ChangeApplicationUserModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201807231147275_PopulateMissingColumnsForMoviesManager.cs" />
+    <Compile Include="Persistence\Migrations\201807231147275_PopulateMissingColumnsForMoviesManager.Designer.cs">
+      <DependentUpon>201807231147275_PopulateMissingColumnsForMoviesManager.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201807241554297_CommentModel.cs" />
+    <Compile Include="Persistence\Migrations\201807241554297_CommentModel.Designer.cs">
+      <DependentUpon>201807241554297_CommentModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201807241648053_changecommentmodel.cs" />
+    <Compile Include="Persistence\Migrations\201807241648053_changecommentmodel.Designer.cs">
+      <DependentUpon>201807241648053_changecommentmodel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201807241810359_changecommentmodel2.cs" />
+    <Compile Include="Persistence\Migrations\201807241810359_changecommentmodel2.Designer.cs">
+      <DependentUpon>201807241810359_changecommentmodel2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201807241820110_changecommentmodel3.cs" />
+    <Compile Include="Persistence\Migrations\201807241820110_changecommentmodel3.Designer.cs">
+      <DependentUpon>201807241820110_changecommentmodel3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201807241850415_changecommentmodel4.cs" />
+    <Compile Include="Persistence\Migrations\201807241850415_changecommentmodel4.Designer.cs">
+      <DependentUpon>201807241850415_changecommentmodel4.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201807241857346_changecommentmodel5.cs" />
+    <Compile Include="Persistence\Migrations\201807241857346_changecommentmodel5.Designer.cs">
+      <DependentUpon>201807241857346_changecommentmodel5.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201807241929261_changecommentmodel6.cs" />
+    <Compile Include="Persistence\Migrations\201807241929261_changecommentmodel6.Designer.cs">
+      <DependentUpon>201807241929261_changecommentmodel6.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201807241946066_changecommentmodel7.cs" />
+    <Compile Include="Persistence\Migrations\201807241946066_changecommentmodel7.Designer.cs">
+      <DependentUpon>201807241946066_changecommentmodel7.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201807250916410_changecommentmodel8.cs" />
+    <Compile Include="Persistence\Migrations\201807250916410_changecommentmodel8.Designer.cs">
+      <DependentUpon>201807250916410_changecommentmodel8.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201807251053303_changecommentmodel9.cs" />
+    <Compile Include="Persistence\Migrations\201807251053303_changecommentmodel9.Designer.cs">
+      <DependentUpon>201807251053303_changecommentmodel9.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201807251352265_changecommentmodel10.cs" />
+    <Compile Include="Persistence\Migrations\201807251352265_changecommentmodel10.Designer.cs">
+      <DependentUpon>201807251352265_changecommentmodel10.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201807251410056_addupvotedcommentscolumn.cs" />
+    <Compile Include="Persistence\Migrations\201807251410056_addupvotedcommentscolumn.Designer.cs">
+      <DependentUpon>201807251410056_addupvotedcommentscolumn.cs</DependentUpon>
     </Compile>
     <Compile Include="Persistence\Migrations\Configuration.cs" />
     <Compile Include="Core\Repositories\IMovieRepository.cs" />
@@ -497,6 +559,7 @@
     <Content Include="Content\DataTables\images\sort_desc_disabled.png" />
     <Content Include="Content\DataTables\swf\flashExport.swf" />
     <Content Include="Content\fancychecbox.css" />
+    <Content Include="Content\jquery-comments.css" />
     <Content Include="Content\modern-business.css" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
@@ -551,6 +614,7 @@
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\comments-data.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.min.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap4.js" />
@@ -659,6 +723,8 @@
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery-comments.js" />
+    <Content Include="Scripts\jquery-comments.min.js" />
     <Content Include="Scripts\jquery-ui-1.12.1.js" />
     <Content Include="Scripts\jquery-ui-1.12.1.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
@@ -779,6 +845,48 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Persistence\Migrations\201807201137187_AddMoviesManagerToDatabaseModel.resx">
       <DependentUpon>201807201137187_AddMoviesManagerToDatabaseModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201807231144325_ChangeApplicationUserModel.resx">
+      <DependentUpon>201807231144325_ChangeApplicationUserModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201807231147275_PopulateMissingColumnsForMoviesManager.resx">
+      <DependentUpon>201807231147275_PopulateMissingColumnsForMoviesManager.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201807241554297_CommentModel.resx">
+      <DependentUpon>201807241554297_CommentModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201807241648053_changecommentmodel.resx">
+      <DependentUpon>201807241648053_changecommentmodel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201807241810359_changecommentmodel2.resx">
+      <DependentUpon>201807241810359_changecommentmodel2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201807241820110_changecommentmodel3.resx">
+      <DependentUpon>201807241820110_changecommentmodel3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201807241850415_changecommentmodel4.resx">
+      <DependentUpon>201807241850415_changecommentmodel4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201807241857346_changecommentmodel5.resx">
+      <DependentUpon>201807241857346_changecommentmodel5.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201807241929261_changecommentmodel6.resx">
+      <DependentUpon>201807241929261_changecommentmodel6.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201807241946066_changecommentmodel7.resx">
+      <DependentUpon>201807241946066_changecommentmodel7.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201807250916410_changecommentmodel8.resx">
+      <DependentUpon>201807250916410_changecommentmodel8.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201807251053303_changecommentmodel9.resx">
+      <DependentUpon>201807251053303_changecommentmodel9.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201807251352265_changecommentmodel10.resx">
+      <DependentUpon>201807251352265_changecommentmodel10.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201807251410056_addupvotedcommentscolumn.resx">
+      <DependentUpon>201807251410056_addupvotedcommentscolumn.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

@@ -61,7 +61,7 @@
                             //Loading appropriate checkboxes with proper events
                             var checkbox = '<input type="checkbox" onchange="addToLearneds(' + quote.id + ')">';
 
-                            getLearnedQuotes().filter(function(item) {
+                            learnedQuotes.filter(function(item) {
                                 if (item.quoteId == quote.id)
                                     checkbox = '<input type="checkbox" checked onchange="deleteFromLearneds(' +
                                         quote.id +
@@ -77,7 +77,7 @@
                             //Loading appropriate checkboxes with proper events
                             var checkbox = '<input type="checkbox" onchange="addToLearnings(' + quote.id + ')">';
 
-                            getLearningQuotes().filter(function(item) {
+                            learningQuotes.filter(function(item) {
                                 if (item.quoteId == quote.id)
                                     checkbox = '<input type="checkbox" checked onchange="deleteFromLearnings(' +
                                         quote.id +

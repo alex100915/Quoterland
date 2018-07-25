@@ -1,17 +1,14 @@
-﻿function getLearnedQuotes() {
-    return $.ajax({
+﻿var learnedQuotes=$.ajax({
         url: "/api/learneds",
         method: "GET",
         async: false
-    }).responseJSON;
-}
-function getLearningQuotes() {
-    return $.ajax({
+}).responseJSON;
+
+var learningQuotes=$.ajax({
         url: "/api/learnings",
         method: "GET",
         async: false
     }).responseJSON;
-}
 
 function addToLearneds(quote) {
 

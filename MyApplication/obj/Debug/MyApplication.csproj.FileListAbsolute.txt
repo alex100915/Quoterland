@@ -318,3 +318,17 @@ C:\Users\KOWAL\Documents\Quoterland\MyApplication\obj\Debug\MyApplication.Migrat
 C:\Users\KOWAL\Documents\Quoterland\MyApplication\obj\Debug\MyApplication.csproj.GenerateResource.Cache
 C:\Users\KOWAL\Documents\Quoterland\MyApplication\obj\Debug\MyApplication.dll
 C:\Users\KOWAL\Documents\Quoterland\MyApplication\obj\Debug\MyApplication.pdb
+C:\Users\KOWAL\Desktop\Quoterland\MyApplication\obj\Debug\MyApplication.Migrations.ChangeApplicationUserModel.resources
+C:\Users\KOWAL\Desktop\Quoterland\MyApplication\obj\Debug\MyApplication.Migrations.PopulateMissingColumnsForMoviesManager.resources
+C:\Users\KOWAL\Desktop\Quoterland\MyApplication\obj\Debug\MyApplication.Migrations.CommentModel.resources
+C:\Users\KOWAL\Desktop\Quoterland\MyApplication\obj\Debug\MyApplication.Migrations.changecommentmodel.resources
+C:\Users\KOWAL\Desktop\Quoterland\MyApplication\obj\Debug\MyApplication.Migrations.changecommentmodel2.resources
+C:\Users\KOWAL\Desktop\Quoterland\MyApplication\obj\Debug\MyApplication.Migrations.changecommentmodel3.resources
+C:\Users\KOWAL\Desktop\Quoterland\MyApplication\obj\Debug\MyApplication.Migrations.changecommentmodel4.resources
+C:\Users\KOWAL\Desktop\Quoterland\MyApplication\obj\Debug\MyApplication.Migrations.changecommentmodel5.resources
+C:\Users\KOWAL\Desktop\Quoterland\MyApplication\obj\Debug\MyApplication.Migrations.changecommentmodel6.resources
+C:\Users\KOWAL\Desktop\Quoterland\MyApplication\obj\Debug\MyApplication.Migrations.changecommentmodel7.resources
+C:\Users\KOWAL\Desktop\Quoterland\MyApplication\obj\Debug\MyApplication.Migrations.changecommentmodel8.resources
+C:\Users\KOWAL\Desktop\Quoterland\MyApplication\obj\Debug\MyApplication.Migrations.changecommentmodel9.resources
+C:\Users\KOWAL\Desktop\Quoterland\MyApplication\obj\Debug\MyApplication.Migrations.changecommentmodel10.resources
+C:\Users\KOWAL\Desktop\Quoterland\MyApplication\obj\Debug\MyApplication.Migrations.addupvotedcommentscolumn.resources
