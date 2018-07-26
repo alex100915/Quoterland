@@ -76,10 +76,10 @@
                     currentUserId: currentUser.id,
                     roundProfilePictures: true,
                     textareaRows: 1,
-                    enableAttachments: true,
-                    enableHashtags: true,
-                    enablePinging: true,
-                    enableNavigation: true,
+                    enableAttachments: false,
+                    enableHashtags: false,
+                    enablePinging: false,
+                    popular:false,
                     getUsers: function(success, error) {
                         $.ajax({
                             type: 'get',

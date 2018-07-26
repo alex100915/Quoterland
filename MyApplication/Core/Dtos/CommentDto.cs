@@ -16,6 +16,7 @@ namespace MyApplication.Core.Dtos
         public string Creator { get; set; }
         public string Fullname { get; set; }
         public string Profile_picture_url { get; set; }
+        public string Parent { get; set; }
         public string file_url { get; set; }
         public bool Created_by_admin { get; set; }
         public bool Created_by_current_user { get; set; }

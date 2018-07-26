@@ -86,6 +86,8 @@ namespace MyApplication.Controllers.Api
 
             comment.Creator = userId;
 
+
+
             comment.QuoteId = id;
 
             _context.Comments.Add(comment);

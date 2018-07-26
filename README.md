@@ -10,7 +10,8 @@ For all users:
 For logged-in users:
 - adding and storing quotes added by user,
 - deleting user quotes,
-- following quotes to learn and learned quotes.
+- following quotes to learn and learned quotes
+- comments
 
 For Movies Manager:
 - adding new titles with posters,
@@ -26,7 +27,7 @@ Back-end:
 
 Front-end (jQuery):
 - AJAX requests, 
-- plugins (DataTables, Bootbox, Toastr notifications, Validation)
+- plugins (DataTables, Bootbox, Toastr notifications, Validation, jquery-comments)
 
 Tools and packages: Visual Studio 2015, SQL Server Managment Studio 2017, Entity Framework, Automapper, Ninject, Moq, NUnit, Postman 
 
