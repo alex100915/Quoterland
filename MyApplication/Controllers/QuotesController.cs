@@ -1,7 +1,10 @@
-﻿using System.Web.Http.Results;
+﻿using System.Dynamic;
+using System.Linq;
+using System.Web.Http.Results;
 using Microsoft.AspNet.Identity;
 using System.Web.Mvc;
 using MyApplication.Core;
+using MyApplication.Persistence;
 
 namespace MyApplication.Controllers
 {
@@ -40,7 +43,14 @@ namespace MyApplication.Controllers
         public ViewResult FindQuotes()
         {
             var movies = _unitOfWork.Movies.GetAllMovies();
-            return View(movies);
+            ApplicationDbContext _context=new ApplicationDbContext();
+            var genres = _context.Genres.ToList();
+
+            dynamic myModel = new ExpandoObject();
+            myModel.Movies = movies;
+            myModel.Genres = genres;
+
+            return View(myModel);
         }
 
         public ViewResult Detail(int id)

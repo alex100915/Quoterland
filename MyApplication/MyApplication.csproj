@@ -257,6 +257,7 @@
     <Compile Include="Core\IUnitOfWork.cs" />
     <Compile Include="Core\Models\ApplicationUser.cs" />
     <Compile Include="Core\Models\Comment.cs" />
+    <Compile Include="Core\Models\Genre.cs" />
     <Compile Include="Core\Models\Learned.cs" />
     <Compile Include="Core\Models\Learning.cs" />
     <Compile Include="Core\Models\Movie.cs" />
@@ -384,6 +385,34 @@
     <Compile Include="Persistence\Migrations\201807251410056_addupvotedcommentscolumn.Designer.cs">
       <DependentUpon>201807251410056_addupvotedcommentscolumn.cs</DependentUpon>
     </Compile>
+    <Compile Include="Persistence\Migrations\201807271412560_AddGenreTable.cs" />
+    <Compile Include="Persistence\Migrations\201807271412560_AddGenreTable.Designer.cs">
+      <DependentUpon>201807271412560_AddGenreTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201807271416382_PopulateGenresTable.cs" />
+    <Compile Include="Persistence\Migrations\201807271416382_PopulateGenresTable.Designer.cs">
+      <DependentUpon>201807271416382_PopulateGenresTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201807271627156_AddGenrePropertyToMovieTableAndDropFromQuoteTable.cs" />
+    <Compile Include="Persistence\Migrations\201807271627156_AddGenrePropertyToMovieTableAndDropFromQuoteTable.Designer.cs">
+      <DependentUpon>201807271627156_AddGenrePropertyToMovieTableAndDropFromQuoteTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201807271628081_AddGenresToExistingMovies.cs" />
+    <Compile Include="Persistence\Migrations\201807271628081_AddGenresToExistingMovies.Designer.cs">
+      <DependentUpon>201807271628081_AddGenresToExistingMovies.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201807271726052_AddGenresToExistingMovies2.cs" />
+    <Compile Include="Persistence\Migrations\201807271726052_AddGenresToExistingMovies2.Designer.cs">
+      <DependentUpon>201807271726052_AddGenresToExistingMovies2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201807271728581_DropAllMovie.cs" />
+    <Compile Include="Persistence\Migrations\201807271728581_DropAllMovie.Designer.cs">
+      <DependentUpon>201807271728581_DropAllMovie.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201807271731297_AddAllMoviesWithGenres.cs" />
+    <Compile Include="Persistence\Migrations\201807271731297_AddAllMoviesWithGenres.Designer.cs">
+      <DependentUpon>201807271731297_AddAllMoviesWithGenres.cs</DependentUpon>
+    </Compile>
     <Compile Include="Persistence\Migrations\Configuration.cs" />
     <Compile Include="Core\Repositories\IMovieRepository.cs" />
     <Compile Include="Persistence\Repositories\LearnedRepository.cs" />
@@ -401,6 +430,7 @@
     <Content Include="Content\bootstrap-reboot.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\dashboard.css" />
     <Content Include="Content\DataTables\css\autoFill.bootstrap.css" />
     <Content Include="Content\DataTables\css\autoFill.bootstrap.min.css" />
     <Content Include="Content\DataTables\css\autoFill.bootstrap4.css" />
@@ -887,6 +917,27 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Persistence\Migrations\201807251410056_addupvotedcommentscolumn.resx">
       <DependentUpon>201807251410056_addupvotedcommentscolumn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201807271412560_AddGenreTable.resx">
+      <DependentUpon>201807271412560_AddGenreTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201807271416382_PopulateGenresTable.resx">
+      <DependentUpon>201807271416382_PopulateGenresTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201807271627156_AddGenrePropertyToMovieTableAndDropFromQuoteTable.resx">
+      <DependentUpon>201807271627156_AddGenrePropertyToMovieTableAndDropFromQuoteTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201807271628081_AddGenresToExistingMovies.resx">
+      <DependentUpon>201807271628081_AddGenresToExistingMovies.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201807271726052_AddGenresToExistingMovies2.resx">
+      <DependentUpon>201807271726052_AddGenresToExistingMovies2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201807271728581_DropAllMovie.resx">
+      <DependentUpon>201807271728581_DropAllMovie.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201807271731297_AddAllMoviesWithGenres.resx">
+      <DependentUpon>201807271731297_AddAllMoviesWithGenres.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

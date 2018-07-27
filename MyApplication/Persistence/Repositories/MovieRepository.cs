@@ -35,5 +35,10 @@ namespace MyApplication.Persistence.Repositories
         {
             _context.Movies.Add(movie);
         }
+
+        public IEnumerable<Movie> GetMoviesByGenre(int id)
+        {
+            return _context.Movies.Where(m => m.Genre.Id == id).ToList();
+        }
     }
 }

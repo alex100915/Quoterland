@@ -332,3 +332,10 @@ C:\Users\KOWAL\Desktop\Quoterland\MyApplication\obj\Debug\MyApplication.Migratio
 C:\Users\KOWAL\Desktop\Quoterland\MyApplication\obj\Debug\MyApplication.Migrations.changecommentmodel9.resources
 C:\Users\KOWAL\Desktop\Quoterland\MyApplication\obj\Debug\MyApplication.Migrations.changecommentmodel10.resources
 C:\Users\KOWAL\Desktop\Quoterland\MyApplication\obj\Debug\MyApplication.Migrations.addupvotedcommentscolumn.resources
+C:\Users\KOWAL\Desktop\Quoterland\MyApplication\obj\Debug\MyApplication.Migrations.AddGenreTable.resources
+C:\Users\KOWAL\Desktop\Quoterland\MyApplication\obj\Debug\MyApplication.Migrations.PopulateGenresTable.resources
+C:\Users\KOWAL\Desktop\Quoterland\MyApplication\obj\Debug\MyApplication.Migrations.AddGenrePropertyToMovieTableAndDropFromQuoteTable.resources
+C:\Users\KOWAL\Desktop\Quoterland\MyApplication\obj\Debug\MyApplication.Migrations.AddGenreIdsToExistingMovies.resources
+C:\Users\KOWAL\Desktop\Quoterland\MyApplication\obj\Debug\MyApplication.Migrations.AddGenreIdsToExistingMovies2.resources
+C:\Users\KOWAL\Desktop\Quoterland\MyApplication\obj\Debug\MyApplication.Migrations.DropAllMovie.resources
+C:\Users\KOWAL\Desktop\Quoterland\MyApplication\obj\Debug\MyApplication.Migrations.AddAllMoviesWithGenres.resources

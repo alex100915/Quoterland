@@ -12,6 +12,7 @@ namespace MyApplication.Persistence
         public DbSet<Learning> Learnings { get; set; }
         public DbSet<Comment> Comments { get; set; }
         public DbSet<UpvotedComments> UpvotedComents { get; set; }
+        public DbSet<Genre> Genres { get; set; }
 
 
         public ApplicationDbContext()

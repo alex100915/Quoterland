@@ -4,20 +4,70 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<div class="container-fluid" style="padding-top: 20px">
+    <div class="row">
+        <nav class="col-md-2 d-none d-md-block border-right bg-light sidebar">
+            <div class="sidebar-sticky">
+                <ul class="nav nav-pills flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link dropdown-toggle" id="moviesitem" data-toggle="collapse" href="#item-1">
+                            <span data-feather="film"></span>
+                            Movies <span class="sr-only">(current)</span>
+                        </a>
+                        <div id="item-1" class="collapse">
+                            <ul class="nav flex-column ml-3">
+                                @foreach (var genre in Model.Genres)
+                                {
+                                    <li id="@genre.Id">
+                                        <a id="@genre.Name" class="nav-link" value="@genre.Name" href="#">@genre.Name</a>
+                                    </li>
+                                }
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link dropdown-toggle" id="tvsitem" data-toggle="collapse" href="#item-2">
+                            <span data-feather="tv"></span>
+                            TV Shows <span class="sr-only">(current)</span>
+                        </a>
+                        <div id="item-2" class="collapse">
+                            <ul class="nav flex-column ml-3">
+                                @foreach (var genre in Model.Genres)
+                                {
+                                    <li value="@genre.Name">
+                                        <a class="nav-link" value="@genre.Name" href="#">@genre.Name</a>
+                                    </li>
+                                }
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-2 px-4">
+            <form id="myForm">
+                @foreach (var movie in Model.Movies)
+                {
+                    <input type="checkbox" id=@movie.Id value="@movie.Title" />
+                    <label for=@movie.Id>
+                        <img src="../../images/@(movie.Title).jpg">
+                    </label>
+                }
+            </form>
 
-<div class="container body-content" align="center" style="padding-top: 50px">
-    <h2 style="padding-bottom: 20px">Find Quotes</h2>
-    <form id="myForm">
-        @foreach (var movie in Model)
-        {
-            <input type="checkbox" id=@movie.Id value="@movie.Title"/>
-            <label for=@movie.Id>
-                <img src="../../images/@(movie.Title).jpg">
-            </label>
-        }
-    </form>
-    <button id="Find" class="btn btn-primary btn-lg btn-block">Find Quotes</button>
+            <form id="myForm2" hidden>
+            </form>
+            <button id="Find" class="btn btn-primary btn-lg btn-block">Find Quotes</button>
+
+        </main>
+    </div>
 </div>
+
+<!-- Icons -->
+<script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
+<script>
+    feather.replace()
+</script>
 
 @Styles.Render("~/content/fancychecbox.css")
 
@@ -26,10 +76,10 @@
     <script>
         $(document).ready(function () {
             var moviesNames = "";
-            $("input[type=checkbox]").on("change",
-                function() {
+            $(document).on("change","input[type=checkbox]",
+                function () {
                     var arr = [];
-                    $(":checkbox").each(function() {
+                    $(":checkbox").each(function () {
                         if ($(this).is(":checked")) {
                             arr.push($(this).val());
                         }
@@ -42,9 +92,33 @@
             $("#Find").on("click",
                 function () {
                     console.log(moviesNames);
-                    if (moviesNames=="" || moviesNames=="on")
+                    if (moviesNames == "" || moviesNames == "on")
                         return toastr.error("Mark some movies");
-                    window.location.href = "/quotes/allquotes?moviesName="+moviesNames;
+                    window.location.href = "/quotes/allquotes?moviesName=" + moviesNames;
+                });
+            var genre;
+            $("li>div>ul>li").on("click",
+                function () {
+                    $("a",genre).attr("class", "nav-link");
+                    genre = this;
+                    $("#logo").attr("class", "navbar-brand");
+                    $("#moviesitem").attr("class", "nav-link dropdown-toggle");
+                    $("#tvsitem").attr("class", "nav-link dropdown-toggle");
+                    var result = $.ajax({
+                        url: "/api/movies/getmoviesbygenre/" + $(this).attr("id"),
+                        method: "GET",
+                        async: false
+                    }).responseJSON;
+
+                    $("a",this).attr("class", "nav-link active");
+                    $("#myForm").attr("hidden", true);
+                    $("#myForm2").attr("hidden", false);
+                    $("#myForm2").html("");
+
+                    for (var i = 0; i < result.length; i++) {
+                        var title = result[i].title;
+                        $('#myForm2').append('<input type="checkbox" id="'+title+'" value="'+title+'"/><label for="'+title+'"><img src="'+'../../images/'+title+'.jpg'+'"></label>');
+                    }
                 });
         });
 

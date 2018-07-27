@@ -33,6 +33,15 @@ namespace MyApplication.Controllers.Api
             return Ok(allMovies);
         }
 
+        [HttpGet]
+        [Route("api/movies/getmoviesbygenre/{id}")]
+        public IHttpActionResult GetMoviesByGenre(int id)
+        {
+            var allMovies = _unitOfWork.Movies.GetMoviesByGenre(id);
+
+            return Ok(allMovies);
+        }
+
         [HttpDelete]
         public IHttpActionResult DeleteMovie(int id)
         {

@@ -9,5 +9,10 @@ namespace MyApplication.Core.Models
         [Required]
         [MaxLength(30)]
         public string Title { get; set; }
+
+        public Genre Genre { get; set; }
+
+        [Required]
+        public int GenreId { get; set; }
     }
 }
