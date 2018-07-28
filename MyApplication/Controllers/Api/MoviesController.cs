@@ -41,7 +41,14 @@ namespace MyApplication.Controllers.Api
 
             return Ok(allMovies);
         }
+        [HttpGet]
+        [Route("api/movies/gettvsbygenre/{id}")]
+        public IHttpActionResult GetTvsByGenre(int id)
+        {
+            var allTvs = _unitOfWork.Movies.GetTvsByGenre(id);
 
+            return Ok(allTvs);
+        }
         [HttpDelete]
         public IHttpActionResult DeleteMovie(int id)
         {
@@ -55,8 +62,9 @@ namespace MyApplication.Controllers.Api
 
             return Ok();
         }
-
-        public HttpResponseMessage Post()
+        [HttpPost]
+        [Route("api/movies/addNew/{productionTypeId}/{genreId}")]
+        public HttpResponseMessage Post(int productionTypeId, int genreId)
         {
             HttpResponseMessage result = null;
             var httpRequest = HttpContext.Current.Request;
@@ -78,7 +86,7 @@ namespace MyApplication.Controllers.Api
 
                     files.Add(filePath);
                 }
-                var movie = new Movie { Title = imageName.Replace(".jpg", "") };
+                var movie = new Movie { Title = imageName.Replace(".jpg", ""), GenreId = genreId, ProductionTypeId = productionTypeId };
 
                 _unitOfWork.Movies.Add(movie);
                 _unitOfWork.Complete();

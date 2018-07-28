@@ -10,5 +10,6 @@ namespace MyApplication.Core.Repositories
         void Remove(Movie movie);
         void Add(Movie movie);
         IEnumerable<Movie> GetMoviesByGenre(int id);
+        IEnumerable<Movie> GetTvsByGenre(int id);
     }
 }

@@ -14,5 +14,9 @@ namespace MyApplication.Core.Models
 
         [Required]
         public int GenreId { get; set; }
+
+        public ProductionType ProductionType { get; set; }
+
+        public int? ProductionTypeId { get; set; }
     }
 }

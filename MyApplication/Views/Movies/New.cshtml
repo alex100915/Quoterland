@@ -8,29 +8,52 @@
 <h2>New Movie</h2>
 <p style="padding-top:5px"></p>
 
-<form enctype="multipart/form-data">
-    <div class="form-group">
-        <label>Movie Name</label>
-        <div class="tt-container">
-            <input type="text" class="form-control" required id="name" />
+    <form enctype="multipart/form-data">
+        <div class="form-group">
+            <label>Movie Name</label>
+            <div class="tt-container">
+                <input type="text" class="form-control" required id="name" />
+            </div>
         </div>
-    </div>
-    <div class="form-group">
-        <label>Poster</label>
-        <div class="tt-container">
-            <label class="btn btn-light">
-                Browse <input name="file" type="file" accept="image/*" id="poster" required style="display: none;">
-            </label>
+        <div class="form-group">
+            <label>Select genre:</label>
+            <select class="form-control" id="genre" required>
+                <option value="0">Select genre</option>
+                @foreach (var genre in Model.Genres)
+                {
+                    <option id="@genre.Id" value="@genre.Id">@genre.Name</option>
+                }
+            </select>
         </div>
-    </div>
-    <div class="form-group">
-        <label id="imageLabel" hidden>Loaded image</label>
-        <div class="tt-container">
-            <img id="loaded" height="140" width="100" hidden />
+    
+        <div class="form-group">
+            <label>Select production type:</label>
+            <select class="form-control" id="productionType" required>
+                <option value="0">Select production type</option>
+                @foreach (var production in Model.ProductionTypes)
+                {
+                    <option id="@production.Id" value="@production.Id">@production.Type</option>
+                }
+            </select>
         </div>
-    </div>
+
+        <div class="form-group">
+            <label>Poster</label>
+            <div class="tt-container">
+                <label class="btn btn-light">
+                    Browse <input name="file" type="file" accept="image/*" id="poster" required style="display: none;">
+                </label>
+            </div>
+        </div>
+        <div class="form-group">
+            <label id="imageLabel" hidden>Loaded image</label>
+            <div class="tt-container">
+                <img id="loaded" height="140" width="100" hidden />
+            </div>
+        </div>
+    
+    </form>
     <button id="Upload" class="btn btn-primary">Upload</button>
-</form>
 </div>
 @section scripts
 {
@@ -50,36 +73,40 @@
             }
         }
 
-        $(document).ready(function () {
+        $(document).ready(function() {
 
-            $("#poster").change(function () {
+            $("#poster").change(function() {
                 readURL(this);
             });
 
-            $('#Upload').on("click", function () {
 
-                if ($("#name").val() == "")
-                    return;
+            $('#Upload').on("click",
+                function () {
+                    var productionTypeId = $('#productionType').val();
+                    var genreId = $('#genre').val();
 
-                var formData = new FormData();
-                var opmlFile = $('#poster')[0];
-                formData.append("opmlFile", opmlFile.files[0], $("#name").val() + ".jpg");
+                    if (genreId == 0 || productionTypeId == 0 || $("#name").val() == 0)
+                        return toastr.error("Not all fields are filled");
 
-                $.ajax({
-                    url: '/api/movies',
-                    type: 'POST',
-                    data: formData,
-                    cache: false,
-                    contentType: false,
-                    processData: false,
-                    error:function() {
-                        toastr.error("Make sure you provided poster");
-                    },
-                    success:function() {
-                        alert("The title is going to be added");
-                    }
+                    var formData = new FormData();
+                    var opmlFile = $('#poster')[0];
+                    formData.append("opmlFile", opmlFile.files[0], $("#name").val() + ".jpg");
+                    $.ajax({
+                        url: '/api/movies/addNew/' + productionTypeId + '/' + genreId,
+                        type: 'POST',
+                        data: formData,
+                        cache: false,
+                        contentType: false,
+                        processData: false,
+                        error: function() {
+                            toastr.error("All fields and poster are required");
+                        },
+                        success: function() {
+
+                            alert("The title is going to be added");
+                        }
+                    });
                 });
-            });
         });
     </script>
 }

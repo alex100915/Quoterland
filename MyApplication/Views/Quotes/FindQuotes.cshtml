@@ -10,7 +10,7 @@
             <div class="sidebar-sticky">
                 <ul class="nav nav-pills flex-column">
                     <li class="nav-item">
-                        <a class="nav-link dropdown-toggle" id="moviesitem" data-toggle="collapse" href="#item-1">
+                        <a class="nav-link dropdown-toggle" data-toggle="collapse" href="#item-1">
                             <span data-feather="film"></span>
                             Movies <span class="sr-only">(current)</span>
                         </a>
@@ -18,15 +18,15 @@
                             <ul class="nav flex-column ml-3">
                                 @foreach (var genre in Model.Genres)
                                 {
-                                    <li id="@genre.Id">
-                                        <a id="@genre.Name" class="nav-link" value="@genre.Name" href="#">@genre.Name</a>
+                                    <li id="@genre.Name Movies">
+                                        <a id="@genre.Name-moviesitem" value="@genre.Id" class="nav-link" href="#">@genre.Name</a>
                                     </li>
                                 }
                             </ul>
                         </div>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link dropdown-toggle" id="tvsitem" data-toggle="collapse" href="#item-2">
+                        <a class="nav-link dropdown-toggle" data-toggle="collapse" href="#item-2">
                             <span data-feather="tv"></span>
                             TV Shows <span class="sr-only">(current)</span>
                         </a>
@@ -34,8 +34,8 @@
                             <ul class="nav flex-column ml-3">
                                 @foreach (var genre in Model.Genres)
                                 {
-                                    <li value="@genre.Name">
-                                        <a class="nav-link" value="@genre.Name" href="#">@genre.Name</a>
+                                    <li id="@genre.Name TV Shows">
+                                        <a id="@genre.Name-tvsitem" value="@genre.Id" class="nav-link" href="#">@genre.Name</a>
                                     </li>
                                 }
                             </ul>
@@ -45,18 +45,19 @@
             </div>
         </nav>
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-2 px-4">
+            <h4 id="header" style="text-align: center; padding-top: 20px; padding-bottom: 20px">All Titles</h4>
             <form id="myForm">
                 @foreach (var movie in Model.Movies)
                 {
-                    <input type="checkbox" id=@movie.Id value="@movie.Title" />
+                    <input type="checkbox" id=@movie.Id value="@movie.Title"/>
                     <label for=@movie.Id>
                         <img src="../../images/@(movie.Title).jpg">
                     </label>
                 }
             </form>
 
-            <form id="myForm2" hidden>
-            </form>
+            <form id="myForm2" style="text-align: center;" hidden></form>
+
             <button id="Find" class="btn btn-primary btn-lg btn-block">Find Quotes</button>
 
         </main>
@@ -74,12 +75,13 @@
 @section scripts
 {
     <script>
-        $(document).ready(function () {
+        $(document).ready(function() {
             var moviesNames = "";
-            $(document).on("change","input[type=checkbox]",
-                function () {
+            $(document).on("change",
+                "input[type=checkbox]",
+                function() {
                     var arr = [];
-                    $(":checkbox").each(function () {
+                    $(":checkbox").each(function() {
                         if ($(this).is(":checked")) {
                             arr.push($(this).val());
                         }
@@ -90,37 +92,59 @@
                 });
 
             $("#Find").on("click",
-                function () {
+                function() {
                     console.log(moviesNames);
                     if (moviesNames == "" || moviesNames == "on")
                         return toastr.error("Mark some movies");
                     window.location.href = "/quotes/allquotes?moviesName=" + moviesNames;
                 });
             var genre;
+            var element;
             $("li>div>ul>li").on("click",
                 function () {
-                    $("a",genre).attr("class", "nav-link");
-                    genre = this;
-                    $("#logo").attr("class", "navbar-brand");
-                    $("#moviesitem").attr("class", "nav-link dropdown-toggle");
-                    $("#tvsitem").attr("class", "nav-link dropdown-toggle");
+                    $("#Find").prop("hidden", false);
+                    $("#"+element).attr("class", "nav-link");
+                    element = $("a", this).attr("id");
+                    genre = $(this).attr("id");
+                    $("#header").text(genre);
+
+                    var url = "";
+                    if (genre.includes("Movies")) {
+                        url = "/api/movies/getmoviesbygenre/" + $("a", this).attr("value");
+                    } else
+                        url = "/api/movies/gettvsbygenre/" + $("a", this).attr("value");
+
                     var result = $.ajax({
-                        url: "/api/movies/getmoviesbygenre/" + $(this).attr("id"),
+                        url: url,
                         method: "GET",
                         async: false
                     }).responseJSON;
 
-                    $("a",this).attr("class", "nav-link active");
+                    $("#" + element).prop("class", "nav-link active");
                     $("#myForm").attr("hidden", true);
                     $("#myForm2").attr("hidden", false);
                     $("#myForm2").html("");
 
+                    if (result.length == 0) {
+                        $("#header").text("Sorry we don't have any titles for that genre yet");
+                        $("#Find").prop("hidden", true);
+                    }
+
                     for (var i = 0; i < result.length; i++) {
                         var title = result[i].title;
-                        $('#myForm2').append('<input type="checkbox" id="'+title+'" value="'+title+'"/><label for="'+title+'"><img src="'+'../../images/'+title+'.jpg'+'"></label>');
+                        $('#myForm2').append('<input type="checkbox" id="' +
+                            title +
+                            '" value="' +
+                            title +
+                            '"/><label for="' +
+                            title +
+                            '"><img src="' +
+                            '../../images/' +
+                            title +
+                            '.jpg' +
+                            '"></label>');
                     }
                 });
         });
-
     </script>
 }

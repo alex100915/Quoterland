@@ -13,6 +13,7 @@ namespace MyApplication.Persistence
         public DbSet<Comment> Comments { get; set; }
         public DbSet<UpvotedComments> UpvotedComents { get; set; }
         public DbSet<Genre> Genres { get; set; }
+        public DbSet<ProductionType> ProductionTypes { get; set; }
 
 
         public ApplicationDbContext()

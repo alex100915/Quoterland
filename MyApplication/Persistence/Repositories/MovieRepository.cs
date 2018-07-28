@@ -38,7 +38,12 @@ namespace MyApplication.Persistence.Repositories
 
         public IEnumerable<Movie> GetMoviesByGenre(int id)
         {
-            return _context.Movies.Where(m => m.Genre.Id == id).ToList();
+            return _context.Movies.Where(m => m.ProductionTypeId == 1 && m.Genre.Id == id).ToList();
+        }
+
+        public IEnumerable<Movie> GetTvsByGenre(int id)
+        {
+            return _context.Movies.Where(t => t.ProductionTypeId == 2 && t.GenreId == id).ToList();
         }
     }
 }

@@ -261,6 +261,7 @@
     <Compile Include="Core\Models\Learned.cs" />
     <Compile Include="Core\Models\Learning.cs" />
     <Compile Include="Core\Models\Movie.cs" />
+    <Compile Include="Core\Models\ProductionType.cs" />
     <Compile Include="Core\Models\Quote.cs" />
     <Compile Include="Core\Models\UpvotedComments.cs" />
     <Compile Include="Core\Repositories\ILearnedRepository.cs" />
@@ -412,6 +413,14 @@
     <Compile Include="Persistence\Migrations\201807271731297_AddAllMoviesWithGenres.cs" />
     <Compile Include="Persistence\Migrations\201807271731297_AddAllMoviesWithGenres.Designer.cs">
       <DependentUpon>201807271731297_AddAllMoviesWithGenres.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201807280716345_AddProductionTypeTableAndPopulate.cs" />
+    <Compile Include="Persistence\Migrations\201807280716345_AddProductionTypeTableAndPopulate.Designer.cs">
+      <DependentUpon>201807280716345_AddProductionTypeTableAndPopulate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201807280721303_AddProductionTypeToMoviesTable.cs" />
+    <Compile Include="Persistence\Migrations\201807280721303_AddProductionTypeToMoviesTable.Designer.cs">
+      <DependentUpon>201807280721303_AddProductionTypeToMoviesTable.cs</DependentUpon>
     </Compile>
     <Compile Include="Persistence\Migrations\Configuration.cs" />
     <Compile Include="Core\Repositories\IMovieRepository.cs" />
@@ -938,6 +947,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Persistence\Migrations\201807271731297_AddAllMoviesWithGenres.resx">
       <DependentUpon>201807271731297_AddAllMoviesWithGenres.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201807280716345_AddProductionTypeTableAndPopulate.resx">
+      <DependentUpon>201807280716345_AddProductionTypeTableAndPopulate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201807280721303_AddProductionTypeToMoviesTable.resx">
+      <DependentUpon>201807280721303_AddProductionTypeToMoviesTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

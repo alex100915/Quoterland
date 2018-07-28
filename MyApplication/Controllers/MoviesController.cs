@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using MyApplication.Core;
+using MyApplication.Persistence;
 
 namespace MyApplication.Controllers
 {
@@ -24,8 +26,15 @@ namespace MyApplication.Controllers
 
         public ActionResult New()
         {
-            
-            return View();
+            ApplicationDbContext _context=new ApplicationDbContext();
+            var productionTypes = _context.ProductionTypes.ToList();
+            var genres = _context.Genres.ToList();
+
+            dynamic myModel = new ExpandoObject();
+            myModel.ProductionTypes = productionTypes;
+            myModel.Genres = genres;
+
+            return View(myModel);
         }
     }
 }

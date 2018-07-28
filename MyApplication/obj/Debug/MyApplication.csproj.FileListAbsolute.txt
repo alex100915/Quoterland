@@ -339,3 +339,5 @@ C:\Users\KOWAL\Desktop\Quoterland\MyApplication\obj\Debug\MyApplication.Migratio
 C:\Users\KOWAL\Desktop\Quoterland\MyApplication\obj\Debug\MyApplication.Migrations.AddGenreIdsToExistingMovies2.resources
 C:\Users\KOWAL\Desktop\Quoterland\MyApplication\obj\Debug\MyApplication.Migrations.DropAllMovie.resources
 C:\Users\KOWAL\Desktop\Quoterland\MyApplication\obj\Debug\MyApplication.Migrations.AddAllMoviesWithGenres.resources
+C:\Users\KOWAL\Desktop\Quoterland\MyApplication\obj\Debug\MyApplication.Migrations.AddProductionTypeTableAndPopulate.resources
+C:\Users\KOWAL\Desktop\Quoterland\MyApplication\obj\Debug\MyApplication.Migrations.AddProductionTypeToMoviesTable.resources
