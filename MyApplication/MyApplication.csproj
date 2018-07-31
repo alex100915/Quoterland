@@ -422,6 +422,10 @@
     <Compile Include="Persistence\Migrations\201807280721303_AddProductionTypeToMoviesTable.Designer.cs">
       <DependentUpon>201807280721303_AddProductionTypeToMoviesTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Persistence\Migrations\201807301351018_ChangeQuoteAndMovieTitleLength.cs" />
+    <Compile Include="Persistence\Migrations\201807301351018_ChangeQuoteAndMovieTitleLength.Designer.cs">
+      <DependentUpon>201807301351018_ChangeQuoteAndMovieTitleLength.cs</DependentUpon>
+    </Compile>
     <Compile Include="Persistence\Migrations\Configuration.cs" />
     <Compile Include="Core\Repositories\IMovieRepository.cs" />
     <Compile Include="Persistence\Repositories\LearnedRepository.cs" />
@@ -953,6 +957,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Persistence\Migrations\201807280721303_AddProductionTypeToMoviesTable.resx">
       <DependentUpon>201807280721303_AddProductionTypeToMoviesTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201807301351018_ChangeQuoteAndMovieTitleLength.resx">
+      <DependentUpon>201807301351018_ChangeQuoteAndMovieTitleLength.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

@@ -7,7 +7,7 @@ namespace MyApplication.Core.Models
         public int Id { get; set; }
 
         [Required]
-        [MaxLength(30)]
+        [MaxLength(50)]
         public string Title { get; set; }
 
         public Genre Genre { get; set; }

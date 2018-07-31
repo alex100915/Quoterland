@@ -68,6 +68,7 @@ namespace MyApplication.Controllers.Api
 
         public IHttpActionResult GetQuotesByMoviesNames(string moviesNames)
         {
+            moviesNames=moviesNames.Replace("singleQuote", "'");
             string[] moviesName = moviesNames.Split(',').ToArray();
 
             var quotesByMoviesNames = new List<Quote>();

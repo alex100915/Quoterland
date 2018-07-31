@@ -49,9 +49,19 @@
             <form id="myForm">
                 @foreach (var movie in Model.Movies)
                 {
-                    <input type="checkbox" id=@movie.Id value="@movie.Title"/>
+                    <input type="checkbox" id=@movie.Id value="@movie.Title" unchecked />
                     <label for=@movie.Id>
-                        <img src="../../images/@(movie.Title).jpg">
+                        @{
+                        var charactersGettingRidded = new string[] {"/", @"\", ":", "*", "?", "\"", "<", ">", "|"};
+                            var imageName = movie.Title;
+                        foreach (var c in charactersGettingRidded)
+                        {
+                        imageName = imageName.Replace(c, "");
+                        }
+                            var path = imageName + ".jpg";
+                        }
+                        
+                        <img src="../../images/@path"/>
                     </label>
                 }
             </form>
@@ -75,7 +85,10 @@
 @section scripts
 {
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
+
+            $("input[type=checkbox]").prop("checked",false);
+
             var moviesNames = "";
             $(document).on("change",
                 "input[type=checkbox]",
@@ -87,7 +100,8 @@
                         }
                     });
 
-                    moviesNames = arr.join(",").replace(",on", "");
+                    moviesNames = arr.join(",").replace(",on", "").replace(/'/g, "singleQuote");
+                    
                     console.log(arr.length);
                 });
 
@@ -132,6 +146,12 @@
 
                     for (var i = 0; i < result.length; i++) {
                         var title = result[i].title;
+                        var imagePath = title;
+                        var charactersGettingRidded = ["/", ":","\\", "*", "?", "\"", "<", ">", "|"];
+                        for (var j = 0; j < charactersGettingRidded.length; j++)
+                            imagePath = imagePath.replace(charactersGettingRidded[j], "");
+                        imagePath = imagePath + ".jpg";
+
                         $('#myForm2').append('<input type="checkbox" id="' +
                             title +
                             '" value="' +
@@ -140,8 +160,7 @@
                             title +
                             '"><img src="' +
                             '../../images/' +
-                            title +
-                            '.jpg' +
+                            imagePath +
                             '"></label>');
                     }
                 });

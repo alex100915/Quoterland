@@ -10,7 +10,7 @@ namespace MyApplication.Core.Models
 
         [Required]
         [MinLength(15)]
-        [MaxLength(200)]
+        [MaxLength(400)]
         public string Content { get; set; }
 
         public ApplicationUser User { get; set; }

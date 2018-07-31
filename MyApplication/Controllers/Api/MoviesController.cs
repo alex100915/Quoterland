@@ -75,18 +75,27 @@ namespace MyApplication.Controllers.Api
                 var files = new List<string>();
 
                 string imageName = "";
+                string title = "";
 
                 // interate the files and save on the server
                 foreach (string file in httpRequest.Files)
                 {
                     var postedFile = httpRequest.Files[file];
                     imageName = postedFile.FileName;
+                    title = imageName;
+
+                    var charactersGettingRidded = new string[] {"/", @"\", ":", "*", "?", "\"", "<", ">", "|"};
+                    foreach (var c in charactersGettingRidded)
+                    {
+                        imageName = imageName.Replace(c, "");
+                    }
+
                     var filePath = HttpContext.Current.Server.MapPath("~/images/" + imageName);
                     postedFile.SaveAs(filePath);
 
                     files.Add(filePath);
                 }
-                var movie = new Movie { Title = imageName.Replace(".jpg", ""), GenreId = genreId, ProductionTypeId = productionTypeId };
+                var movie = new Movie { Title = title.Replace(".jpg", "").Replace("%22","\""), GenreId = genreId, ProductionTypeId = productionTypeId };
 
                 _unitOfWork.Movies.Add(movie);
                 _unitOfWork.Complete();
