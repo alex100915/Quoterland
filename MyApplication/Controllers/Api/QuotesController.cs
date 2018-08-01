@@ -3,6 +3,7 @@ using AutoMapper;
 using Microsoft.AspNet.Identity;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web.Http;
 using MyApplication.Core;
 using MyApplication.Core.Dtos;
@@ -69,7 +70,7 @@ namespace MyApplication.Controllers.Api
         public IHttpActionResult GetQuotesByMoviesNames(string moviesNames)
         {
             moviesNames=moviesNames.Replace("singleQuote", "'");
-            string[] moviesName = moviesNames.Split(',').ToArray();
+            string[] moviesName = Regex.Split(moviesNames, "arrJoin");
 
             var quotesByMoviesNames = new List<Quote>();
 

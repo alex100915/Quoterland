@@ -10,5 +10,9 @@ namespace MyApplication.Persistence
         DbSet<Learned> Learneds { get; set; }
         DbSet<Learning> Learnings { get; set; }
         IDbSet<ApplicationUser> Users { get; set; }
+        DbSet<ProductionType> ProductionTypes { get; set; }
+        DbSet<Genre> Genres { get; }
+        DbSet<Comment> Comments { get; }
+        DbSet<UpvotedComment> UpvotedComments { get; set; }
     }
 }

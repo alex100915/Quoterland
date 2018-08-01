@@ -1,9 +1,11 @@
-﻿using System.Dynamic;
+﻿using System.Collections.Generic;
+using System.Dynamic;
 using System.Linq;
 using System.Web.Http.Results;
 using Microsoft.AspNet.Identity;
 using System.Web.Mvc;
 using MyApplication.Core;
+using MyApplication.Core.Models;
 using MyApplication.Persistence;
 
 namespace MyApplication.Controllers
@@ -42,13 +44,10 @@ namespace MyApplication.Controllers
 
         public ViewResult FindQuotes()
         {
-            var movies = _unitOfWork.Movies.GetAllMovies();
-            ApplicationDbContext _context=new ApplicationDbContext();
-            var genres = _context.Genres.ToList();
-
             dynamic myModel = new ExpandoObject();
-            myModel.Movies = movies;
-            myModel.Genres = genres;
+
+            myModel.Movies = _unitOfWork.Movies.GetAllMovies();
+            myModel.Genres = _unitOfWork.Genres.GetAllGenres();
 
             return View(myModel);
         }

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using MyApplication.Core;
+using MyApplication.Core.Models;
 using MyApplication.Persistence;
 
 namespace MyApplication.Controllers
@@ -26,13 +27,9 @@ namespace MyApplication.Controllers
 
         public ActionResult New()
         {
-            ApplicationDbContext _context=new ApplicationDbContext();
-            var productionTypes = _context.ProductionTypes.ToList();
-            var genres = _context.Genres.ToList();
-
             dynamic myModel = new ExpandoObject();
-            myModel.ProductionTypes = productionTypes;
-            myModel.Genres = genres;
+            myModel.ProductionTypes = _unitOfWork.ProductionTypes.GetAllProductionTypes();
+            myModel.Genres = _unitOfWork.Genres.GetAllGenres();
 
             return View(myModel);
         }

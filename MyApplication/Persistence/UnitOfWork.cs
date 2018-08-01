@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using MyApplication.Core;
@@ -17,6 +16,11 @@ namespace MyApplication.Persistence
         public ILearnedRepository Learneds { get; private set ; }
         public ILearningRepository Learnings { get; private set; }
         public IMovieRepository Movies { get; private set; }
+        public IGenreRepository Genres { get; private set; }
+        public IProductionTypeRepository ProductionTypes { get; private set; }
+        public IApplicationUserRepository ApplicationUsers { get; private set; }
+        public ICommentRepository Comments { get; private set; }
+        public IUpvotedCommentRepository UpvotedComments { get; private set; }
 
         public UnitOfWork(ApplicationDbContext context)
         {
@@ -25,6 +29,11 @@ namespace MyApplication.Persistence
             Learneds=new LearnedRepository(_context);
             Learnings=new LearningRepository(_context);
             Movies=new MovieRepository(_context);
+            ProductionTypes=new ProductionTypeRepository(_context);
+            Genres=new GenreRepository(_context);
+            ApplicationUsers=new ApplicationUserRepository(_context);
+            Comments= new CommentRepository(_context);
+            UpvotedComments=new UpvotedCommentRepository(_context);
         }
 
         public void Complete()

@@ -254,6 +254,11 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MoviesController.cs" />
     <Compile Include="Controllers\QuotesController.cs" />
+    <Compile Include="Core\Repositories\IUpvotedCommentRepository.cs" />
+    <Compile Include="Core\Repositories\ICommentRepository.cs" />
+    <Compile Include="Core\Repositories\IApplicationUserRepository.cs" />
+    <Compile Include="Core\Repositories\IGenreRepository.cs" />
+    <Compile Include="Core\Repositories\IProductionTypeRepository.cs" />
     <Compile Include="Core\IUnitOfWork.cs" />
     <Compile Include="Core\Models\ApplicationUser.cs" />
     <Compile Include="Core\Models\Comment.cs" />
@@ -263,7 +268,7 @@
     <Compile Include="Core\Models\Movie.cs" />
     <Compile Include="Core\Models\ProductionType.cs" />
     <Compile Include="Core\Models\Quote.cs" />
-    <Compile Include="Core\Models\UpvotedComments.cs" />
+    <Compile Include="Core\Models\UpvotedComment.cs" />
     <Compile Include="Core\Repositories\ILearnedRepository.cs" />
     <Compile Include="Core\Repositories\ILearningRepository.cs" />
     <Compile Include="Core\Repositories\IQuoteRepository.cs" />
@@ -428,11 +433,16 @@
     </Compile>
     <Compile Include="Persistence\Migrations\Configuration.cs" />
     <Compile Include="Core\Repositories\IMovieRepository.cs" />
+    <Compile Include="Persistence\Repositories\ApplicationUserRepository.cs" />
+    <Compile Include="Persistence\Repositories\CommentRepository.cs" />
+    <Compile Include="Persistence\Repositories\GenreRepository.cs" />
     <Compile Include="Persistence\Repositories\LearnedRepository.cs" />
     <Compile Include="Persistence\Repositories\LearningRepository.cs" />
     <Compile Include="Persistence\Repositories\MovieRepository.cs" />
+    <Compile Include="Persistence\Repositories\ProductionTypeRepository.cs" />
     <Compile Include="Persistence\Repositories\QuoteRepository.cs" />
     <Compile Include="Persistence\UnitOfWork.cs" />
+    <Compile Include="Persistence\Repositories\UpvotedCommentRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>

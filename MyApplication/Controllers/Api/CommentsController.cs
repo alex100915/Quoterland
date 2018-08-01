@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity.Migrations;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 using AutoMapper;
 using Microsoft.AspNet.Identity;
@@ -16,18 +12,18 @@ namespace MyApplication.Controllers.Api
 {
     public class CommentsController : ApiController
     {
-        private readonly ApplicationDbContext _context;
-
-        public CommentsController()
+        private readonly IUnitOfWork _unitOfWork;
+        
+        public CommentsController(IUnitOfWork unitOfWork)
         {
-            _context = new ApplicationDbContext();
+            _unitOfWork = unitOfWork;
         }
 
         [Route("api/comments/getusers")]
         [HttpGet]
         public IHttpActionResult GetUsers()
         {
-            var users = _context.Users.ToList();
+            var users = _unitOfWork.ApplicationUsers.GetAllApplicationUsers();
 
             return Ok(users);
         }
@@ -38,7 +34,7 @@ namespace MyApplication.Controllers.Api
         {
             var userId = User.Identity.GetUserId();
 
-            var currentUser = _context.Users.SingleOrDefault(u => u.Id == userId);
+            var currentUser = _unitOfWork.ApplicationUsers.GetUserById(userId);
 
             var userDto = Mapper.Map<ApplicationUser, ApplicationUserDto>(currentUser);
 
@@ -49,32 +45,31 @@ namespace MyApplication.Controllers.Api
         [HttpGet]
         public IHttpActionResult GetAllComments(int id)
         {
-            var allComments = _context.Comments.Where(c=>c.QuoteId==id).ToList().Select(Mapper.Map<Comment, CommentDto>).ToList();
+            var allComments = _unitOfWork.Comments
+                .GetAllCommentsForQuote(id)
+                .Select(Mapper.Map<Comment, CommentDto>)
+                .ToList();
+
+            var userId = User.Identity.GetUserId();
 
             foreach (var comment in allComments)
             {
-                if (comment.Creator == User.Identity.GetUserId())
+                if (comment.Creator == userId)
                 {
                     comment.Created_by_current_user = true;
                     comment.Fullname = "You";
                 }
 
-                var userId = User.Identity.GetUserId();
-                var checkUserUpvoteComment =
-                    _context.UpvotedComents.SingleOrDefault(c => c.ApplicationUserId == userId && c.CommentId==comment.CommentId);
-
-                if (checkUserUpvoteComment != null)
+                if (_unitOfWork.UpvotedComments.CheckUserUpvoteComment(userId, comment.CommentId))
                     comment.User_has_upvoted = true;
-                else
-                    comment.User_has_upvoted = false;
 
-                if (comment.Creator == _context.Users.SingleOrDefault(u => u.Fullname == "Movies Manager").Id)
+                if (comment.Creator == _unitOfWork.ApplicationUsers.GetUserIdByFullname("Movies Manager"))
                     comment.Created_by_admin = true;
-
             }
 
             return Ok(allComments);
         }
+
         [HttpPost]
         public IHttpActionResult AddComment(CommentDto commentDto, int id)
         {
@@ -82,16 +77,12 @@ namespace MyApplication.Controllers.Api
 
             var userId = User.Identity.GetUserId();
 
-            comment.Fullname = _context.Users.SingleOrDefault(u => u.Id == userId).Fullname;
-
+            comment.Fullname = _unitOfWork.ApplicationUsers.GetUserById(userId).Fullname;
             comment.Creator = userId;
-
-
-
             comment.QuoteId = id;
 
-            _context.Comments.Add(comment);
-            _context.SaveChanges();
+            _unitOfWork.Comments.Add(comment);
+            _unitOfWork.Complete();
 
             return Ok();
         }
@@ -99,8 +90,9 @@ namespace MyApplication.Controllers.Api
         [HttpDelete]
         public IHttpActionResult DeleteComments(string id)
         {
-            _context.Comments.Remove(_context.Comments.SingleOrDefault(c => c.Id == id));
-            _context.SaveChanges();
+            _unitOfWork.Comments.Remove(_unitOfWork.Comments.GetCommentById(id));
+            _unitOfWork.Complete();
+
             return Ok(id);
         }
 
@@ -108,12 +100,12 @@ namespace MyApplication.Controllers.Api
         [Route("api/comments/updatecomment/{id}")]
         public IHttpActionResult UpdateComment(string id, CommentDto commentDto)
         {
-            var comment=_context.Comments.SingleOrDefault(c => c.Id == id);
+            var comment=_unitOfWork.Comments.GetCommentById(id);
 
             comment.Content = commentDto.Content;
             comment.Modified=DateTime.Now;
 
-            _context.SaveChanges();
+            _unitOfWork.Complete();
 
             return Ok();
         }
@@ -122,33 +114,31 @@ namespace MyApplication.Controllers.Api
         [Route("api/comments/upvotes/{id}")]
         public IHttpActionResult UpvoteComment(string id)
         {
-            var comment = _context.Comments.SingleOrDefault(c => c.Id == id);
+            var comment = _unitOfWork.Comments.GetCommentById(id);
 
             var userId = User.Identity.GetUserId();
 
-            var upvoteComent = _context.UpvotedComents.SingleOrDefault(c =>
-                c.CommentId == comment.CommentId && c.ApplicationUserId == userId);
-
-            if (upvoteComent != null)
+            if (_unitOfWork.UpvotedComments.CheckUserUpvoteComment(userId, comment.CommentId))
             {
                 comment.Upvote_count--;
 
-                _context.UpvotedComents.Remove(
-                    _context.UpvotedComents.SingleOrDefault(u => u.CommentId == comment.CommentId && u.ApplicationUserId==userId));
+                _unitOfWork.UpvotedComments.Remove(
+                    _unitOfWork.UpvotedComments.GetUpvoteComment(comment.CommentId, userId));
             }
 
             else
             {
-                var newUpvotedComment = new UpvotedComments
+                var newUpvotedComment = new UpvotedComment
                 {
                     ApplicationUserId = User.Identity.GetUserId(),
                     CommentId = comment.CommentId
                 };
+
                 comment.Upvote_count++;
-                _context.UpvotedComents.Add(newUpvotedComment);
+                _unitOfWork.UpvotedComments.Add(newUpvotedComment);
             }
 
-            _context.SaveChanges();
+            _unitOfWork.Complete();
 
             return Ok();
         }
