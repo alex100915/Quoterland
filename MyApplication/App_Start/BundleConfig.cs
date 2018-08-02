@@ -13,8 +13,8 @@ namespace MyApplication
             ));
 
             bundles.Add(new ScriptBundle("~/bundles/lib").Include(
+                "~/Scripts/bootstrap.bundle.min.js",
                 "~/Scripts/jquery-3.3.1.js",
-                "~/Scripts/bootstrap.js",
                 "~/Scripts/bootbox.js",
                 "~/Scripts/respond.js",
                 "~/scripts/datatables/jquery.datatables.js",

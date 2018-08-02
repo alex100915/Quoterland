@@ -19,7 +19,7 @@ namespace MyApplication.Persistence.Repositories
             return _context.Learnings.SingleOrDefault(q => q.QuoteId == id && q.ApplicationUserId == userId);
         }
 
-        public IEnumerable<Learning> GetUserLearningQuotes(string userId)
+        public IEnumerable<Learning> GetUserLearningQuotesIds(string userId)
         {
             return _context.Learnings.Where(l => l.ApplicationUserId == userId).ToList();
         }

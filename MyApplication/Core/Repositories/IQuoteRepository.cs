@@ -11,5 +11,7 @@ namespace MyApplication.Core.Repositories
         Quote GetQuoteById(int id);
         void Add(Quote quote);
         void Remove(Quote quoteInDb);
+        IEnumerable<Quote> GetUserLearnedQuotes(string userId);
+        IEnumerable<Quote> GetUserLearningQuotes(string userId);
     }
 }

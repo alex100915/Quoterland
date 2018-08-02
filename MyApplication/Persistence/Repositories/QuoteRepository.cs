@@ -53,5 +53,31 @@ namespace MyApplication.Persistence.Repositories
         {
             _context.Quotes.Remove(quoteInDb);
         }
+
+        public IEnumerable<Quote> GetUserLearnedQuotes(string userId)
+        {
+            IEnumerable<Learned> learnedQuotesIds=_context.Learneds.Where(l => l.ApplicationUserId == userId).ToList();
+            var result=new List<Quote>();
+
+            foreach (var learnedQuoteId in learnedQuotesIds)
+            {
+                result.Add(_context.Quotes.Include(m=>m.Movie).SingleOrDefault(q=>q.Id==learnedQuoteId.QuoteId));
+            }
+
+            return result;
+        }
+
+        public IEnumerable<Quote> GetUserLearningQuotes(string userId)
+        {
+            IEnumerable<Learning> learningQuotesIds = _context.Learnings.Where(l => l.ApplicationUserId == userId).ToList();
+            var result = new List<Quote>();
+
+            foreach (var learningQuoteId in learningQuotesIds)
+            {
+                result.Add(_context.Quotes.Include(m => m.Movie).SingleOrDefault(q => q.Id == learningQuoteId.QuoteId));
+            }
+
+            return result;
+        }
     }
 }

@@ -94,9 +94,9 @@ namespace MyApplication.Tests.Controllers.Api
         {
             IEnumerable<Learned> quotes = new List<Learned>();
 
-            _mockLearnedRepository.Setup(r => r.GetUserLearnedQuotes("1")).Returns(quotes);
+            _mockLearnedRepository.Setup(r => r.GetUserLearnedQuotesIds("1")).Returns(quotes);
 
-            var result = _controller.GetLearnedQuotes();
+            var result = _controller.GetLearnedQuotesIds();
 
             result.Should().BeOfType<OkNegotiatedContentResult<IEnumerable<Learned>>>();
         }

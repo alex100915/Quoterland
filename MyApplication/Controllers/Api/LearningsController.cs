@@ -43,11 +43,25 @@ namespace MyApplication.Controllers.Api
         }
 
         [HttpGet]
+        public IHttpActionResult GetLearningQuotesIds()
+        {
+            var userId = User.Identity.GetUserId();
+
+            var quotes = _unitOfWork.Learnings.GetUserLearningQuotesIds(userId);
+
+            return Ok(quotes);
+        }
+
+        [HttpGet]
+        [Route("api/learnings/getlearningquotes")]
         public IHttpActionResult GetLearningQuotes()
         {
             var userId = User.Identity.GetUserId();
 
-            var quotes = _unitOfWork.Learnings.GetUserLearningQuotes(userId);
+            if (userId == null)
+                return Unauthorized();
+
+            var quotes = _unitOfWork.Quotes.GetUserLearningQuotes(userId);
 
             return Ok(quotes);
         }

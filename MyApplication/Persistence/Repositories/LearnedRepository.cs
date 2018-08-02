@@ -24,7 +24,7 @@ namespace MyApplication.Persistence.Repositories
             return _context.Learneds.SingleOrDefault(q => q.QuoteId == id && q.ApplicationUserId == userId);
         }
 
-        public IEnumerable<Learned> GetUserLearnedQuotes(string userId)
+        public IEnumerable<Learned> GetUserLearnedQuotesIds(string userId)
         {
             return _context.Learneds.Where(l => l.ApplicationUserId == userId).ToList();
         }

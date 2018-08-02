@@ -46,6 +46,20 @@ namespace MyApplication.Controllers.Api
         }
 
         [HttpGet]
+        public IHttpActionResult GetLearnedQuotesIds()
+        {
+            var userId = User.Identity.GetUserId();
+
+            if (userId == null)
+                return Unauthorized();
+
+            var quotes = _unitOfWork.Learneds.GetUserLearnedQuotesIds(userId);
+
+            return Ok(quotes);
+        }
+
+        [HttpGet]
+        [Route("api/learneds/getlearnedquotes")]
         public IHttpActionResult GetLearnedQuotes()
         {
             var userId = User.Identity.GetUserId();
@@ -53,10 +67,11 @@ namespace MyApplication.Controllers.Api
             if (userId == null)
                 return Unauthorized();
 
-            var quotes = _unitOfWork.Learneds.GetUserLearnedQuotes(userId);
+            var quotes = _unitOfWork.Quotes.GetUserLearnedQuotes(userId);
 
             return Ok(quotes);
         }
+
 
         [HttpDelete]
         public IHttpActionResult DeleteFromLearnedQuotes(int id)

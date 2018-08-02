@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - Quoter's Land</title>
+    <title>@ViewBag.Title - „Quoterland”</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
@@ -25,6 +25,9 @@
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMyQuotes">
                             <a class="dropdown-item" href="@Url.Action("New", "Quotes")">Add New</a>
                             <a class="dropdown-item" href="@Url.Action("MyQuotes", "Quotes")">Added</a>
+                            <a class="dropdown-item" href="@Url.Action("Index", "Learneds")">Learned</a>
+                            <a class="dropdown-item" href="@Url.Action("Index", "Learnings")">Learning</a>
+
                         </div>
                     </li>
                     <li class="nav-item dropdown">

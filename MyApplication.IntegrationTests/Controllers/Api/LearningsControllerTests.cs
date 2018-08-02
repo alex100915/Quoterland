@@ -82,7 +82,7 @@ namespace MyApplication.IntegrationTests.Controllers.Api
 
             IEnumerable<Learning> learnings = new List<Learning> { _context.Learnings.First() };
 
-            var result = _controller.GetLearningQuotes();
+            var result = _controller.GetLearningQuotesIds();
 
             result.Should().BeOfType<OkNegotiatedContentResult<IEnumerable<Learning>>>().Which.Content.ShouldBeEquivalentTo(learnings);
         }
