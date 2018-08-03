@@ -3,7 +3,7 @@
 User features:
 
 For all users:
-- finding quotes with posters in main page,
+- finding quotes with posters,
 - filtering, finding and sorting quotes in table,
 - watching movies fragments on youtube.
 
@@ -38,5 +38,8 @@ password - Guest1!
 Movies Manager:
 email - moviesmanager@site.com
 password - Moviesmanager1!
+
+NOTE: Bootstrap 4 to proper work required TypeScript support for Visual Studio (popper.js libary). For Visual Studio 2015 you can download it here: 
+https://www.microsoft.com/en-US/download/details.aspx?id=48593 
 
 
