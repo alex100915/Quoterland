@@ -18,8 +18,8 @@
                             <ul class="nav flex-column ml-3">
                                 @foreach (var genre in Model.Genres)
                                 {
-                                    <li id="@genre.Name Movies">
-                                        <a id="@genre.Name-moviesitem" value="@genre.Id" class="nav-link" href="#">@genre.Name</a>
+                                    <li>
+                                        <a id="@genre.Name Movies" value="@genre.Id" class="nav-link moviesItem" href="#">@genre.Name</a>
                                     </li>
                                 }
                             </ul>
@@ -34,8 +34,8 @@
                             <ul class="nav flex-column ml-3">
                                 @foreach (var genre in Model.Genres)
                                 {
-                                    <li id="@genre.Name TV Shows">
-                                        <a id="@genre.Name-tvsitem" value="@genre.Id" class="nav-link" href="#">@genre.Name</a>
+                                    <li>
+                                        <a id="@genre.Name TV Shows" value="@genre.Id" class="nav-link tvsItem" href="#">@genre.Name</a>
                                     </li>
                                 }
                             </ul>
@@ -46,7 +46,7 @@
         </nav>
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-2 px-4">
             <h4 id="header" style="text-align: center; padding-top: 20px; padding-bottom: 20px">All Titles</h4>
-            <form id="myForm">
+            <form id="allTitles">
                 @foreach (var movie in Model.Movies)
                 {
                     <input type="checkbox" id=@movie.Id value="@movie.Title" unchecked />
@@ -66,7 +66,7 @@
                 }
             </form>
 
-            <form id="myForm2" style="text-align: center;" hidden></form>
+            <form id="genreTitles" style="text-align: center;" hidden></form>
 
             <button id="Find" class="btn btn-primary btn-lg btn-block">Find Quotes</button>
 
@@ -112,38 +112,52 @@
                         return toastr.error("Mark some movies");
                     window.location.href = "/quotes/allquotes?moviesName=" + moviesNames;
                 });
-            var genre;
+
             var element;
-            $("li>div>ul>li").on("click",
+            $('.moviesItem, .tvsItem').on("click",
                 function () {
+                    console.log("do stuff")
+                    //hide All Titles form to make a room for titles for clicked genre
+                    $("#allTitles").attr("hidden", true);
+
+                    // Show form for clicked genre Titles, clear form state
+                    $("#genreTitles").attr("hidden", false);
+                    $("#genreTitles").html("");
+
+                    //if there wasn't any titles for previous genre, set button as unhidden in next click
                     $("#Find").prop("hidden", false);
-                    $("#"+element).attr("class", "nav-link");
-                    element = $("a", this).attr("id");
-                    genre = $(this).attr("id");
-                    $("#header").text(genre);
 
+                    //Set previous genre link back to unactive
+                    $(element).attr("class", "nav-link");
+
+                    //Set current genre link to active
+                    element=$(this).attr("class", "nav-link active");
+                    
+                    //Set appropriate header
+                    $("#header").text($(this).attr("id"));
+
+                    //Distinguish Movie Item from TV Show item to generate appropriate ajax url
                     var url = "";
-                    if (genre.includes("Movies")) {
-                        url = "/api/movies/getmoviesbygenre/" + $("a", this).attr("value");
+                    if ($(this).attr("id").includes("Movies")) {
+                        url = "/api/movies/getmoviesbygenre/" + $(this).attr("value");
                     } else
-                        url = "/api/movies/gettvsbygenre/" + $("a", this).attr("value");
+                        url = "/api/movies/gettvsbygenre/" + $(this).attr("value");
 
+                    //Load titles for clicked genre and production type, store result in variable
                     var result = $.ajax({
                         url: url,
                         method: "GET",
                         async: false
                     }).responseJSON;
 
-                    $("#" + element).prop("class", "nav-link active");
-                    $("#myForm").attr("hidden", true);
-                    $("#myForm2").attr("hidden", false);
-                    $("#myForm2").html("");
-
+                    //If titles for that genre don't exist, hide Find button and display message
                     if (result.length == 0) {
                         $("#header").text("Sorry we don't have any titles for that genre yet");
                         $("#Find").prop("hidden", true);
+                        return;
                     }
 
+                    //Get rid of unallowed marks for files names to load images
                     for (var i = 0; i < result.length; i++) {
                         var title = result[i].title;
                         var imagePath = title;
@@ -152,7 +166,8 @@
                             imagePath = imagePath.replace(charactersGettingRidded[j], "");
                         imagePath = imagePath + ".jpg";
 
-                        $('#myForm2').append('<input type="checkbox" id="' +
+                        //Load appropriate image-checkboxes
+                        $('#genreTitles').append('<input type="checkbox" id="' +
                             title +
                             '" value="' +
                             title +
