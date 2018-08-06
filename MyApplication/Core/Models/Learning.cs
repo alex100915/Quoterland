@@ -13,5 +13,6 @@ namespace MyApplication.Core.Models
         public string ApplicationUserId { get; set; }
         public ApplicationUser ApplicationUser { get; set; }
         public Quote Quote { get; set; }
+        public string Translation { get; set; }
     }
 }

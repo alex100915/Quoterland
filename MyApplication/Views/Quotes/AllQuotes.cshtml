@@ -19,10 +19,36 @@
 </table>
 </div>
 
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Almost there...</h5>
+            </div>
+            <div class="modal-body">
+                <form id="form">
+                    <div class="form-group">
+                        <label>Your translation:</label>
+                        <div class="tt-container">
+                            <input type="text" id="translation" class="form-control" />
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button id="reject" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button id="submit" type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 @section scripts
 {
     <script>
-
         //reusing AllQuotes view to FindQuotes
         if ("@Model" == "") {
             url = "/api/quotes";
@@ -56,14 +82,18 @@
 
                     },
                     {
-                        render: function (data, type, quote) {
+                        render: function(data, type, quote) {
 
                             //Loading appropriate checkboxes with proper events
-                            var checkbox = '<input type="checkbox" onchange="addToLearneds(' + quote.id + ')">';
+                            var checkbox =
+                                '<input type="checkbox" id="'+quote.id+"Learned"+'" onchange="addToLearneds(' +
+                                    quote.id +
+                                    ')">';
 
                             learnedQuotes.filter(function(item) {
                                 if (item.quoteId == quote.id)
-                                    checkbox = '<input type="checkbox" checked onchange="deleteFromLearneds(' +
+                                    checkbox =
+                                        '<input type="checkbox" id="'+quote.id+"Learned"+'" checked onchange="deleteFromLearneds(' +
                                         quote.id +
                                         ')">';
                             });
@@ -75,11 +105,15 @@
                         render: function(data, type, quote) {
 
                             //Loading appropriate checkboxes with proper events
-                            var checkbox = '<input type="checkbox" onchange="addToLearnings(' + quote.id + ')">';
+                            var checkbox =
+                                '<input type="checkbox" id="' + quote.id + "Learning" + '" onchange="addToLearnings(' +
+                                    quote.id +
+                                    ')">';
 
                             learningQuotes.filter(function(item) {
                                 if (item.quoteId == quote.id)
-                                    checkbox = '<input type="checkbox" checked onchange="deleteFromLearnings(' +
+                                    checkbox =
+                                        '<input type="checkbox" id="' + quote.id + "Learning" + '" checked onchange="deleteFromLearnings(' +
                                         quote.id +
                                         ')">';
                             });
@@ -90,5 +124,147 @@
                 ]
             });
         });
+
+        //get all learning Quotes to load checkboxes
+        var learningQuotes = $.ajax({
+            url: "/api/learnings/getlearningsquotesids",
+            method: "GET",
+            async: false
+        }).responseJSON;
+
+        //implementation on addToLearnings event
+        function addToLearnings(quote) {
+
+            //don't allow checkbox to getting mark until one of operation being successfull
+            var checkbox = event.currentTarget;
+            checkbox.checked = false;
+
+            // check that quote is already on learned table
+            if (document.getElementById(quote + "Learned").checked) {
+                bootbox.confirm("Are you sure you want to move this quote to learning table?",
+                    function (result) {
+                        if (result) {
+                            $.ajax({
+                                url: "/api/learnings/movetolearningstable/" + quote,
+                                method: "POST",
+                                success: function () {
+                                    toastr.success("Quote added to learning.");
+
+                                    //change learning checkbox event, mark checbkox and delete quote from learned table
+                                    checkbox.setAttribute("onchange", "deleteFromLearnings(" + quote + ")");
+                                    checkbox.checked = true;
+                                    deleteFromLearneds(quote);
+                                }
+                            })
+                            return;
+                        }
+                    });
+            }
+            else {
+                // if quote is not on learned table show modal dialog to enforce user to provide translation
+                $('#exampleModal').modal("show");
+
+                // off() method maintain button click event in clean state 
+                $("#submit").off().on("click",
+                    function () {
+                        $.ajax({
+                            url: "/api/learnings/addtolearningquotes/" + quote + "/" + $("#translation").val(),
+                            method: "POST",
+                            async: false,
+                            context: this,
+                            success: function () {
+                                toastr.success("Quote successfully added to learning.");
+                                checkbox.setAttribute("onchange", "deleteFromLearnings(" + quote + ")");
+                                $('#exampleModal').modal('hide');
+                                // reset translation input after submition
+                                $('#form')[0].reset();
+                                checkbox.checked = true;
+                            },
+                            error: function () {
+                                toastr.error("Provide translation");
+                            }
+                        });
+                    });
+            }
+        }
+
+        // implementation of deleteFromLearnings event
+        function deleteFromLearnings(quote) {
+            $.ajax({
+                url: "/api/learnings/" + quote,
+                method: "DELETE"
+            }).done(function () {
+                toastr.warning("Quote successfully deleted from learning.");
+
+                //change event and checbox state after deleting
+                var element = document.getElementById(quote + "Learning");
+                element.setAttribute("onchange", "addToLearnings(" + quote + ")");
+                element.checked = false;
+            });
+
+        }
+
+        var learnedQuotes = $.ajax({
+            url: "/api/learneds",
+            method: "GET",
+            async: false
+        }).responseJSON;
+
+        function addToLearneds(quote) {
+            var checkbox = event.currentTarget;
+            checkbox.checked = false;
+            if (document.getElementById(quote + "Learning").checked) {
+                bootbox.confirm("Are you sure you want to move this quote to learned table?",
+                    function (result) {
+                        if (result) {
+                            $.ajax({
+                                url: "/api/learneds/movetolearnedstable/" + quote,
+                                method: "POST",
+                                success: function () {
+                                    toastr.success("Quote successfully added to learned.");
+                                    checkbox.setAttribute("onchange", "deleteFromLearneds(" + quote + ")");
+                                    checkbox.checked = true;
+                                    deleteFromLearnings(quote);
+                                },
+                            })
+                            return;
+                        }
+                    });
+            }
+            else {
+                $('#exampleModal').modal("show");
+                $("#submit").off().on("click",
+                    function () {
+                        $.ajax({
+                            url: "/api/learneds/addtolearnedquotes/" + quote + "/" + $("#translation").val(),
+                            method: "POST",
+                            async: false,
+                            context: this,
+                            success: function () {
+                                toastr.success("Quote successfully added to learned.");
+                                checkbox.setAttribute("onchange", "deleteFromLearneds(" + quote + ")");
+                                $('#exampleModal').modal('hide');
+                                $('#form')[0].reset();
+                                checkbox.checked = true;
+                            },
+                            error: function () {
+                                toastr.error("Provide translation");
+                            }
+                        });
+                    });
+            }
+        }
+
+        function deleteFromLearneds(quote) {
+            $.ajax({
+                url: "/api/learneds/" + quote,
+                method: "DELETE"
+            }).done(function () {
+                toastr.warning("Quote successfully deleted form learned.");
+                var element = document.getElementById(quote + "Learned");
+                element.setAttribute("onchange", "addToLearneds(" + quote + ")");
+                element.checked = false;
+            });
+        }
     </script>
 }

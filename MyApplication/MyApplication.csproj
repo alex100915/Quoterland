@@ -433,6 +433,14 @@
     <Compile Include="Persistence\Migrations\201807301351018_ChangeQuoteAndMovieTitleLength.Designer.cs">
       <DependentUpon>201807301351018_ChangeQuoteAndMovieTitleLength.cs</DependentUpon>
     </Compile>
+    <Compile Include="Persistence\Migrations\201808041034513_AddTranslationToLearningsTable.cs" />
+    <Compile Include="Persistence\Migrations\201808041034513_AddTranslationToLearningsTable.Designer.cs">
+      <DependentUpon>201808041034513_AddTranslationToLearningsTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201808051131057_AddTranslationColumnToLearnedTable.cs" />
+    <Compile Include="Persistence\Migrations\201808051131057_AddTranslationColumnToLearnedTable.Designer.cs">
+      <DependentUpon>201808051131057_AddTranslationColumnToLearnedTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Persistence\Migrations\Configuration.cs" />
     <Compile Include="Core\Repositories\IMovieRepository.cs" />
     <Compile Include="Persistence\Repositories\ApplicationUserRepository.cs" />
@@ -974,6 +982,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Persistence\Migrations\201807301351018_ChangeQuoteAndMovieTitleLength.resx">
       <DependentUpon>201807301351018_ChangeQuoteAndMovieTitleLength.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201808041034513_AddTranslationToLearningsTable.resx">
+      <DependentUpon>201808041034513_AddTranslationToLearningsTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201808051131057_AddTranslationColumnToLearnedTable.resx">
+      <DependentUpon>201808051131057_AddTranslationColumnToLearnedTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

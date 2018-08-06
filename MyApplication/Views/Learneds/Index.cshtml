@@ -30,26 +30,26 @@
                         "emptyTable": "Your list is empty"
                     },
                     ajax: {
-                        url: "/api/learneds/getlearnedquotes",
+                        url: "/api/learneds",
                         dataSrc: ""
                     },
                     columns: [
                         {
-                            data: "content",
-                            render: function (data, type, quote) {
-                                return "<a class='quote' href='/quotes/detail/" + quote.id + "'>" + quote.content + "</a>";
+                            data: "quote.content",
+                            render: function (data, type, learned) {
+                                return "<a class='quote' href='/quotes/detail/" + learned.quote.id + "'>" + learned.quote.content + "</a>";
                             }
                         },
 
                         {
-                            data: "phraseToLearn"
+                            data: "quote.phraseToLearn"
                         },
                         {
-                            data: "movie.title"
+                            data: "quote.movie.title"
 
                         },
                         {
-                            data: "id",
+                            data: "quote.id",
                             render: function (data) {
                                 return '<div class="dropdown show"><a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Manage</a><div class="dropdown-menu" aria-labelledby="dropdownMenuLink"><a class="dropdown-item js-add" href="#" data-quote-id="'+data+'">Mark as learning</a><a class="dropdown-item js-delete" href="#" data-quote-id="'+data+'">Delete from learned</a></div></div>';
                             }
@@ -79,6 +79,11 @@
                     bootbox.confirm("Are you sure you want to mark this quote as learning?", function (result) {
                         if (result) {
                             $.ajax({
+                                url: "/api/learnings/movetolearningstable/" + button.attr("data-quote-id"),
+                                method: "POST",
+                                async: false
+                            });
+                            $.ajax({
                                 url: "/api/learneds/" + button.attr("data-quote-id"),
                                 method: "DELETE",
                                 async: false,
@@ -86,13 +91,6 @@
                                     table.row(button.parents("tr")).remove().draw();
                                 }
                             });
-                            $.ajax({
-                                url: "/api/learnings/" + button.attr("data-quote-id"),
-                                method: "POST",
-                                async: false
-                        });
-
-
                         }
                     });
                 });

@@ -18,7 +18,8 @@ namespace MyApplication.Controllers.Api
         }
 
         [HttpPost]
-        public IHttpActionResult AddToLearnedQuotes(int id)
+        [Route("api/learneds/addtolearnedquotes/{id}/{translation}")]
+        public IHttpActionResult AddToLearnedQuotes(int id, string translation)
         {
             if (_unitOfWork.Quotes.GetQuoteById(id) == null)
                 return BadRequest();
@@ -28,16 +29,14 @@ namespace MyApplication.Controllers.Api
             if (userId == null)
                 return Unauthorized();
 
-            if (_unitOfWork.Learnings.CheckQuoteExistsInLearnings(id, userId))
-                return BadRequest();
-
             if (_unitOfWork.Learneds.CheckQuoteExistsInLearnedList(id, userId))
                 return BadRequest();
 
             _unitOfWork.Learneds.Add(new Learned
             {
                 ApplicationUserId = userId,
-                QuoteId = id
+                QuoteId = id,
+                Translation=translation
             });
 
             _unitOfWork.Complete();
@@ -45,7 +44,45 @@ namespace MyApplication.Controllers.Api
             return Ok();
         }
 
+        [HttpPost]
+        [Route("api/learneds/movetolearnedstable/{id}")]
+        public IHttpActionResult MoveToLearnedsTable(int id)
+        {
+            var userId = User.Identity.GetUserId();
+
+            if (!_unitOfWork.Learnings.CheckQuoteExistsInLearnings(id, userId))
+                return BadRequest();
+
+            var quoteToDelete = _unitOfWork.Learnings.GetUserLearningQuoteById(id, userId);
+
+            var quoteToAdd = new Learned
+            {
+                ApplicationUserId = userId,
+                QuoteId = id,
+                Translation = quoteToDelete.Translation
+            };
+
+            _unitOfWork.Learneds.Add(quoteToAdd);
+            _unitOfWork.Complete();
+
+            return Ok();
+        }
+
         [HttpGet]
+        public IHttpActionResult GetLearnedQuotes()
+        {
+            var userId = User.Identity.GetUserId();
+
+            if (userId == null)
+                return Unauthorized();
+
+            var quotes = _unitOfWork.Learneds.GetUserLearnedQuotes(userId);
+
+            return Ok(quotes);
+        }
+
+        [HttpGet]
+        [Route("api/learneds/getlearnedsquotesids")]
         public IHttpActionResult GetLearnedQuotesIds()
         {
             var userId = User.Identity.GetUserId();
@@ -58,19 +95,19 @@ namespace MyApplication.Controllers.Api
             return Ok(quotes);
         }
 
-        [HttpGet]
-        [Route("api/learneds/getlearnedquotes")]
-        public IHttpActionResult GetLearnedQuotes()
-        {
-            var userId = User.Identity.GetUserId();
+        //[HttpGet]
+        //[Route("api/learneds/getlearnedquotes")]
+        //public IHttpActionResult GetLearnedQuotes()
+        //{
+        //    var userId = User.Identity.GetUserId();
 
-            if (userId == null)
-                return Unauthorized();
+        //    if (userId == null)
+        //        return Unauthorized();
 
-            var quotes = _unitOfWork.Quotes.GetUserLearnedQuotes(userId);
+        //    var quotes = _unitOfWork.Quotes.GetUserLearnedQuotes(userId);
 
-            return Ok(quotes);
-        }
+        //    return Ok(quotes);
+        //}
 
 
         [HttpDelete]

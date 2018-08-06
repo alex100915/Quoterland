@@ -7,8 +7,9 @@ namespace MyApplication.Core.Repositories
     {
         bool CheckQuoteExistsInLearnedList(int id, string userId);
         Learned GetUserLearnedQuoteById(int id, string userId);
-        IEnumerable<Learned> GetUserLearnedQuotesIds(string userId);
+        IEnumerable<Learned> GetUserLearnedQuotes(string userId);
         void Add(Learned learned);
         void Remove(Learned quote);
+        IEnumerable<Learned> GetUserLearnedQuotesIds(string userId);
     }
 }

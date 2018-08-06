@@ -342,3 +342,5 @@ C:\Users\KOWAL\Desktop\Quoterland\MyApplication\obj\Debug\MyApplication.Migratio
 C:\Users\KOWAL\Desktop\Quoterland\MyApplication\obj\Debug\MyApplication.Migrations.AddProductionTypeTableAndPopulate.resources
 C:\Users\KOWAL\Desktop\Quoterland\MyApplication\obj\Debug\MyApplication.Migrations.AddProductionTypeToMoviesTable.resources
 C:\Users\KOWAL\Desktop\Quoterland\MyApplication\obj\Debug\MyApplication.Migrations.ChangeQuoteAndMovieTitleLength.resources
+C:\Users\KOWAL\Desktop\Quoterland\MyApplication\obj\Debug\MyApplication.Migrations.AddTranslationToLearningsTable.resources
+C:\Users\KOWAL\Desktop\Quoterland\MyApplication\obj\Debug\MyApplication.Migrations.AddTranslationColumnToLearnedTable.resources

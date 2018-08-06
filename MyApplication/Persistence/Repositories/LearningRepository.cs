@@ -2,6 +2,7 @@
 using System.Linq;
 using MyApplication.Core.Models;
 using MyApplication.Core.Repositories;
+using System.Data.Entity;
 
 namespace MyApplication.Persistence.Repositories
 {
@@ -17,6 +18,11 @@ namespace MyApplication.Persistence.Repositories
         public Learning GetUserLearningQuoteById(int id, string userId)
         {
             return _context.Learnings.SingleOrDefault(q => q.QuoteId == id && q.ApplicationUserId == userId);
+        }
+
+        public IEnumerable<Learning> GetUserLearningQuotes(string userId)
+        {
+            return _context.Learnings.Include(q=>q.Quote).Include(m=>m.Quote.Movie).Where(l => l.ApplicationUserId == userId).ToList();
         }
 
         public IEnumerable<Learning> GetUserLearningQuotesIds(string userId)

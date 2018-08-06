@@ -2,6 +2,7 @@
 using System.Linq;
 using MyApplication.Core.Models;
 using MyApplication.Core.Repositories;
+using System.Data.Entity;
 
 namespace MyApplication.Persistence.Repositories
 {
@@ -22,6 +23,11 @@ namespace MyApplication.Persistence.Repositories
         public Learned GetUserLearnedQuoteById(int id, string userId)
         {
             return _context.Learneds.SingleOrDefault(q => q.QuoteId == id && q.ApplicationUserId == userId);
+        }
+
+        public IEnumerable<Learned> GetUserLearnedQuotes(string userId)
+        {
+            return _context.Learneds.Include(q=>q.Quote).Include(m=>m.Quote.Movie).Where(l => l.ApplicationUserId == userId).ToList();
         }
 
         public IEnumerable<Learned> GetUserLearnedQuotesIds(string userId)
