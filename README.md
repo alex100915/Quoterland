@@ -1,4 +1,4 @@
-# Quoterland - my first project
+# Quoterland
 
 Programming features:
 
